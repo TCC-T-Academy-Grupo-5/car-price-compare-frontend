@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .links-style {
+        @apply
+        block
+        px-4
+        py-2
+        text-sm
+        text-gray-700
+        hover:bg-indigo-600
+        hover:text-white;
+    }
+
+    .custom-color-by-component { @apply text-indigo-500 } /* FIXME: Remover Teste -> Sobrescreve color de styles.sass */
+}
+
+.override-custom-color { color:orangered; } /* FIXME: remover teste -> sobrescreve color de styles.sass */
