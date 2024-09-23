@@ -10,6 +10,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { OutsideClickDirective } from './directives/outside-click.directive';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     FooterComponent,
     MatSidenavModule,
     MatButtonModule,
+    OutsideClickDirective,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

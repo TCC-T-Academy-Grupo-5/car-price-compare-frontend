@@ -10,9 +10,13 @@
     height: 8vh;
   "
 >
-  <fa-icon [icon]="faCar" class="text-1xl"></fa-icon>
+  <fa-icon
+    [icon]="faCar"
+    class="text-1xl cursor-pointer test"
+    [routerLink]="['/']"
+  ></fa-icon>
 
-  <div class="space-x-2" sty>
+  <div class="space-x-4">
     <fa-icon
       [icon]="faLiked"
       class="text-1xl cursor-pointer hoverable"
@@ -28,9 +32,34 @@
       class="text-1xl cursor-pointer hoverable"
       [routerLink]="['/vehicle-compare']"
     ></fa-icon>
-    <fa-icon
-      [icon]="faUser"
-      class="text-1xl cursor-pointer hoverable"
-    ></fa-icon>
+    <div class="relative inline-block text-left" (click)="toggleDropdown()">
+      <fa-icon
+        [icon]="faUser"
+        class="text-1xl cursor-pointer hoverable"
+      ></fa-icon>
+
+      <!-- Dropdown menu -->
+      <div
+        *ngIf="isDropdownOpen"
+        class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+        [appOutsideClick]="isDropdownOpen"
+        (outSideClick)="isDropdownOpen = false"
+      >
+        <div class="py-1">
+          <a
+            [routerLink]="['/register']"
+            class="block px-4 py-2 text-sm text-gray-500 cursor-pointer"
+            style="color: black !important"
+            >Editar Perfil</a
+          >
+          <a
+            (click)="logout()"
+            class="block px-4 py-2 text-sm text-gray-500 cursor-pointer"
+            style="color: black !important"
+            >Sair da Conta</a
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </div>
