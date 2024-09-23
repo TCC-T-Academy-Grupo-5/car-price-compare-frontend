@@ -7,7 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class ThemeService {
     private readonly themeKey: string = 'data-theme';
 
-    constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    constructor(@Inject(PLATFORM_ID) private platformId: object) {
         if (isPlatformBrowser(this.platformId)) {
             this.setThemeFromLocalStorage();
         }

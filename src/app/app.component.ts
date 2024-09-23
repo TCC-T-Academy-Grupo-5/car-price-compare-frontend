@@ -5,7 +5,7 @@ import {fas} from "@fortawesome/free-solid-svg-icons";
 import {ThemeService} from "./services/theme.service";
 
 @Component({
-  selector: 'app-root',
+  selector: 'tcc-root',
   standalone: true,
   imports: [RouterOutlet, FaIconComponent],
   templateUrl: './app.component.html',
