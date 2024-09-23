@@ -1,0 +1,36 @@
+<div
+  style="
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0px 100px;
+    position: none !important;
+    height: 8vh;
+  "
+>
+  <fa-icon [icon]="faCar" class="text-1xl"></fa-icon>
+
+  <div class="space-x-2" sty>
+    <fa-icon
+      [icon]="faLiked"
+      class="text-1xl cursor-pointer hoverable"
+      [routerLink]="['/liked']"
+    ></fa-icon>
+    <fa-icon
+      [icon]="faAlert"
+      class="text-1xl cursor-pointer hoverable"
+      [routerLink]="['/alert']"
+    ></fa-icon>
+    <fa-icon
+      [icon]="faCompare"
+      class="text-1xl cursor-pointer hoverable"
+      [routerLink]="['/vehicle-compare']"
+    ></fa-icon>
+    <fa-icon
+      [icon]="faUser"
+      class="text-1xl cursor-pointer hoverable"
+    ></fa-icon>
+  </div>
+</div>
