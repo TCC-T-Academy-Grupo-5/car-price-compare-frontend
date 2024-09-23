@@ -1,0 +1,23 @@
+<header>
+    <div class=" container flex items-center justify-between">
+
+        <fa-icon [icon]="faCar" class="text-1xl cursor-pointer" [routerLink]="['/']"></fa-icon>
+
+        <div class="space-x-4 w-100">
+            <nav class="icons">
+                <ul class="flex items-center space-x-4 w-full gap-2">
+                    <li><fa-icon [icon]="faLiked" [routerLink]="['/like']" /></li>
+                    <li><fa-icon [icon]="faAlert" [routerLink]="['/alert']" /></li>
+                    <li><fa-icon [icon]="faCompare" [routerLink]="['/vehicle-compare']" /></li>
+                    <li class="relative inline-block text-left dropdown-menu">
+                        <fa-icon [icon]="faUser" (click)="toggleDropdown()"></fa-icon>
+                        <ul *ngIf="isDropdownOpen" [tccOutsideClick]="isDropdownOpen" (outSideClick)="isDropdownOpen = false">
+                            <li [routerLink]="['/']"> Editar Perfil </li>
+                            <li (click)="logout()"> Sair da Conta </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
