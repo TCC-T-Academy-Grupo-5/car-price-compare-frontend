@@ -26,12 +26,12 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
-              "src/app/assets/icons/favicon.ico",
+              "src/assets/icons/favicon.ico",
               "src/assets/"
             ],
             "styles": [
-              "src/app/assets/stylesheets/styles.sass",
-              "src/app/assets/stylesheets/custom.scss"
+              "src/assets/stylesheets/styles.sass",
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -93,8 +93,8 @@
               "src/assets/"
             ],
             "styles": [
-              "src/app/assets/stylesheets/styles.sass",
-              "src/app/assets/stylesheets/custom.scss"
+              "src/assets/stylesheets/styles.sass",
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": []
           }

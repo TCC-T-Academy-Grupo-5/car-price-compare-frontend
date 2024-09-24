@@ -38,7 +38,6 @@ export class ThemeService {
     }
   }
 
-
   getCurrentTheme(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       return document.documentElement.getAttribute(this.themeKey);

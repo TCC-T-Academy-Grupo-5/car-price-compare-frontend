@@ -1,0 +1,19 @@
+actions:
+  create: 'Erstelle {{object}}'
+  edit: 'Bearbeite {{object}}'
+  delete: 'Lösche {{object}}'
+home:
+  title: 'Fahrzeugpreisvergleich'
+profile: 'Profil'
+languages:
+  de: 'Deutsch'
+  en: 'Englisch'
+  es: 'Spanisch'
+  pt: 'Portugiesisch'
+messages:
+  error: 'Fehler beim {{action}} des {{object}}.'
+  success: '{{object}} erfolgreich {{action}}.'
+sign:
+  in: 'Anmelden'
+  out: 'Abmelden'
+translate: 'Übersetzen'

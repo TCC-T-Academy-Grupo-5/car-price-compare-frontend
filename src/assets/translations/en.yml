@@ -1,0 +1,19 @@
+actions:
+  create: 'Create {{object}}'
+  edit: 'Edit {{object}}'
+  delete: 'Delete {{object}}'
+home:
+  title: 'Vehicle Price Compare'
+profile: 'Profile'
+languages:
+  de: 'Germany'
+  en: 'English'
+  es: 'Spanish'
+  pt: 'Portuguese'
+messages:
+  error: 'Error {{action}} {{object}}.'
+  success: '{{object}} {{action}} successfully.'
+sign:
+  in: 'Sign in'
+  out: 'Sign out'
+translate: 'Translate'

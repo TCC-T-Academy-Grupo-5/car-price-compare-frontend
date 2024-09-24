@@ -6,10 +6,10 @@ import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {YamlTranslateHttpLoader} from "./services/yaml-translate-http-loader";
+import {YamlTranslateHttpLoader} from "@services/yaml-translate-http-loader";
 
-export function YamlLoaderFactory(http: HttpClient) {
-  return new YamlTranslateHttpLoader(http, './assets/i18n/', '.yml');
+function YamlLoaderFactory(http: HttpClient) {
+  return new YamlTranslateHttpLoader(http, './assets/translations/', '.yml');
 }
 
 export const appConfig: ApplicationConfig = {
