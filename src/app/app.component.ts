@@ -16,13 +16,15 @@ import {faBalanceScale,faCar,faExclamationTriangle,faHeart,faUser} from '@fortaw
     HeaderComponent,
     RouterOutlet
   ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'Car Price Compare'; // TODO: i18n
   isDropdownOpen = false;
-  constructor(private icon: FaIconLibrary, private themeService: ThemeService) {
+  constructor(
+    private icon: FaIconLibrary,
+    private themeService: ThemeService
+  ) {
     this.initializeIcons();
   }
 

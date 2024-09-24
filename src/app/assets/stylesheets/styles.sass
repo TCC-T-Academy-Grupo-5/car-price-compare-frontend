@@ -74,8 +74,7 @@ $font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
   fa-icon
     cursor: pointer
 
-  .dropdown-menu
-    & > ul
+  .dropdown-menu > ul
       @apply absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-100 ring-1 ring-black ring-opacity-5 z-10
       li
         @apply block px-4 py-2 text-sm text-slate-950 rounded-md hover:bg-slate-200 transition-colors cursor-pointer
@@ -114,3 +113,4 @@ $font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
   $foreground: $slate-900
   @include theme-styles($foreground, $slate-50, $slate-300, $slate-50)
 /* End Light Theme ----------------------------------------------------------------------------- */
+
