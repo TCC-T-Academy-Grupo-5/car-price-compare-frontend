@@ -8,6 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {faBalanceScale, faCar, faExclamationTriangle, faHeart, faUser} from "@fortawesome/free-solid-svg-icons";
 import {OutsideClickDirective} from "../../core/directives/outside-click.directive";
 import {ThemeService} from "../../services/theme.service";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'tcc-header',
@@ -20,6 +21,7 @@ import {ThemeService} from "../../services/theme.service";
     MatButtonModule,
     MatIconModule,
     OutsideClickDirective,
+    TranslateModule,
   ],
   templateUrl: './header.component.html'
 })
@@ -28,7 +30,11 @@ export class HeaderComponent implements OnInit {
   currentTheme: string | null = '';
   themeIcon: string = 'sun';
 
-  constructor(private themeService: ThemeService) {}
+  constructor(
+      private themeService: ThemeService,
+      private translateService: TranslateService
+  ) {}
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -60,6 +66,11 @@ export class HeaderComponent implements OnInit {
 
   updateThemeIcon(): void {
     if (this.currentTheme) this.themeIcon = this.currentTheme == 'dark' ? 'sun' : 'moon';
+  }
+
+  switchLang(lang: string): void {
+    this.translateService.use(lang);
+    localStorage.setItem("lang", lang);
   }
 
   protected readonly faCar = faCar;
