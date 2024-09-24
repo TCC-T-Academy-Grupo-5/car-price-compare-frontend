@@ -22,7 +22,6 @@ import {MatButtonModule} from "@angular/material/button";
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Vehicle Price Compare';
   isDropdownOpen = false;
   constructor(
     private icon: FaIconLibrary,

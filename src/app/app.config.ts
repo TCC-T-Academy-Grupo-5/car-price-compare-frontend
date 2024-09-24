@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import {YamlTranslateHttpLoader} from "@services/yaml-translate-http-loader";
 
 function YamlLoaderFactory(http: HttpClient) {
@@ -25,9 +25,10 @@ export const appConfig: ApplicationConfig = {
           }
         }),
       ),
-      provideZoneChangeDetection({ eventCoalescing: true }),
+      provideAnimationsAsync(),
       provideRouter(routes),
       provideClientHydration(),
-      provideAnimationsAsync()
-  ]
+      provideHttpClient(withFetch()),
+      provideZoneChangeDetection({ eventCoalescing: true })
+    ]
 };

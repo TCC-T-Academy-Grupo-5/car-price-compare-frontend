@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
     private translateService: TranslateService,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: object,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -64,13 +64,8 @@ export class HeaderComponent implements OnInit {
     this.switchLang(this.currentLang);
   }
 
-  toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-
   setInitialTheme(): void {
     this.updateThemeIcon(this.themeService.getCurrentTheme());
-    console.log('Initial theme from service:', this.themeIcon);
     if (!this.themeIcon) {
       this.updateThemeIcon('light');
       this.themeService.toggleTheme();
@@ -107,7 +102,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private updateThemeIcon(theme: string | null): void {
-    this.themeIcon = (theme === 'dark') ? faMoon : faSun;
+    this.themeIcon = theme === 'dark' ? faMoon : faSun;
   }
 
   private initializeLanguageSettings(): string {
@@ -124,8 +119,12 @@ export class HeaderComponent implements OnInit {
     return isPlatformBrowser(this.platformId);
   }
 
-  objectKeys(obj: any): string[] {
+  objectKeys(obj: object): string[] {
     return Object.keys(obj);
+  }
+
+  public getThemeServiceCurrentTheme(): string | null {
+    return this.themeService.getCurrentTheme();
   }
 
   protected readonly faCar = faCar;

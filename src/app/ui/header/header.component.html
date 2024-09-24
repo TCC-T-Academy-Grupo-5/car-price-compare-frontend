@@ -10,7 +10,7 @@
           <li><fa-icon [icon]="faCompare" [routerLink]="['/vehicle-compare']"/></li>
 
           <li class="relative inline-block text-left dropdown-menu">
-            <span (click)="toggleTheme()" (keydown)="handleKeyboardEvent($event)">
+            <span tabindex="0" (click)="toggleTheme()" (keyup)="handleKeyboardEvent($event)">
               <fa-icon [icon]="themeIcon" size="lg" class="mr-4"></fa-icon>
             </span>
           </li>
@@ -21,6 +21,8 @@
               [matMenuTriggerFor]="languageMenu"
               aria-label="Language Menu"
               class="open-dropdown"
+              tabindex="0"
+              (keyup)="handleKeyboardEvent($event)"
             >
               <img
                 ngSrc="../../../assets/flags/{{currentLang}}.svg"
@@ -35,7 +37,12 @@
 
           <mat-menu #languageMenu="matMenu" xPosition="before">
             <ng-container *ngFor="let lang of objectKeys(languages)">
-              <span *ngIf="lang !== currentLang" mat-menu-item (click)="switchLang(lang)">
+              <span *ngIf="lang !== currentLang"
+                    mat-menu-item
+                    tabindex="0"
+                    (click)="switchLang(lang)"
+                    (keyup)="handleKeyboardEvent($event)"
+              >
                 {{ languages[lang] | translate }}
               </span>
             </ng-container>
@@ -46,6 +53,8 @@
               mat-button
               [matMenuTriggerFor]="userMenu"
               aria-label="User Menu"
+              tabindex="0"
+              (keyup)="handleKeyboardEvent($event)"
             >
               <fa-icon [icon]="faUser"></fa-icon>
             </span>
@@ -53,13 +62,12 @@
 
           <mat-menu #userMenu="matMenu" xPosition="before">
             <span mat-menu-item [routerLink]="['/']" class="w-full">
-              {{ 'actions.edit' | translate: { object: ('profile' | translate) } }}
+              {{ 'actions.edit' | translate: {object: ('profile' | translate) } }}
             </span>
-            <span mat-menu-item (click)="logout()" class="w-full">
+            <span mat-menu-item tabindex="0" (click)="logout()" (keyup)="handleKeyboardEvent($event)" class="w-full">
               {{ 'sign.out' | translate }}
             </span>
           </mat-menu>
-
         </ul>
       </nav>
     </div>
