@@ -68,6 +68,13 @@ export class HeaderComponent implements OnInit {
     if (this.currentTheme) this.themeIcon = this.currentTheme == 'dark' ? 'sun' : 'moon';
   }
 
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      const target = event.target as HTMLElement;
+      target.click();
+    }
+  }
+
   switchLang(lang: string): void {
     this.translateService.use(lang);
     localStorage.setItem("lang", lang);

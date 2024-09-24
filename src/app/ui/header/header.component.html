@@ -9,20 +9,22 @@
                     <li><fa-icon [icon]="faAlert" [routerLink]="['/alert']" /></li>
                     <li><fa-icon [icon]="faCompare" [routerLink]="['/vehicle-compare']" /></li>
                     <li class="relative inline-block text-left dropdown-menu">
-                            <span (click)="toggleTheme()">
-                                <fa-icon [icon]="['fas', themeIcon]" size="lg" class="mr-4"></fa-icon>
-                            </span>
-                        <fa-icon [icon]="faUser" (click)="toggleDropdown()"></fa-icon>
+                        <span (click)="toggleTheme()" (keydown)="handleKeyboardEvent($event)" tabindex="0">
+                            <fa-icon [icon]="['fas', themeIcon]" size="lg" class="mr-4"></fa-icon>
+                        </span>
+                        <fa-icon [icon]="faUser"
+                                 (click)="toggleDropdown()"
+                                 (keydown)="handleKeyboardEvent($event)"
+                                 tabindex="0"></fa-icon>
                         <ul *ngIf="isDropdownOpen"
                             [tccOutsideClick]="isDropdownOpen"
-                            (outSideClick)="isDropdownOpen = false"
-                        >
+                            (outSideClick)="isDropdownOpen = false">
                             <li [routerLink]="['/']"> Editar Perfil </li>
-                            <li (click)="logout()"> Sair da Conta </li>
+                            <li (click)="logout()" (keydown)="handleKeyboardEvent($event)" tabindex="0"> Sair da Conta </li>
                         </ul>
                     </li>
                     <li>
-                        <div id="set-app"  class="flex space-x-2">
+                        <div id="set-app" class="flex space-x-2">
                             <mat-form-field appearance="fill">
                                 <mat-label>Language</mat-label>
                                 <mat-select (selectionChange)="switchLang($event.value)">
