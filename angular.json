@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "tcc",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -26,14 +26,12 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets/icons/favicon.ico",
+              "src/assets/"
             ],
             "styles": [
-              "src/app/assets/stylesheets/styles.sass",
-              "src/app/assets/stylesheets/custom.scss"
+              "src/assets/stylesheets/styles.sass",
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -47,8 +45,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -91,19 +89,31 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "sass",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/app/assets/icons/favicon.ico",
+              "src/assets/"
             ],
             "styles": [
-              "src/app/assets/stylesheets/styles.sass",
-              "src/app/assets/stylesheets/custom.scss"
+              "src/assets/stylesheets/styles.sass",
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

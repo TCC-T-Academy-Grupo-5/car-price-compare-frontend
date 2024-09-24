@@ -1,0 +1,95 @@
+@use '../../../node_modules/@angular/material/index' as mat;
+@include mat.core();
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Table of Contents
+-------------------------
+1. Angular Material
+   - 1.1 Core Styles
+   - 1.2 Theme Definition
+   - 1.3 Apply Theme to Root
+
+2. Tailwind CSS
+   - 2.1 Components Layer
+     - 2.1.1 Dropdown Menu
+     - 2.1.2 Links Style
+     - 2.1.3 Open Dropdown
+------------------------- */
+
+/*
+1. Angular Material
+------------------------------------------------------------------- */
+@include mat.core();
+$car-price-compare-frontend-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+:root {
+  @include mat.all-component-themes($car-price-compare-frontend-theme);
+}
+/* ---------------------------------------------------------------- */
+
+/*
+2. Tailwind CSS
+------------------------------------------------------------------- */
+@layer components {
+  .dropdown-menu > ul {
+    @apply
+    absolute
+    right-0
+    mt-2
+    w-48
+    rounded-md
+    shadow-lg
+    bg-gray-100
+    ring-1
+    ring-black
+    ring-opacity-5
+    z-10;
+  }
+
+  .links-style {
+    @apply
+    block
+    px-4
+    py-2
+    text-sm
+    text-gray-700
+    hover:bg-indigo-600
+    hover:text-white;
+  }
+
+  .open-dropdown {
+    @apply
+    flex
+    items-center
+    gap-1
+    w-5
+    hover:scale-105;
+
+    li {
+      @apply
+      block
+      px-4
+      py-2
+      text-sm
+      text-slate-950
+      rounded-md
+      hover:bg-slate-200
+      transition-colors
+      cursor-pointer;
+    }
+  }
+}
+/* ---------------------------------------------------------------- */

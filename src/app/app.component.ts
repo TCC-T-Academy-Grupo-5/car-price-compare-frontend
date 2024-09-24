@@ -2,22 +2,43 @@ import {Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {FaIconComponent, FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {fas} from "@fortawesome/free-solid-svg-icons";
-import {ThemeService} from "./services/theme.service";
+import {HeaderComponent} from "@ui/header/header.component";
+import {FooterComponent} from "@ui/footer/footer.component";
+import {ThemeService} from "@services/theme.service";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
-  selector: 'app-root',
+  selector: 'tcc-root',
   standalone: true,
-  imports: [RouterOutlet, FaIconComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  imports: [
+    FaIconComponent,
+    FooterComponent,
+    HeaderComponent,
+    MatMenuModule,
+    MatButtonModule,
+    RouterOutlet
+  ],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Car Price Compare'; // TODO: i18n
-  constructor(library: FaIconLibrary, private themeService: ThemeService) {
-    library.addIconPacks(fas);
+  isDropdownOpen = false;
+  constructor(
+    private icon: FaIconLibrary,
+    private themeService: ThemeService
+  ) {
+    this.icon.addIconPacks(fas);
   }
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  logout(): void {
+    // TODO!!!
   }
 }

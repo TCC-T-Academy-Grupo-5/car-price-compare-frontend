@@ -1,0 +1,19 @@
+actions:
+  create: 'Criar {{object}}'
+  edit: 'Editar {{object}}'
+  delete: 'Excluir {{object}}'
+home:
+  title: 'Comparar Preços de Veículos'
+profile: 'Perfil'
+languages:
+  de: 'Alemanha'
+  en: 'Inglês'
+  es: 'Espanhol'
+  pt: 'Português'
+messages:
+  error: 'Erro ao {{action}} {{object}}.'
+  success: '{{object}} {{action}} com sucesso.'
+sign:
+  in: 'Entrar'
+  out: 'Sair'
+translate: 'Traduzir'
