@@ -2,11 +2,9 @@ actions:
   create: 'Criar {{object}}'
   edit: 'Editar {{object}}'
   delete: 'Excluir {{object}}'
-home:
-  title: 'Comparar Preços de Veículos'
 profile: 'Perfil'
 languages:
-  de: 'Alemanha'
+  de: 'Alemão'
   en: 'Inglês'
   es: 'Espanhol'
   pt: 'Português'
@@ -17,3 +15,4 @@ sign:
   in: 'Entrar'
   out: 'Sair'
 translate: 'Traduzir'
+title: 'Valor do Veículo'

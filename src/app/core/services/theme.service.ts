@@ -1,11 +1,11 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import {Injectable, Inject, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ThemeService {
-  private readonly themeKey: string = 'data-theme';
+  private readonly themeKey: string = 'theme';
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
@@ -15,33 +15,25 @@ export class ThemeService {
 
   toggleTheme(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const currentTheme: string = document.documentElement.getAttribute(this.themeKey) || 'light';
-      const newTheme: string = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute(this.themeKey, newTheme);
+      const currentTheme = this.getCurrentTheme();
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+      document.documentElement.classList.toggle('dark', newTheme === 'dark');
       localStorage.setItem(this.themeKey, newTheme);
     }
   }
 
   setThemeFromLocalStorage(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const storedTheme: string = localStorage.getItem(this.themeKey) || 'light';
-      console.log('Stored theme:', storedTheme);
-      document.documentElement.setAttribute(this.themeKey, storedTheme);
-
-      if (!localStorage.getItem(this.themeKey)) {
-        const prefersDark: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const defaultTheme: string = prefersDark ? 'dark' : 'light';
-        console.log('Setting default theme:', defaultTheme);
-        document.documentElement.setAttribute(this.themeKey, defaultTheme);
-        localStorage.setItem(this.themeKey, defaultTheme);
-      }
+      const storedTheme = localStorage.getItem(this.themeKey) || '';
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
     }
   }
 
-  getCurrentTheme(): string | null {
+  getCurrentTheme(): string {
     if (isPlatformBrowser(this.platformId)) {
-      return document.documentElement.getAttribute(this.themeKey);
+      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     }
-    return null;
+    return 'light';
   }
 }

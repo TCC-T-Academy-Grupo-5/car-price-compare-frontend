@@ -2,8 +2,6 @@ actions:
   create: 'Create {{object}}'
   edit: 'Edit {{object}}'
   delete: 'Delete {{object}}'
-home:
-  title: 'Vehicle Price Compare'
 profile: 'Profile'
 languages:
   de: 'Germany'
@@ -17,3 +15,4 @@ sign:
   in: 'Sign in'
   out: 'Sign out'
 translate: 'Translate'
+title: 'Auto Value'

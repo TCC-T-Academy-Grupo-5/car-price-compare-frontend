@@ -1,0 +1,12 @@
+<a [routerLink]="['']" class="flex items-center">
+  <button
+    (click)="toggleMenu()"
+    type="button"
+    class="bg-transparent"
+    aria-controls="navbar-default"
+    [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'"
+  >
+    <span class="sr-only" aria-hidden="true">Abrir menu</span>
+    <fa-icon [icon]="faBars" class="text-black"></fa-icon>
+  </button>
+</a>
