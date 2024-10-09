@@ -3,10 +3,24 @@ version: '3.5'
 services:
   angular-app:
     build: .
-    container_name: angular-app
+    container_name: angular
     ports:
       - '4200:4200'
     volumes:
       - ./:/app
     environment:
       - STYLE=css
+
+    # TODO: Remover daqui para baixo quando não estiver usando json-server e usar o compose da pasta ../
+    depends_on:
+      - json-server
+
+  json-server:
+    image: node:18
+    container_name: json-server
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: npx json-server --watch db.json --port 3000
+    ports:
+      - '3000:3000'

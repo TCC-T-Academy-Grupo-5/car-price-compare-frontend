@@ -1,27 +1,20 @@
-# CarPriceCompareFrontend
+# Auto Value
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+## Project Description
 
-## Development server
+This project is an Angular application called **Auto Value**, designed to [describe the main functionality of the application]. Recently, I refactored the translation and the project structure to enhance organization and facilitate maintenance.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies Used
 
-## Code scaffolding
+- **Angular 18**: The framework used to build the application.
+- **Docker**: To streamline the development environment and run the application.
+- **Json-server**: Utilized as a simulated REST API during development.
+- **Tailwind CSS** and **Angular Material**: For styling and responsive design.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How to Run the App with Docker
 
-## Build
+To start the application, use the following command:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+docker-compose up --build
+```
