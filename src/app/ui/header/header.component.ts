@@ -4,10 +4,6 @@ import {NavbarMobileComponent} from "@ui/navbar-mobile/navbar-mobile.component";
 import {RouterLink} from "@angular/router";
 import {NgClass} from "@angular/common";
 
-interface Languages {
-  [key: string]: string;
-}
-
 @Component({
   selector: 'tcc-header',
   standalone: true,
@@ -21,7 +17,4 @@ interface Languages {
 })
 export class HeaderComponent {
   title: string = 'Auto Value';
-  isActive(s: string) {
-    return undefined;
-  }
 }

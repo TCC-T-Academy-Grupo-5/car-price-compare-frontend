@@ -67,10 +67,9 @@ export class NavbarComponent implements OnInit {
   }
 
   isActive(route: string): string {
-    let isRoute: boolean = this.currentRoute === route;
+    const isRoute: boolean = this.currentRoute === route;
     return isRoute ? this.activeClass : this.inactiveClass;
   }
-
 
   switchLang(lang: string): void {
     if (this.isBrowser()) {

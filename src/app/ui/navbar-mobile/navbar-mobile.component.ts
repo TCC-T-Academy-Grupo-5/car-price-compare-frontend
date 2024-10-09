@@ -15,9 +15,11 @@ import {faBars} from "@fortawesome/free-solid-svg-icons";
   styles: ``
 })
 export class NavbarMobileComponent {
-  isMenuOpen: any;
+  isMenuOpen: boolean;
 
-  constructor(private menu: MenuService) {}
+  constructor(private menu: MenuService) {
+    this.isMenuOpen = false;
+  }
 
   toggleMenu(): void {
     this.menu.toggleMenu();
@@ -32,6 +34,5 @@ export class NavbarMobileComponent {
       this.menu.closeMenu();
     }
   }
-
   protected readonly faBars = faBars;
 }
