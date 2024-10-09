@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
   switchTheme!: string;
   currentRoute: string = '';
   activeClass: string = "border-b-2 transform transition duration-500 ease-in-out";
-  inactiveClass: string = "hover:border-b-2 border-av-highlight-light dark:border-av-highlight hover:transform transition duration-700";
+  inactiveClass: string = "hover:border-b-2 border-tcc-highlight-light dark:border-tcc-highlight hover:transform transition duration-700";
   currentLang: string;
   // isDropdownOpen: boolean = false;
   dropdownOpen: boolean = false;

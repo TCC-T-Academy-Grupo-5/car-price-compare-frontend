@@ -16,5 +16,5 @@ import {NgClass} from "@angular/common";
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  title: string = 'Auto Value';
+  title: string = 'precificar';
 }
