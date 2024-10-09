@@ -1,9 +1,7 @@
 actions:
-  create: 'Erstelle {{object}}'
-  edit: 'Bearbeite {{object}}'
-  delete: 'Lösche {{object}}'
-home:
-  title: 'Fahrzeugpreisvergleich'
+  create: 'Erstellen {{object}}'
+  edit: 'Bearbeiten {{object}}'
+  delete: 'Löschen {{object}}'
 profile: 'Profil'
 languages:
   de: 'Deutsch'
@@ -11,9 +9,10 @@ languages:
   es: 'Spanisch'
   pt: 'Portugiesisch'
 messages:
-  error: 'Fehler beim {{action}} des {{object}}.'
-  success: '{{object}} erfolgreich {{action}}.'
+  error: 'Fehler beim {{action}} {{object}}.'
+  success: '{{object}} wurde erfolgreich {{action}}.'
 sign:
-  in: 'Anmelden'
-  out: 'Abmelden'
+  in: 'In'
+  out: 'Out'
 translate: 'Übersetzen'
+title: 'Auto Wert'

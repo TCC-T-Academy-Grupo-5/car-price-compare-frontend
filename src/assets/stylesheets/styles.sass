@@ -1,168 +1,36 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap')
-
 /* Table of Contents
-/* -------------------------
-  1. Variables
-  2. Mixins
-  3. Base Styles
-  4. Header Styles
-  5. Link Styles
-  6. Button Styles
-  7. Icon Styles
-  9. Footer Styles
-  11. Image Styles
+  ------------------
+  1. Default
+  --------------- */
 
-/* 1. Variables
+/*
+ 1. Default
   ---------------------------------------------------------------------- */
-$slate-900: #0f172a
-$slate-800: #1e293b
-$slate-300: #d4d4d8
-$slate-50: #fafafa
-$link: #4493f8
-$font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
-/* End Variables ------------------------------------------------------- */
+::-webkit-scrollbar
+  width: 8px
+::-webkit-scrollbar-track
+  background: #2D3748
+::-webkit-scrollbar-thumb
+  background: #CBD5E0
+::-webkit-scrollbar-thumb:hover
+  background: #718096
 
-
-/* 2. Mixins
-  ---------------------------------------------------------------------- */
-@mixin transition($time: 500ms, $props: all, $timing-function: ease-in-out)
-  -webkit-transition: $props $time $timing-function
-  -moz-transition: $props $time $timing-function
-  -o-transition: $props $time $timing-function
-  transition: $props $time $timing-function
-
-@mixin theme-styles($color, $border-color, $bg-primary, $bg-secondary)
-  $darken: adjust-color($bg-primary, $lightness: -50%)
-
-  body
-    color: $color
-    background: $bg-secondary
-    @include transition(0.2s, color)
-
-  header
-    color: $color
-    border-bottom: 1px solid $bg-primary
-    box-shadow: 0 1px 6px $darken
-    background-color: $bg-primary
-
-  a
-    color: $color
-
-    &:hover
-      color: $link
-
-  button
-    color: $color
-    border: 1px solid $color
-
-    &:hover
-      color: $bg-primary
-      background-color: $color
-      @include transition()
-
-    & > a
-      color: inherit
-
-      &:hover
-        color: $bg-primary
-
-      &:hover
-        background-color: darken($bg-primary, 10%)
-/* End Mixins ---------------------------------------------------------- */
-
-
-/* 3. Base Styles
-  ---------------------------------------------------------------------- */
+html,
 body
-  @apply antialiased
   margin: 0
   padding: 0
   box-sizing: border-box
-/* End Base Styles ----------------------------------------------------- */
+  &.dark
+    @apply bg-av-bg-primary
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
 
-
-/* 4. Header Styles
-  ---------------------------------------------------------------------- */
-header
-  position: fixed
-  top: 0
-  width: 100vw
-  height: 10vh
-  min-height: 56px
-  max-height: 60px
-  display: flex
-  align-items: center
-  justify-content: space-between
-  padding: 0 2rem
-  z-index: 50
-/* End Header Styles --------------------------------------------------- */
-
-
-/* 5. Link Styles
-  ---------------------------------------------------------------------- */
-a
-  text-decoration: none
-  padding: 0.5rem 1rem
-  border-radius: 0.25rem
-
-  &:hover
-    text-decoration: underline
-    transform: scale(1.1)
-    @include transition(400ms)
-/* End Link Styles ----------------------------------------------------- */
-
-
-/* 6. Button Styles
-  ---------------------------------------------------------------------- */
-button
-  font-size: 0.9rem
-  padding: 6px
-  border-radius: 12px
-/* End Button Styles ---------------------------------------------------- */
-
-
-/* 7. Icon Styles
-  ---------------------------------------------------------------------- */
+a,
+li,
+button,
 fa-icon
+  text-decoration: none
+  list-style: none
   cursor: pointer
-/* End Icon Styles ----------------------------------------------------- */
-
-/* 8. Footer Styles
-  ---------------------------------------------------------------------- */
-footer
-  position: fixed
-  bottom: 0
-  width: 100vw
-  height: 10vh
-  min-height: 56px
-  max-height: 60px
-  display: flex
-  justify-content: space-between
-  align-items: center
-  padding: 0 20px
-/* End Footer Styles --------------------------------------------------- */
-
-/* 9. Image Styles
-  ---------------------------------------------------------------------- */
-img
-  cursor: pointer
-  object-fit: contain
-  width: 100%
-  height: 100%
-/* End Image Styles ---------------------------------------------------- */
-
-mat-mdc-menu-content
-  border: 1px solid red
-  margin-top: 100px
-
-[data-theme="dark"]
-  $bg-primary: $slate-900
-  $bg-secondary: $slate-800
-  $foreground: $slate-50
-  @include theme-styles($foreground, $slate-800, $slate-900, $slate-800)
-
-[data-theme="light"]
-  $bg-secondary: $slate-50
-  $bg-primary: $slate-300
-  $foreground: $slate-900
-  @include theme-styles($foreground, $slate-50, $slate-300, $slate-50)
