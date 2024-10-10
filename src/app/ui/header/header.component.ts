@@ -10,11 +10,11 @@ import {NgClass} from "@angular/common";
   imports: [
     NavbarComponent,
     NavbarMobileComponent,
-    RouterLink,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  title: string = 'Auto Value';
+  title: string = 'precificar';
 }
