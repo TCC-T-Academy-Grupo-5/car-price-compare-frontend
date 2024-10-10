@@ -4,6 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@include mat.core();
 
 /*
 Table of Contents
@@ -20,7 +21,6 @@ Table of Contents
 /*
 1. Angular Material
 ----------------------------------------------- */
-@include mat.core();
 
 /*
 2. Default

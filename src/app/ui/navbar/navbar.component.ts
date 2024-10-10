@@ -32,8 +32,8 @@ export class NavbarComponent implements OnInit {
   themeIcon: IconDefinition = faMoon;
   switchTheme!: string;
   currentRoute: string = '';
-  activeClass: string = "border-b-2 transform transition duration-500 ease-in-out";
-  inactiveClass: string = "hover:border-b-2 border-tcc-highlight-light dark:border-tcc-highlight hover:transform transition duration-700";
+  activeClass: string = "border-b-2 transform";
+  inactiveClass: string = "hover:border-b-2 border-tcc-highlight-light dark:border-tcc-highlight hover:transform";
   currentLang: string;
   // isDropdownOpen: boolean = false;
   dropdownOpen: boolean = false;
