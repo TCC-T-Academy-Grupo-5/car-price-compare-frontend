@@ -7,9 +7,20 @@
     </h3>
     <div class="hidden md:block">
       <tcc-navbar />
+      <!--TODO navbar-->
     </div>
-    <div class="block md:hidden">
-      <tcc-navbar-mobile />
+<!--    <div class="block md:hidden">-->
+<!--      <tcc-navbar-mobile />-->
+<!--    </div>-->
+    <tcc-theme />
+    <tcc-language />
+    <div class="flex justify-between items-center gap-2">
+      <div class="relative inline-block text-left dropdown-menu">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </button>
+        <tcc-user></tcc-user>
+      </div>
     </div>
   </div>
 </header>
