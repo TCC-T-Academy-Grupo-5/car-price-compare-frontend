@@ -7,6 +7,7 @@ import {HeaderComponent} from "@ui/header/header.component";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {HomeComponent} from "@pages/home/home.component";
+import {UserComponent} from "@ui/user/user.component";
 
 @Component({
   selector: 'tcc-root',
@@ -18,7 +19,8 @@ import {HomeComponent} from "@pages/home/home.component";
     HeaderComponent,
     HomeComponent,
     NavbarComponent,
-    RouterOutlet
+    RouterOutlet,
+    UserComponent
   ],
   template: `
     <div class="flex flex-col min-h-screen">

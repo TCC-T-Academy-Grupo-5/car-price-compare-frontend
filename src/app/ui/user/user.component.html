@@ -1,0 +1,27 @@
+<mat-menu #userMenu="matMenu" id="userMenu">
+  <span mat-menu-item [routerLink]="['/profile']" class="w-full">
+    {{ 'actions.edit' | translate: { object: ('profile' | translate) } }}
+  </span>
+  <span
+    mat-menu-item
+    tabindex="0"
+    (click)="logout(); closeUserMenu()"
+    (keydown.enter)="logout(); closeUserMenu()"
+    class="w-full"
+  >
+    {{ 'sign.out' | translate }}
+  </span>
+</mat-menu>
+
+<li>
+  <span
+    mat-button
+    [matMenuTriggerFor]="userMenu"
+    aria-label="User Menu"
+    tabindex="0"
+    (click)="toggleUserMenu()"
+    (keydown.enter)="toggleUserMenu()"
+  >
+  <fa-icon [icon]="faUser"></fa-icon>
+  </span>
+</li>

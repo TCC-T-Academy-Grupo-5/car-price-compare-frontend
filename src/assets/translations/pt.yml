@@ -16,3 +16,4 @@ sign:
   out: 'Sair'
 translate: 'Traduzir'
 title: 'Valor do Veículo'
+switch_theme: 'Trocar tema para'
