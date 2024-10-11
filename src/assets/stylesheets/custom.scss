@@ -34,20 +34,26 @@ Table of Contents
   -moz-osx-font-smoothing: grayscale;
 }
 
+$font-sizes: (
+  h1: (base: 1.5rem, scale: 3vw),
+  h2: (base: 1.25rem, scale: 2.5vw),
+  h3: (base: 1rem, scale: 2vw),
+  h4: (base: 0.875rem, scale: 1.5vw)
+);
+
+@each $header, $sizes in $font-sizes {
+  #{$header} {
+    @include font-setting('Roboto', 700, calc(map-get($sizes, base) + map-get($sizes, scale)), 1.2);
+    letter-spacing: 0.05em;
+  }
+}
+
 /*
 3. Layer Components
   -------------------------------------------------------------------------------- */
 @layer components {
   body {
-    @include font-setting('Inter', 300);
-  }
-
-  $font-sizes: (h1: 2.5rem, h2: 2rem, h3: 1.75rem, h4: 1.5rem);
-  @each $header, $size in $font-sizes {
-    #{$header} {
-      @include font-setting('Roboto', 700, $size, 1.2);
-      letter-spacing: 0.05em;
-    }
+    @include font-setting('Roboto', 300);
   }
 
   //a {
@@ -99,27 +105,25 @@ Table of Contents
     duration-300
     overflow-hidden;
 
-    .max-w-screen-xl {
-      @apply
-      flex
-      items-center
-      justify-between
-      mx-auto
-      py-4
-      px-4
-      xl:px-2
-      w-full;
-    }
-
     span {
       @apply
       flex-grow;
     }
   }
 
+  .max-w-screen {
+    @apply
+    mx-auto
+    py-4
+    px-4
+    xl:px-2
+    w-full;
+  }
+
   .tcc-navbar-mobile {
     @apply fixed top-10 left-0 w-full z-40;
   }
+
 }
 
 /*

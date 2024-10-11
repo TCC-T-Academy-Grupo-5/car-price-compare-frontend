@@ -6,19 +6,31 @@ import {NavbarComponent} from "@ui/navbar/navbar.component";
 import {HeaderComponent} from "@ui/header/header.component";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
+import {HomeComponent} from "@pages/home/home.component";
 
 @Component({
   selector: 'tcc-root',
   standalone: true,
   imports: [
     FaIconComponent,
+    FontAwesomeModule,
     FooterComponent,
-    NavbarComponent,
-    RouterOutlet,
     HeaderComponent,
-    FontAwesomeModule
+    HomeComponent,
+    NavbarComponent,
+    RouterOutlet
   ],
-  template: `<tcc-header/> <router-outlet/> <tcc-footer/>`
+  template: `
+    <div class="flex flex-col min-h-screen">
+      <tcc-header/>
+      <main class="flex-grow">
+        <router-outlet/>
+        <fa-icon [icon]="['fas', 'home']" size="lg" />AAAAA
+        <fa-icon [icon]="['fas', 'magnifying-glass']" />
+      </main>
+      <tcc-footer/>
+    </div>
+  `
 })
 export class AppComponent {
   constructor() {

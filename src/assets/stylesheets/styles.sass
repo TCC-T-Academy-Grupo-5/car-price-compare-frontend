@@ -41,7 +41,7 @@ fa-icon
 
 .mat-mdc-menu-content
   border-radius: 2px
-  @apply mt-1 border border-primary
+  @apply mt-1 border border-primary bg-primary-light dark:bg-primary
   .mat-mdc-menu-item-text
     padding: 4px 8px
     &:hover, &:focus
@@ -54,3 +54,6 @@ html.dark
       padding: 4px 8px
       &:hover, &:focus
         @apply bg-tertiary outline-none
+
+.tcc-flex
+  @apply flex justify-between items-center gap-4
