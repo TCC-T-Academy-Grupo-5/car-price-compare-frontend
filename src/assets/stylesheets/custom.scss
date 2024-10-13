@@ -112,6 +112,15 @@ $font-sizes: (
       ease-in-out
     }
   }
+
+  .menu-overlay {
+    @apply fixed top-0 right-0 w-64 h-full bg-white shadow-lg transition-transform duration-500 ease-in-out;
+  }
+  .menu {
+    @apply flex flex-col;
+  }
+
+
 }
 
 /*

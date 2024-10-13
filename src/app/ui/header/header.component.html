@@ -6,19 +6,41 @@
       </a>
     </h3>
     <div class="hidden md:block">
-      <tcc-navbar />
+      <!-- <tcc-navbar /> -->
     </div>
-<!--      <tcc-navbar-mobile />-->
     <div class="flex justify-between items-center gap-4">
       <tcc-theme />
       <tcc-language />
       <tcc-user />
-      <i class="material-symbols-outlined">menu</i>
-      <!--        <div class="relative inline-block text-left dropdown-menu">-->
-      <!--            <i class="material-symbols-outlined">dark_mode</i>-->
-      <!--          <button mat-icon-button [matMenuTriggerFor]="userMenu">-->
-      <!--          </button>-->
-      <!--        </div>-->
+      <input class="side-menu hidden" type="checkbox" id="side-menu" />
+      <label
+        for="side-menu"
+        (click)="toggleMenu()"
+        (keydown)="toggleMenu()"
+        tabindex="0"
+        class="hamb md:hidden cursor-pointer"
+      >
+        <i class="material-symbols-outlined"> {{ isOpen ? 'close' : 'menu' }} </i>
+      </label>
     </div>
   </div>
 </header>
+
+<nav class="nav">
+  <div
+    class="menu-overlay fixed top-0 right-0 w-64 h-full bg-primary-light dark:bg-primary shadow-lg transition-transform duration-500 ease-in-out"
+    [ngClass]="{'translate-x-0': isOpen, 'translate-x-full': !isOpen}"
+  >
+    <ul class="menu mt-10 text-primary dark:text-primary-light">
+      <li class="border-b border-gray-700">
+        <a routerLink="/" class="block hover:bg-gray-700 p-4">teste 1</a>
+      </li>
+      <li class="border-b border-gray-700">
+        <a routerLink="/" class="block hover:bg-gray-700 p-4">teste 2</a>
+      </li>
+      <li>
+        <a routerLink="/" class="block hover:bg-gray-700 p-4">teste 3</a>
+      </li>
+    </ul>
+  </div>
+</nav>
