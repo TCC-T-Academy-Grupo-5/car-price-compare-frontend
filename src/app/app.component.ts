@@ -25,8 +25,8 @@ import {HomeComponent} from "@pages/home/home.component";
       <tcc-header/>
       <main class="flex-grow">
         <router-outlet/>
-        <fa-icon [icon]="['fas', 'home']" size="lg" />AAAAA
-        <fa-icon [icon]="['fas', 'magnifying-glass']" />
+<!--        <fa-icon [icon]="['fas', 'home']" size="lg" />AAAAA-->
+<!--        <fa-icon [icon]="['fas', 'magnifying-glass']" />-->
       </main>
       <tcc-footer/>
     </div>

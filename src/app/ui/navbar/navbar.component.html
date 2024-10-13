@@ -8,6 +8,16 @@
     </li>
   </ul>
 
+  <!-- No template do seu componente -->
+  <mat-icon fontIcon="search">search</mat-icon>
+  <mat-icon fontIcon="home">home</mat-icon>
+  <mat-icon fontIcon="settings">settings</mat-icon>
+  <mat-icon fontIcon="favorite">favorite</mat-icon>
+  <i class="material-symbols-outlined">dark_mode</i>
+  <i class="material-symbols-outlined">dark_mode</i>
+  <i class="material-symbols-outlined">search</i>
+  <i class="material-symbols-outlined">home</i>
+
   <ul class="flex justify-between items-center gap-2">
     <li class="relative inline-block text-left dropdown-menu">
       <span
@@ -16,7 +26,9 @@
         (keyup)="handleKeyboardEvent($event)"
         title="{{ switchTheme }}"
       >
-        <fa-icon [icon]="themeIcon" size="lg" class="mr-4"></fa-icon>
+
+
+<!--        <fa-icon [icon]="themeIcon" size="lg" class="mr-4"></fa-icon>-->
       </span>
     </li>
 
@@ -48,7 +60,7 @@
         tabindex="0"
         (keyup)="handleKeyboardEvent($event)"
       >
-        <fa-icon [icon]="faUser"></fa-icon>
+<!--        <fa-icon [icon]="faUser"></fa-icon>-->
       </span>
     </li>
 

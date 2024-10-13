@@ -1,15 +1,51 @@
-<main class="bg-secondary-light dark:bg-secondary mb-0 pb-0 mt-20 overflow-hidden">
+<main class="bg-secondary-light dark:bg-secondary mb-0 pb-0 mt-20 overflow-hidden text-center">
   <div class="max-w-screen tcc-flex flex-col">
-    <fa-icon [icon]="['fas', 'user']" size="lg" style="color:red; background-color:blue;" />
-    <!-- TODO remove -->
-    <p>Find cars for compare prices</p>
-    <h1>Find Your Dream Car</h1>
-    <img ngSrc="assets/images/car_default.png" alt="" class="hidden md:block" height="713" width="2332">
-    <div class="h-10 w-100 p-4 border-tertiary bg-primary-light tcc-flex gap-1 hover:border" style="border-radius:24px;">
+    <p class="mt-2">Find cars for compare prices</p>
+    <h2>Find Your Dream Car</h2>
+    <img
+      ngSrc="assets/images/car_default_mobile.svg"
+      alt="Tesla Car Image Mobile"
+      class="block md:hidden"
+      height="276"
+      width="393"
+      priority
+    >
+    <div class="search-wrapper tcc-flex">
       <input type="text" placeholder="todo..." class="outline-none">
-      <span class="bg-red-600 p-1" style="border-radius: 64px"> <fa-icon [icon]="['fas', 'home']" size="lg" /> lupa</span>
+      <i class="material-symbols-outlined">search</i>
     </div>
-    <img ngSrc="assets/images/car_default_mobile.svg" alt="" class="block md:hidden" height="276" width="393">
-    <h3>Browse by Type</h3>
+    <img
+    ngSrc="assets/images/car_default.png"
+    alt="Tesla Car Image Desktop"
+    class="hidden md:block"
+    height="713"
+    width="2332"
+    priority
+    >
+    <div class="browse-type">
+      <h4 class="my-2">Browse by Type</h4>
+      <div class="tcc-flex gap-2">
+        <div class="card">
+          <div class="flex flex-col items-center p-4">
+            <i class="material-symbols-outlined text-4xl">directions_car</i>
+            <p class="text-lg">Car</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="flex flex-col items-center p-4">
+            <i class="material-symbols-outlined text-4xl">two_wheeler</i>
+            <p class="text-lg">Moto</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="flex flex-col items-center p-4">
+            <i class="material-symbols-outlined text-4xl">local_shipping</i>
+            <p class="text-lg">Truck</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>

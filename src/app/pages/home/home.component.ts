@@ -3,13 +3,17 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {NgOptimizedImage} from "@angular/common";
+import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
 
 @Component({
   selector: 'tcc-home',
   standalone: true,
   imports: [
     FaIconComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatCardImage,
+    MatCard,
+    MatCardContent
   ],
   templateUrl: './home.component.html',
   styles: ``

@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,21 +10,13 @@
 /*
 Table of Contents
 --------------------------------------------------
-1. Angular Material
-  - 1.1 Core Styles
-  - 1.2 Theme Definition
-  - 1.3 Apply Theme to Root
-2. Default
+1. Default
   - 2.1 Mixin -> font-setting on body
   - 2.2 Each  -> typography Headers + font-setting
-3. Layer Components
+2. Layer Components
 
 /*
-1. Angular Material
------------------------------------------------ */
-
-/*
-2. Default
+1. Default
   -------------------------------------------------------------------------------- */
 @mixin font-setting($family: 'Inter', $weight: 400, $size: 16px, $line-height: 1.5) {
   font-family: $family, sans-serif;
@@ -49,33 +42,12 @@ $font-sizes: (
 }
 
 /*
-3. Layer Components
+2. Layer Components
   -------------------------------------------------------------------------------- */
 @layer components {
   body {
     @include font-setting('Roboto', 300);
   }
-
-  //a {
-  //  @apply
-  //  text-highlight
-  //  dark:text-highlight-light
-  //}
-
-  //.dropdown-menu > ul {
-  //  @apply
-  //  absolute
-  //  right-0
-  //  mt-2
-  //  w-48
-  //  rounded-md
-  //  shadow-lg
-  //  bg-gray-100
-  //  ring-1
-  //  ring-black
-  //  ring-opacity-5
-  //  z-10;
-  //}
 
   .open-dropdown {
     @apply
@@ -124,6 +96,22 @@ $font-sizes: (
     @apply fixed top-10 left-0 w-full z-40;
   }
 
+  .browse-type {
+
+    .card {
+      @apply
+      rounded
+      h-24
+      w-24
+      border
+      border-gray-300
+      shadow-lg
+      hover:shadow-xl
+      transition-shadow
+      duration-300
+      ease-in-out
+    }
+  }
 }
 
 /*

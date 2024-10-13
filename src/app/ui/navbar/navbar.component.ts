@@ -8,6 +8,7 @@ import {FaIconComponent, IconDefinition} from "@fortawesome/angular-fontawesome"
 import {Languages} from "@services/interfaces/languages";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'tcc-navbar',
@@ -22,7 +23,8 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
     NgForOf,
     MatMenuTrigger,
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    MatIcon
   ],
   templateUrl: './navbar.component.html',
   styles: ``
