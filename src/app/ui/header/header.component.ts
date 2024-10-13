@@ -1,6 +1,4 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavbarComponent} from "@ui/navbar/navbar.component";
-import {NavbarMobileComponent} from "@ui/navbar-mobile/navbar-mobile.component";
 import {RouterLink} from "@angular/router";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatIconButton} from "@angular/material/button";
@@ -20,8 +18,6 @@ import {MatIcon} from "@angular/material/icon";
     LanguageComponent,
     MatIconButton,
     MatMenuTrigger,
-    NavbarComponent,
-    NavbarMobileComponent,
     NgClass,
     RouterLink,
     ThemeComponent,

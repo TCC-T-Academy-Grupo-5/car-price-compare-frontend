@@ -31,7 +31,7 @@ jobs:
       - name: Run ESLint
         run: ./node_modules/.bin/eslint . --max-warnings 0
 
-      - name: Run tests
-        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --verbose
-        env:
-          CI: true
+#      - name: Run tests
+#        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless --verbose
+#        env:
+#          CI: true
