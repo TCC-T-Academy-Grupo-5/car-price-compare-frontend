@@ -1,18 +1,32 @@
 actions:
   create: 'Criar {{object}}'
   edit: 'Editar {{object}}'
-  delete: 'Excluir {{object}}'
-profile: 'Perfil'
+  delete: 'Deletar {{object}}'
+dark: 'escuro'
+home:
+  find_cars_compare_price: 'Encontre carros para comparar preços'
+  find_dream_car: 'Encontre seu carro dos sonhos'
+  browse_by_type: 'Navegar por tipo'
 languages:
   de: 'Alemão'
   en: 'Inglês'
   es: 'Espanhol'
   pt: 'Português'
+light: 'claro'
 messages:
   error: 'Erro ao {{action}} {{object}}.'
   success: '{{object}} {{action}} com sucesso.'
+placeholder:
+  search: 'Buscar'
+profile: 'Perfil'
 sign:
   in: 'Entrar'
   out: 'Sair'
+switch_theme_to: 'Mudar tema para {{theme}}'
+title: 'Valor do Carro'
 translate: 'Traduzir'
-title: 'Valor do Veículo'
+vehicle:
+  types:
+    car: 'Carro'
+    motorcycle: 'Motocicleta'
+    truck: 'Caminhão'

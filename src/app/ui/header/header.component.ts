@@ -4,18 +4,24 @@ import {NavbarMobileComponent} from "@ui/navbar-mobile/navbar-mobile.component";
 import {RouterLink} from "@angular/router";
 import {NgClass} from "@angular/common";
 import {MatIconButton} from "@angular/material/button";
-import {MatMenuPanel, MatMenuTrigger} from "@angular/material/menu";
+import {MatMenuTrigger} from "@angular/material/menu";
+import {LanguageComponent} from "@ui/language/language.component";
+import {ThemeComponent} from "@ui/theme/theme.component";
+import {UserComponent} from "@ui/user/user.component";
 
 @Component({
   selector: 'tcc-header',
   standalone: true,
   imports: [
+    LanguageComponent,
+    MatIconButton,
+    MatMenuTrigger,
     NavbarComponent,
     NavbarMobileComponent,
     NgClass,
     RouterLink,
-    MatIconButton,
-    MatMenuTrigger
+    ThemeComponent,
+    UserComponent
   ],
   templateUrl: './header.component.html'
 })

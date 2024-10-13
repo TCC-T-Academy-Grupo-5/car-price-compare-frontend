@@ -2,17 +2,31 @@ actions:
   create: 'Create {{object}}'
   edit: 'Edit {{object}}'
   delete: 'Delete {{object}}'
-profile: 'Profile'
+dark: 'dark'
+home:
+  find_cars_compare_price: 'Find cars for compare prices'
+  find_dream_car: 'Find Your Dream Car'
+  browse_by_type: 'Browse by Type'
 languages:
   de: 'Germany'
   en: 'English'
   es: 'Spanish'
   pt: 'Portuguese'
+light: 'light'
 messages:
   error: 'Error {{action}} {{object}}.'
   success: '{{object}} {{action}} successfully.'
+placeholder:
+  search: 'Search'
+profile: 'Profile'
 sign:
   in: 'Sign in'
   out: 'Sign out'
-translate: 'Translate'
+switch_theme_to: 'Switch theme to {{theme}}'
 title: 'Auto Value'
+translate: 'Translate'
+vehicle:
+  types:
+    car: 'Car'
+    motorcycle: 'Mortorcycle'
+    truck: 'Truck'

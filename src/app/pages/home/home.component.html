@@ -1,7 +1,7 @@
 <main class="bg-secondary-light dark:bg-secondary mb-0 pb-0 mt-20 overflow-hidden text-center">
   <div class="max-w-screen tcc-flex flex-col">
-    <p class="mt-2">Find cars for compare prices</p>
-    <h2>Find Your Dream Car</h2>
+    <p class="mt-2">{{ 'home.find_dream_car' | translate }}</p>
+    <h2>{{ 'home.find_dream_car' | translate }}</h2>
     <img
       ngSrc="assets/images/car_default_mobile.svg"
       alt="Tesla Car Image Mobile"
@@ -11,7 +11,7 @@
       priority
     >
     <div class="search-wrapper tcc-flex">
-      <input type="text" placeholder="todo..." class="outline-none">
+      <input type="text" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
       <i class="material-symbols-outlined">search</i>
     </div>
     <img
@@ -23,26 +23,26 @@
     priority
     >
     <div class="browse-type">
-      <h4 class="my-2">Browse by Type</h4>
+      <h4 class="my-2"> {{ 'home.browse_by_type' | translate }} </h4>
       <div class="tcc-flex gap-2">
         <div class="card">
           <div class="flex flex-col items-center p-4">
             <i class="material-symbols-outlined text-4xl">directions_car</i>
-            <p class="text-lg">Car</p>
+            <p>{{ 'vehicle.types.car' | translate }}</p>
           </div>
         </div>
 
         <div class="card">
           <div class="flex flex-col items-center p-4">
             <i class="material-symbols-outlined text-4xl">two_wheeler</i>
-            <p class="text-lg">Moto</p>
+            <p>{{ 'vehicle.types.motorcycle' | translate }}</p>
           </div>
         </div>
 
         <div class="card">
           <div class="flex flex-col items-center p-4">
             <i class="material-symbols-outlined text-4xl">local_shipping</i>
-            <p class="text-lg">Truck</p>
+            <p>{{ 'vehicle.types.truck' | translate }}</p>
           </div>
         </div>
       </div>

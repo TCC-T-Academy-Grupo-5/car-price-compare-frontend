@@ -1,0 +1,27 @@
+<li>
+  <span
+    mat-button
+    [matMenuTriggerFor]="userMenu"
+    aria-label="User Menu"
+    tabindex="0"
+    (keyup)="handleKeyboardEvent($event)"
+    class="material-symbols-outlined"
+  >
+    person
+  </span>
+</li>
+
+<mat-menu #userMenu="matMenu" xPosition="before">
+  <span mat-menu-item [routerLink]="['/']" class="w-full">
+    {{ 'actions.edit' | translate: { object: ('profile' | translate) } }}
+  </span>
+  <span
+    mat-menu-item
+    tabindex="0"
+    (click)="logout()"
+    (keyup)="handleKeyboardEvent($event)"
+    class="w-full"
+  >
+    {{ 'sign.out' | translate }}
+  </span>
+</mat-menu>

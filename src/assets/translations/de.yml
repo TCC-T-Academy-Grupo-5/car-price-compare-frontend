@@ -1,18 +1,32 @@
 actions:
-  create: 'Erstellen {{object}}'
-  edit: 'Bearbeiten {{object}}'
-  delete: 'Löschen {{object}}'
-profile: 'Profil'
+  create: 'Erstelle {{object}}'
+  edit: 'Bearbeite {{object}}'
+  delete: 'Lösche {{object}}'
+dark: 'dunkel'
+home:
+  find_cars_compare_price: 'Finde Autos zum Vergleich von Preisen'
+  find_dream_car: 'Finde dein Traumauto'
+  browse_by_type: 'Durchsuche nach Typ'
 languages:
   de: 'Deutsch'
   en: 'Englisch'
   es: 'Spanisch'
   pt: 'Portugiesisch'
+light: 'hell'
 messages:
-  error: 'Fehler beim {{action}} {{object}}.'
-  success: '{{object}} wurde erfolgreich {{action}}.'
+  error: 'Fehler {{action}} {{object}}.'
+  success: '{{object}} {{action}} erfolgreich.'
+placeholder:
+  search: 'Suche'
+profile: 'Profil'
 sign:
-  in: 'In'
-  out: 'Out'
-translate: 'Übersetzen'
+  in: 'Einloggen'
+  out: 'Ausloggen'
+switch_theme_to: 'Wechsle zu {{theme}}-Thema'
 title: 'Auto Wert'
+translate: 'Übersetzen'
+vehicle:
+  types:
+    car: 'Auto'
+    motorcycle: 'Motorrad'
+    truck: 'Lkw'

@@ -4,6 +4,7 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {NgOptimizedImage} from "@angular/common";
 import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'tcc-home',
@@ -13,13 +14,13 @@ import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
     NgOptimizedImage,
     MatCardImage,
     MatCard,
-    MatCardContent
+    MatCardContent,
+    TranslateModule
   ],
   templateUrl: './home.component.html',
   styles: ``
 })
 export class HomeComponent {
   constructor() {
-    library.add(fas);
   }
 }
