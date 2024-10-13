@@ -3,8 +3,6 @@ import {RouterOutlet} from '@angular/router';
 import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FooterComponent} from "@ui/footer/footer.component";
 import {HeaderComponent} from "@ui/header/header.component";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {fas} from "@fortawesome/free-solid-svg-icons";
 import {HomeComponent} from "@pages/home/home.component";
 
 @Component({
