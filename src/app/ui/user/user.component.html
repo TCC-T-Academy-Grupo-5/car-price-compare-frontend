@@ -1,4 +1,4 @@
-<div *ngIf="!isLogedIn; else isLogged" class="w-full px-2">
+<div *ngIf="!isLoggedIn; else isLogged" class="w-full px-2">
   <i
     mat-button
     aria-label="User Menu"
@@ -25,14 +25,15 @@
 <ng-template #isLogged>
   <div class="flex flex-col items-center text-center py-4 md:block md:py-0">
     <div class="relative avatar-wrapper w-16 h-16 md:w-6 md:h-6 rounded-full">
-      <img
-        class="w-full h-full rounded-full object-contain"
-        [src]="profileImgSrc"
-        alt="Profile"
+      <button
+        class="w-full h-full rounded-full p-0"
         (keyup)="handleKeyboardEvent($event)"
         [matMenuTriggerFor]="userMenu"
         (error)="handleImgError($event)"
+        aria-label="Profile"
       >
+        <img class="w-full h-full rounded-full object-contain" [src]="profileImgSrc" alt="Profile">
+      </button>
     </div>
 
     <div class="mt-4 md:hidden">

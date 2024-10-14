@@ -39,10 +39,18 @@ button
   text-decoration: none
   list-style: none
   cursor: pointer
+  @apply text-secondary dark:text-secondary-light
 
 .search-wrapper
   border-radius: 24px
-  @apply h-10 p-4 my-4 border-tertiary text-primary bg-primary-light gap-1 hover:border
+  @apply h-10 p-6 pr-3 my-4 border-tertiary text-secondary bg-primary-light gap-1 hover:border w-full md:w-6/12
+
+input
+  @apply text-primary
+  &::placeholder
+    @apply text-tertiary
+.material-symbols-outlined
+  @apply text-secondary
 
 div.avatar-wrapper
   position: relative

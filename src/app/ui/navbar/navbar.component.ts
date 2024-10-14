@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgClass} from "@angular/common";
 import {UserComponent} from "@ui/user/user.component";
 import {TranslateModule} from "@ngx-translate/core";
+import {InteractionService} from "@services/interaction.service";
 
 @Component({
   selector: 'tcc-navbar',
@@ -17,10 +18,16 @@ import {TranslateModule} from "@ngx-translate/core";
   styles: ``
 })
 export class NavbarComponent {
-  @Input() isOpen: boolean = false;
-  @Output() toggleMenu: EventEmitter<void> = new EventEmitter<void>();
 
-  closeMenu() {
-    this.toggleMenu.emit();
+  @Input() isOpen: boolean = false;
+
+  constructor(private interaction: InteractionService) {}
+
+  toggleMenu(): void {
+    this.interaction.toggleMenu();
+  }
+
+  closeMenu(): void {
+    this.interaction.closeMenu();
   }
 }

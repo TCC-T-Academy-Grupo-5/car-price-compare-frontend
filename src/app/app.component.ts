@@ -5,6 +5,7 @@ import {FooterComponent} from "@ui/footer/footer.component";
 import {HeaderComponent} from "@ui/header/header.component";
 import {HomeComponent} from "@pages/home/home.component";
 import {UserComponent} from "@ui/user/user.component";
+import {InteractionService} from "@services/interaction.service";
 
 @Component({
   selector: 'tcc-root',
@@ -29,4 +30,17 @@ import {UserComponent} from "@ui/user/user.component";
   `
 })
 export class AppComponent {
+  constructor(private interaction: InteractionService) {}
+
+  get isOpen(): boolean {
+    return this.interaction.isMenuOpen;
+  }
+
+  toggleMenu(): void {
+    this.interaction.toggleMenu();
+  }
+
+  closeMenu(): void {
+    this.interaction.closeMenu();
+  }
 }

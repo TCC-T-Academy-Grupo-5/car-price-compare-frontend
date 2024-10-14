@@ -99,10 +99,10 @@ $font-sizes: (
   .browse-type {
 
     .card {
+      height: 116px;
+      width: 116px;
       @apply
       rounded
-      h-24
-      w-24
       border
       border-gray-300
       shadow-lg

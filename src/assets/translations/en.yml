@@ -7,7 +7,6 @@ dark: 'dark'
 home:
   find_cars_compare_price: 'Find cars for compare prices'
   find_dream_car: 'Find Your Dream Car'
-  browse_by_type: 'Browse by Type'
 languages:
   de: 'Germany'
   en: 'English'
@@ -27,6 +26,7 @@ switch_theme_to: 'Switch theme to {{theme}}'
 title: 'Auto Value'
 translate: 'Translate'
 vehicle:
+  type: 'Vehicle type'
   types:
     car: 'Car'
     motorcycle: 'Mortorcycle'

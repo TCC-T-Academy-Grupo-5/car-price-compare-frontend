@@ -5,11 +5,8 @@
         precifi<span class="text-highlight dark:text-highlight-light">car</span>
       </a>
     </h3>
-    <div class="hidden md:block">
-      <!-- <tcc-navbar /> -->
-    </div>
-    <div class="flex justify-between items-center gap-4">
 
+    <div class="flex justify-between items-center gap-4">
       <tcc-theme />
       <tcc-language />
       <tcc-user class="hidden md:block h-10 pt-2" />
@@ -28,4 +25,4 @@
   </div>
 </header>
 
-<tcc-navbar [isOpen]="isOpen" (toggleMenu)="toggleMenu()" />
+<tcc-navbar [isOpen]="isOpen" />

@@ -3,7 +3,7 @@ import {HostListener, Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService {
+export class InteractionService {
   private isOpen = false;
 
   get isMenuOpen(): boolean {

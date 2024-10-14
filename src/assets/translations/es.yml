@@ -27,6 +27,7 @@ switch_theme_to: 'Cambiar tema a {{theme}}'
 title: 'Valor del Auto'
 translate: 'Traducir'
 vehicle:
+  type: 'Tipo de vehículo'
   types:
     car: 'Coche'
     motorcycle: 'Motocicleta'

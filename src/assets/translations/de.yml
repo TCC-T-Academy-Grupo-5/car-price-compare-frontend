@@ -7,7 +7,6 @@ dark: 'dunkel'
 home:
   find_cars_compare_price: 'Finde Autos zum Vergleich von Preisen'
   find_dream_car: 'Finde dein Traumauto'
-  browse_by_type: 'Durchsuche nach Typ'
 languages:
   de: 'Deutsch'
   en: 'Englisch'
@@ -27,6 +26,7 @@ switch_theme_to: 'Wechsle zu {{theme}}-Thema'
 title: 'Auto Wert'
 translate: 'Übersetzen'
 vehicle:
+  type: 'Fahrzeugtyp'
   types:
     car: 'Auto'
     motorcycle: 'Motorrad'

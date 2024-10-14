@@ -11,6 +11,7 @@ import {HomeComponent} from "@pages/home/home.component";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {NavbarComponent} from "@ui/navbar/navbar.component";
+import {InteractionService} from "@services/interaction.service";
 
 @Component({
   selector: 'tcc-header',
@@ -35,10 +36,14 @@ import {NavbarComponent} from "@ui/navbar/navbar.component";
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  isOpen = false;
+  constructor(private interactionService: InteractionService) {} // Injeção do serviço
 
   toggleMenu() {
-    this.isOpen = !this.isOpen;
+    this.interactionService.toggleMenu();
+  }
+
+  get isOpen() {
+    return this.interactionService.isMenuOpen;
   }
 
   @ViewChild('section2') section2!: ElementRef;

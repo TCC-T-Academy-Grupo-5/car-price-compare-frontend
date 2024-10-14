@@ -3,27 +3,30 @@
     <p class="mt-2">{{ 'home.find_dream_car' | translate }}</p>
     <h2>{{ 'home.find_dream_car' | translate }}</h2>
     <img
-      ngSrc="assets/images/car_default_mobile.svg"
+      ngSrc="../../../assets/images/car_default_mobile.png"
       alt="Tesla Car Image Mobile"
       class="block md:hidden"
-      height="276"
-      width="393"
+      height="256"
+      width="332"
       priority
     >
     <div class="search-wrapper tcc-flex">
       <input type="text" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
-      <i class="material-symbols-outlined">search</i>
+      <span class="bg-highlight rounded-full inline-flex items-center justify-center h-8 w-8">
+        <i class="material-symbols-outlined text-primary-light text-sm">search</i>
+      </span>
+
     </div>
     <img
-    ngSrc="assets/images/car_default.png"
-    alt="Tesla Car Image Desktop"
-    class="hidden md:block"
-    height="713"
-    width="2332"
-    priority
+      ngSrc="assets/images/car_default.png"
+      alt="Tesla Car Image Desktop"
+      class="hidden md:block"
+      height="713"
+      width="2332"
+      priority
     >
     <div class="browse-type">
-      <h4 class="my-2"> {{ 'home.browse_by_type' | translate }} </h4>
+      <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
       <div class="tcc-flex gap-2">
         <div class="card">
           <div class="flex flex-col items-center p-4">
