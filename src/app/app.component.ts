@@ -4,6 +4,7 @@ import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontaweso
 import {FooterComponent} from "@ui/footer/footer.component";
 import {HeaderComponent} from "@ui/header/header.component";
 import {HomeComponent} from "@pages/home/home.component";
+import {UserComponent} from "@ui/user/user.component";
 
 @Component({
   selector: 'tcc-root',
@@ -14,7 +15,8 @@ import {HomeComponent} from "@pages/home/home.component";
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    RouterOutlet
+    RouterOutlet,
+    UserComponent
   ],
   template: `
     <div class="flex flex-col min-h-screen">

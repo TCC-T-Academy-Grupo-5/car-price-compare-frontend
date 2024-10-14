@@ -2,6 +2,7 @@ actions:
   create: 'Erstelle {{object}}'
   edit: 'Bearbeite {{object}}'
   delete: 'Lösche {{object}}'
+close: 'Schliessen'
 dark: 'dunkel'
 home:
   find_cars_compare_price: 'Finde Autos zum Vergleich von Preisen'

@@ -42,7 +42,22 @@ button
 
 .search-wrapper
   border-radius: 24px
-  @apply h-10 p-4 my-4 border-tertiary bg-primary-light gap-1 hover:border
+  @apply h-10 p-4 my-4 border-tertiary text-primary bg-primary-light gap-1 hover:border
+
+div.avatar-wrapper
+  position: relative
+  display: inline-block
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border-radius: 50%
+    @apply bg-gradient-to-r from-secondary to-primary
+    z-index: -1
 
 /*
   2. Material Symbols

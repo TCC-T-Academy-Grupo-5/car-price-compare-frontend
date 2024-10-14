@@ -73,7 +73,7 @@ $font-sizes: (
     fixed
     w-full
     left-0
-    z-50
+    z-40
     duration-300
     overflow-hidden;
 
@@ -118,6 +118,10 @@ $font-sizes: (
   }
   .menu {
     @apply flex flex-col;
+  }
+
+  .navbar-link {
+    @apply flex items-center p-3 space-x-3 hover:bg-secondary-light dark:hover:bg-secondary rounded-lg
   }
 }
 

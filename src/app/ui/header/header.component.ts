@@ -10,6 +10,7 @@ import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
 import {HomeComponent} from "@pages/home/home.component";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
+import {NavbarComponent} from "@ui/navbar/navbar.component";
 
 @Component({
   selector: 'tcc-header',
@@ -28,7 +29,8 @@ import {MatIcon} from "@angular/material/icon";
     DatePipe,
     HomeComponent,
     MatToolbar,
-    MatIcon
+    MatIcon,
+    NavbarComponent
   ],
   templateUrl: './header.component.html'
 })
