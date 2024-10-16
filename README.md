@@ -8,7 +8,6 @@ This project is an Angular application called **precificar**, designed to help u
 
 The project aims to develop a web platform similar to Buscapé, but focused on vehicles. Users can compare prices of used and new cars from different online stores by collecting current prices through web scraping and comparing them to the reference values from the FIPE table.
 
-
 ## Technologies Used
 
 - **Application**: [Angular 18](https://angular.dev/overview);

@@ -3,6 +3,8 @@ import {DatePipe, NgOptimizedImage} from "@angular/common";
 import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
+import {VehicleComponent} from '@pages/vehicle/vehicle.component';
+import {RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'tcc-home',
@@ -16,7 +18,10 @@ import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
     MatTabGroup,
     MatTab,
     MatTabContent,
-    DatePipe
+    DatePipe,
+    VehicleComponent,
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styles: ``

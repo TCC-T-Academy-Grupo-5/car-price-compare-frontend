@@ -1,0 +1,37 @@
+<div class="filter-container mt-32 text-primary dark:text-primary-light">
+  <form [formGroup]="filterForm" (ngSubmit)="applyFilter($event)">
+    <mat-form-field>
+      <input matInput formControlName="model" placeholder="Model">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="brand" placeholder="Brand">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="year" type="number" placeholder="Year">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="fipePrice" type="number" placeholder="FIPE Price">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="type" placeholder="Vehicle Type">
+        <mat-option value="CAR">Car</mat-option>
+        <mat-option value="MOTORCYCLE">Motorcycle</mat-option>
+        <mat-option value="TRUCK">Truck</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Apply Filter</button>
+  </form>
+
+  <div class="vehicle-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let vehicle of vehicles" class="vehicle-card">
+      <img [src]="vehicle.fullUrl" alt="{{ vehicle.name }}">
+      <h3>{{ vehicle.name }}</h3>
+      <p>{{ vehicle.year }} | {{ vehicle.fipeCode }}</p>
+    </div>
+  </div>
+</div>

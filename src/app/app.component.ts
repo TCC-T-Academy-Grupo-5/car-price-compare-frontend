@@ -5,6 +5,7 @@ import {HeaderComponent} from '@ui/header/header.component';
 import {HomeComponent} from '@pages/home/home.component';
 import {UserComponent} from '@ui/user/user.component';
 import {InteractionService} from '@services/interaction.service';
+import {VehicleComponent} from '@pages/vehicle/vehicle.component';
 
 @Component({
   selector: 'tcc-root',
@@ -14,7 +15,8 @@ import {InteractionService} from '@services/interaction.service';
     HeaderComponent,
     HomeComponent,
     RouterOutlet,
-    UserComponent
+    UserComponent,
+    VehicleComponent
   ],
   template: `
     <div class="flex flex-col min-h-screen">
