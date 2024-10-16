@@ -26,6 +26,7 @@
     "paths": {
       "@components/*": ["app/components/*"],
       "@directives/*": ["app/core/directives/*"],
+      "@environments/*": ["environments/*"],
       "@flags/*": ["assets/flags/*"],
       "@icons/*": ["assets/icons/*"],
       "@images/*": ["assets/images/*"],

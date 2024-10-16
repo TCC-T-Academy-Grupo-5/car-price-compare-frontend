@@ -1,26 +1,46 @@
-version: '3.5'
-
 services:
-  angular-app:
-    build: .
-    container_name: angular
+  # Frontend Service
+  frontend:
+    build:
+      context: .
     ports:
-      - '4200:4200'
-    volumes:
-      - ./:/app
-    environment:
-      - STYLE=css
+      - "4200:4200"
+    networks:
+      - app-network
 
-    # TODO: Remover daqui para baixo quando não estiver usando json-server e usar o compose da pasta ../
+  # Backend Service
+  backend:
+    build:
+      context: ../car-price-compare-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
     depends_on:
-      - json-server
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/precificar
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      JWT_SECRET: BboUQ8xAZoO6iLizC9FK1XgNhVhA+UeB4AlQ6GNrrLA==
 
-  json-server:
-    image: node:18
-    container_name: json-server
-    working_dir: /app
+  # Postgres Database Service
+  postgres:
+    image: postgres:14
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: precificar
     volumes:
-      - ./:/app
-    command: npx json-server --watch db.json --port 3000
+      - postgres-data:/var/lib/postgresql/data
     ports:
-      - '3000:3000'
+      - "5431:5432"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
