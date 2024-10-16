@@ -11,10 +11,10 @@ The project aims to develop a web platform similar to Buscapé, but focused on v
 
 ## Technologies Used
 
-- [Angular 18](https://angular.dev/overview): The framework used to build the application.
-- [Docker](https://docs.docker.com/): To streamline the development environment and run the application.
-- styles: [Tailwind CSS](https://tailwindcss.com/docs/installation) and [Angular Material](https://material.angular.io/): For styling and responsive design.
-- [Google Symbols & Icons](https://fonts.google.com/icons).
+- **Application**: [Angular 18](https://angular.dev/overview);
+- **Container**: [Docker](https://docs.docker.com/);
+- **styles**: [Tailwind CSS](https://tailwindcss.com/docs/installation) and [Angular Material](https://material.angular.io/);
+- **Icons**: [Google Symbols & Icons](https://fonts.google.com/icons).
 
 ## Features
 
