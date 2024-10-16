@@ -1,0 +1,28 @@
+<header class="tcc-shared-bar">
+  <div class="max-w-screen-xl tcc-flex mx-auto py-4 px-4 xl:px-2 w-full top-0 h-20 min-h-16">
+    <h3>
+      <a [routerLink]="['']" class="hover:border-none">
+        precifi<span class="text-highlight dark:text-highlight-light">car</span>
+      </a>
+    </h3>
+
+    <div class="flex justify-between items-center gap-4">
+      <tcc-theme />
+      <tcc-language />
+      <tcc-user class="hidden md:block h-10 pt-2" />
+
+      <input class="side-menu hidden" type="checkbox" id="side-menu" />
+      <label
+        for="side-menu"
+        (click)="toggleMenu()"
+        (keydown)="toggleMenu()"
+        tabindex="0"
+        class="md:hidden cursor-pointer"
+      >
+        <i class="material-symbols-outlined">menu</i>
+      </label>
+    </div>
+  </div>
+</header>
+
+<tcc-navbar [isOpen]="isOpen" />

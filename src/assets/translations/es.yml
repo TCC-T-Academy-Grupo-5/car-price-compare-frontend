@@ -1,0 +1,34 @@
+actions:
+  create: 'Crear {{object}}'
+  edit: 'Editar {{object}}'
+  delete: 'Eliminar {{object}}'
+close: 'Cerrar'
+dark: 'oscuro'
+home:
+  find_cars_compare_price: 'Encuentra coches para comparar precios'
+  find_dream_car: 'Encuentra tu coche soñado'
+  browse_by_type: 'Navegar por tipo'
+languages:
+  de: 'Alemán'
+  en: 'Inglés'
+  es: 'Español'
+  pt: 'Portugués'
+light: 'claro'
+messages:
+  error: 'Error {{action}} {{object}}.'
+  success: '{{object}} {{action}} con éxito.'
+placeholder:
+  search: 'Buscar'
+profile: 'Perfil'
+sign:
+  in: 'Iniciar sesión'
+  out: 'Cerrar sesión'
+switch_theme_to: 'Cambiar tema a {{theme}}'
+title: 'Valor del Auto'
+translate: 'Traducir'
+vehicle:
+  type: 'Tipo de vehículo'
+  types:
+    car: 'Coche'
+    motorcycle: 'Motocicleta'
+    truck: 'Camión'

@@ -1,0 +1,60 @@
+<div *ngIf="!isLoggedIn; else isLogged" class="w-full px-2">
+  <i
+    mat-button
+    aria-label="User Menu"
+    tabindex="0"
+    (keyup)="handleKeyboardEvent($event)"
+    [matMenuTriggerFor]="userMenu"
+    class="material-symbols-outlined hidden md:block"
+  >
+    account_circle
+  </i>
+  <a href="/login" class="flex md:hidden justify-start w-full gap-4"> <!--TODO: funcao de login-->
+    <i class="material-symbols-outlined">account_circle</i>
+    <span>Login</span>
+  </a>
+
+  <mat-menu #userMenu="matMenu" xPosition="before">
+    <span mat-menu-item [routerLink]="['/login']" class="w-full">
+      <!--{{ 'actions.login' | translate }}-->
+      Login
+    </span>
+  </mat-menu>
+</div>
+
+<ng-template #isLogged>
+  <div class="flex flex-col items-center text-center py-4 md:block md:py-0">
+    <div class="relative avatar-wrapper w-16 h-16 md:w-6 md:h-6 rounded-full">
+      <button
+        class="w-full h-full rounded-full p-0"
+        (keyup)="handleKeyboardEvent($event)"
+        [matMenuTriggerFor]="userMenu"
+        (error)="handleImgError($event)"
+        aria-label="Profile"
+      >
+        <img class="w-full h-full rounded-full object-contain" [src]="profileImgSrc" alt="Profile">
+      </button>
+    </div>
+
+    <div class="mt-4 md:hidden">
+      <h2 class="text-lg font-semibold dark:text-gray-100">{{ currentUser.name }}</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400">Outro dado (opcional)</p>
+    </div>
+
+  </div>
+
+  <mat-menu #userMenu="matMenu" xPosition="before">
+    <span mat-menu-item [routerLink]="['/profile']" class="w-full">
+      {{ 'actions.edit' | translate: { object: ('profile' | translate) } }}
+    </span>
+    <span
+      mat-menu-item
+      tabindex="0"
+      (click)="logout()"
+      (keyup)="handleKeyboardEvent($event)"
+      class="w-full"
+    >
+      {{ 'sign.out' | translate }}
+    </span>
+  </mat-menu>
+</ng-template>

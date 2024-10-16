@@ -1,0 +1,54 @@
+<nav class="z-50 fixed right-0 top-0 w-64 h-full bg-primary-light dark:bg-primary shadow-lg transition-transform duration-500 ease-in-out"
+     [ngClass]="{'translate-x-0': isOpen, 'translate-x-full': !isOpen}">
+  <div class="p-4">
+    <i
+      tabindex="0"
+      (click)="closeMenu()"
+      (keyup.enter)="closeMenu()"
+      title="{{ 'close' | translate }}"
+      class="material-symbols-outlined w-full text-right"
+    >
+      close
+    </i>
+    <tcc-user class="flex flex-col items-center text-center border-b border-tertiary-light pb-4" />
+
+    <ul class="mt-8 space-y-2 text-secondary dark:text-secondary-light">
+      <li>
+        <a routerLink="/" class="navbar-link" tabindex="0">
+          <i class="material-symbols-outlined">home</i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/" class="navbar-link" tabindex="0">
+          <i class="material-symbols-outlined">topic</i>
+          <span>Topics</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/" class="navbar-link" tabindex="0">
+          <i class="material-symbols-outlined">chat_bubble</i>
+          <span>Messages</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/" class="navbar-link" tabindex="0">
+          <i class="material-symbols-outlined">mail</i>
+          <span>Notifications</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/" class="navbar-link" tabindex="0">
+          <i class="material-symbols-outlined">contact_page</i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/" class="navbar-link" tabindex="0">
+          <i class="material-symbols-outlined">live_help</i>
+          <span>Help</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

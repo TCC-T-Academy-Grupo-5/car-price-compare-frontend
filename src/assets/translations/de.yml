@@ -1,0 +1,33 @@
+actions:
+  create: 'Erstelle {{object}}'
+  edit: 'Bearbeite {{object}}'
+  delete: 'Lösche {{object}}'
+close: 'Schliessen'
+dark: 'dunkel'
+home:
+  find_cars_compare_price: 'Finde Autos zum Vergleich von Preisen'
+  find_dream_car: 'Finde dein Traumauto'
+languages:
+  de: 'Deutsch'
+  en: 'Englisch'
+  es: 'Spanisch'
+  pt: 'Portugiesisch'
+light: 'hell'
+messages:
+  error: 'Fehler {{action}} {{object}}.'
+  success: '{{object}} {{action}} erfolgreich.'
+placeholder:
+  search: 'Suche'
+profile: 'Profil'
+sign:
+  in: 'Einloggen'
+  out: 'Ausloggen'
+switch_theme_to: 'Wechsle zu {{theme}}-Thema'
+title: 'Auto Wert'
+translate: 'Übersetzen'
+vehicle:
+  type: 'Fahrzeugtyp'
+  types:
+    car: 'Auto'
+    motorcycle: 'Motorrad'
+    truck: 'Lkw'

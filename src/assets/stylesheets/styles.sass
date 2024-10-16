@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap')
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+/* Table of Contents
+  ------------------
+  1. Default
+  2. Material Symbols
+  3. Angular Material
+  --------------- */
+
+/*
+  1. Default
+  ---------------------------------------------------------------------- */
+::-webkit-scrollbar
+  width: 8px
+::-webkit-scrollbar-track
+  background: #2D3748
+::-webkit-scrollbar-thumb
+  background: #CBD5E0
+::-webkit-scrollbar-thumb:hover
+  background: #718096
+
+
+html,
+body
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  @apply transition-colors duration-300 ease-in-out
+  &.dark
+    @apply bg-primary text-primary-light
+
+a,
+i,
+li,
+button
+  text-decoration: none
+  list-style: none
+  cursor: pointer
+  @apply text-secondary dark:text-secondary-light
+
+.search-wrapper
+  border-radius: 24px
+  @apply h-10 p-6 pr-3 my-4 border-tertiary text-secondary bg-primary-light gap-1 hover:border w-full md:w-6/12
+
+input
+  @apply text-primary
+  &::placeholder
+    @apply text-tertiary
+.material-symbols-outlined
+  @apply text-secondary
+
+div.avatar-wrapper
+  position: relative
+  display: inline-block
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    border-radius: 50%
+    @apply bg-gradient-to-r from-secondary to-primary
+    z-index: -1
+
+/*
+  2. Material Symbols
+  ---------------------------------------------------------------------- */
+.material-symbols-outlined
+  font-size: 24px
+  line-height: 1
+  vertical-align: middle
+  font-variation-settings: 'FILL' 0, 'wght' 100, 'GRAD' 0, 'opsz' 48
+
+/*
+  3. Angular Material
+  ---------------------------------------------------------------------- */
+.cdk-overlay-pane
+  margin-top: 2px
+
+.mat-mdc-menu-content
+  border-radius: 2px
+  @apply mt-1 border border-primary bg-primary-light dark:bg-primary
+  .mat-mdc-menu-item-text
+    padding: 4px 8px
+    &:hover, &:focus
+      @apply bg-tertiary-light outline-none
+
+html.dark
+  .mat-mdc-menu-content
+    @apply border-primary-light
+    .mat-mdc-menu-item-text
+      padding: 4px 8px
+      &:hover, &:focus
+        @apply bg-tertiary outline-none
+
+.tcc-flex
+  @apply flex justify-between items-center gap-4
+
