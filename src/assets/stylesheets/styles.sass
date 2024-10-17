@@ -101,3 +101,17 @@ html.dark
 .tcc-flex
   @apply flex justify-between items-center gap-4
 
+
+*[class*='snackbar'],
+*[class*='overlay']
+  background-color: transparent
+  border: none
+  color: #fff
+
+.mdc-snackbar
+  &.snackbar-success *
+    background-color: #16a34a
+  &.snackbar-error *
+    background-color: #991b1b
+  &.snackbar-warning *
+    background-color: #ca8a04

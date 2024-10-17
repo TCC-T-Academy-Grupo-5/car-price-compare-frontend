@@ -12,6 +12,8 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {NavbarComponent} from "@ui/navbar/navbar.component";
 import {InteractionDirective} from '@directives/EventListenerDirectives';
+import {ErrorService} from '@services/errors/error.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'tcc-header',
@@ -38,6 +40,20 @@ import {InteractionDirective} from '@directives/EventListenerDirectives';
 })
 export class HeaderComponent {
   isOpen = false;
+
+  constructor(private e: ErrorService) {}
+
+  simulateError(status: number): void {
+    const error = new HttpErrorResponse({
+      status,
+      statusText: 'Simulated Error',
+      url: '/fake-url'
+    });
+
+    this.e.handleError(error).subscribe({
+      error: (err) => console.error('Error handled:', err)
+    });
+  }
 
   toggleMenu() {
     this.isOpen = !this.isOpen;

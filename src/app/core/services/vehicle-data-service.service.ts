@@ -11,7 +11,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class VehicleDataServiceService {
   private vehiclesSubject: BehaviorSubject<Vehicle[]> = new BehaviorSubject<Vehicle[]>([]);
   public vehicles$: Observable<Vehicle[]> = this.vehiclesSubject.asObservable();
-  private selectedType: number = 0;
+  private selectedType = 0;
 
   constructor(private vehicleService: VehicleService) {}
 
