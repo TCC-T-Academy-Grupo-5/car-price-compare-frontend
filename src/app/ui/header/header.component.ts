@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {DatePipe, NgClass} from "@angular/common";
 import {MatIconButton} from "@angular/material/button";
@@ -11,45 +11,39 @@ import {HomeComponent} from "@pages/home/home.component";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {NavbarComponent} from "@ui/navbar/navbar.component";
-import {InteractionService} from "@services/interaction.service";
+import {InteractionDirective} from '@directives/EventListenerDirectives';
 
 @Component({
   selector: 'tcc-header',
   standalone: true,
   imports: [
+    DatePipe,
+    HomeComponent,
+    InteractionDirective,
     LanguageComponent,
+    MatIcon,
     MatIconButton,
     MatMenuTrigger,
+    MatTab,
+    MatTabGroup,
+    MatToolbar,
+    MatTabContent,
+    NavbarComponent,
     NgClass,
     RouterLink,
     ThemeComponent,
-    UserComponent,
-    MatTabGroup,
-    MatTab,
-    MatTabContent,
-    DatePipe,
-    HomeComponent,
-    MatToolbar,
-    MatIcon,
-    NavbarComponent
+    UserComponent
   ],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  constructor(private interactionService: InteractionService) {} // Injeção do serviço
+  isOpen = false;
 
   toggleMenu() {
-    this.interactionService.toggleMenu();
+    this.isOpen = !this.isOpen;
   }
 
-  get isOpen() {
-    return this.interactionService.isMenuOpen;
-  }
-
-  @ViewChild('section2') section2!: ElementRef;
-  @ViewChild('section3') section3!: ElementRef;
-
-  scrollToSection(section: ElementRef) {
-    section.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+  closeMenu() {
+    this.isOpen = false;
   }
 }

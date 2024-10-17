@@ -3,12 +3,7 @@ import {Router, RouterLink} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {NgIf} from "@angular/common";
-import {InteractionService} from "@services/interaction.service";
 import {MatButton} from "@angular/material/button";
-
-interface User {
-  name: string;
-}
 
 @Component({
   selector: 'tcc-user',
@@ -30,21 +25,25 @@ export class UserComponent {
   profileImgSrc = 'https://upload.wikimedia.org/wikipedia/pt/0/07/Daenerys_Targaryen.png';
   defaultImgSrc = 'assets/icons/default_avatar.svg';
 
-  currentUser: User = {
+  currentUser = {
     name: 'Daenerys Targaryen',
   };
 
-  constructor(private router: Router, private interaction: InteractionService) {}
+  readonly menuId = 'userMenu';
+  menuOpen = false;
+
+  constructor(private router: Router) {}
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
 
   logout(): void {
     this.router.navigate(['/']).then((r) => console.log('redirect:', r));
-  }
-
-  handleKeyboardEvent(event: KeyboardEvent): void {
-    if (event.key === 'Enter' || event.key === ' ') {
-      const target = event.target as HTMLElement;
-      target.click();
-    }
   }
 
   handleImgError(event: Event): void {
@@ -52,21 +51,19 @@ export class UserComponent {
     imgElement.src = this.defaultImgSrc;
   }
 
-  toggleMenu(): void {
-    this.interaction.toggleMenu();
-  }
-
-  closeMenu(): void {
-    this.interaction.closeMenu();
-  }
-
   @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent): void {
+  onClickOutside(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const userMenu = document.getElementById('userMenu');
+    const userMenu = document.getElementById(this.menuId);
 
-    if (userMenu && !userMenu.contains(target) && this.isLoggedIn) {
+    if (userMenu && !userMenu.contains(target) && this.menuOpen) {
       this.closeMenu();
+    }
+  }
+
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleMenu();
     }
   }
 }

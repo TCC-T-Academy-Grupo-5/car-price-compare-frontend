@@ -1,3 +1,4 @@
+/*
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Vehicle} from '@models/vehicle';
@@ -47,7 +48,7 @@ export class VehicleComponent implements OnInit, OnDestroy {
       brand: [''],
       year: [''],
       fipePrice: [''],
-      type: ['CAR']
+      type: ['0']
     });
   }
 
@@ -76,3 +77,4 @@ export class VehicleComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 }
+*/

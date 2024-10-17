@@ -2,45 +2,40 @@
   <div class="max-w-screen tcc-flex flex-col">
     <p class="mt-2">{{ 'home.find_dream_car' | translate }}</p>
     <h2>{{ 'home.find_dream_car' | translate }}</h2>
-    <img
-      [src]="carImageMobile"
-      alt="Tesla Car Image Mobile"
-      class="block md:hidden"
-      height="256"
-      width="332"
-    >
+
+    <div class="relative w-full h-64 md:h-[256px]">
+      <img [src]="vehicleImgMobile" alt="Tesla Car Image Mobile"
+           class="absolute inset-0 block md:hidden object-contain w-full h-full" height="256" width="332">
+
+      <img [src]="vehicleImgDesktop" alt="Tesla Car Image Desktop"
+           class="absolute inset-0 hidden md:block object-contain w-full h-full" height="713" width="2332">
+    </div>
+
     <div class="search-wrapper tcc-flex">
       <input type="text" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
       <span class="bg-highlight rounded-full inline-flex items-center justify-center h-8 w-8">
         <i class="material-symbols-outlined text-primary-light text-sm">search</i>
-      </span>
-
+    </span>
     </div>
-    <img
-      [src]="carImageDesktop"
-      alt="Tesla Car Image Desktop"
-      class="hidden md:block"
-      height="713"
-      width="2332"
-    >
+
     <div class="browse-type">
       <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
       <div class="tcc-flex gap-2">
-        <div class="card">
+        <div class="card" tabindex="0" (click)="selectVehicleType(0)" (keydown.enter)="selectVehicleType(0)">
           <div class="flex flex-col items-center p-4">
             <i class="material-symbols-outlined text-4xl">directions_car</i>
             <p>{{ 'vehicle.types.car' | translate }}</p>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" tabindex="0" (click)="selectVehicleType(1)" (keydown.enter)="selectVehicleType(1)">
           <div class="flex flex-col items-center p-4">
             <i class="material-symbols-outlined text-4xl">two_wheeler</i>
             <p>{{ 'vehicle.types.motorcycle' | translate }}</p>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" tabindex="0" (click)="selectVehicleType(2)" (keydown.enter)="selectVehicleType(2)">
           <div class="flex flex-col items-center p-4">
             <i class="material-symbols-outlined text-4xl">local_shipping</i>
             <p>{{ 'vehicle.types.truck' | translate }}</p>
@@ -49,11 +44,11 @@
       </div>
     </div>
 
+<!--    <div class="menu" tccOutsideClick elementId="menu" [closeOnOutsideClick]="true" [closeOnEscapeKey]="true">-->
+<!--      <p>Conteúdo do Menu</p>-->
+<!--    </div>-->
 
-    <!-- TODO implementar do jeito certo -->
-    <a routerLink="vehicles">Filtrar Veículos Teste</a>
-    <router-outlet></router-outlet>
-
-
+<!--    <a routerLink="vehicles">Filtrar Veículos Teste</a>-->
+<!--    <router-outlet></router-outlet>-->
   </div>
 </main>

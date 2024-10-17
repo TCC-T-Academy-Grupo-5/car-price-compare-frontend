@@ -9,4 +9,5 @@ export interface VehicleFilterOptions {
   model?: string;
   year?: number;
   priceRange?: [number, number];
+  type: number | null;
 }

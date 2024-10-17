@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
-import {DatePipe, NgOptimizedImage} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {CommonModule, DatePipe, NgOptimizedImage} from "@angular/common";
 import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
-import {VehicleComponent} from '@pages/vehicle/vehicle.component';
 import {RouterLink, RouterOutlet} from '@angular/router';
+import {VehicleService} from '@services/vehicle.service';
+import {VehicleFilterOptions} from '../../core/interfaces/vehicle-filter';
+import {Vehicle} from '@models/vehicle';
+import {InteractionDirective} from '@directives/EventListenerDirectives';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'tcc-home',
   standalone: true,
   imports: [
+    CommonModule,
     NgOptimizedImage,
     MatCardImage,
     MatCard,
@@ -19,23 +24,89 @@ import {RouterLink, RouterOutlet} from '@angular/router';
     MatTab,
     MatTabContent,
     DatePipe,
-    VehicleComponent,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    InteractionDirective
   ],
   templateUrl: './home.component.html',
   styles: ``
 })
-export class HomeComponent {
-  protected readonly carImageDesktop: string = '../assets/images/car_default.png';
-  protected readonly carImageMobile: string = '../assets/images/car_default_mobile.png';
-  tabLoadTimes: Date[] = [];
+export class HomeComponent implements OnInit {
+  selectedType: number | null = null;
+  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
+  categories: string[] = [];
+  vehicles: Vehicle[] = [];
+  errorMessage: string | null = null;
+  vehicleImgDesktop!: string;
+  vehicleImgMobile!: string;
 
-  getTimeLoaded(index: number) {
-    if (!this.tabLoadTimes[index]) {
-      this.tabLoadTimes[index] = new Date();
-    }
+  constructor(private vehicleService: VehicleService) {}
 
-    return this.tabLoadTimes[index];
+  ngOnInit(): void {
+    this.vehicleImgDesktop = 'car';
+    this.vehicleImgMobile = 'car';
+    this.selectVehicleType(0);
+  }
+
+  selectVehicleType(type: number): void {
+    this.selectedType = type;
+    const selectedVehicleType = this.vehicleTypes[type];
+    this.updateCategories();
+    this.fetchVehicles();
+
+    this.vehicleImgDesktop = this.imagePath(selectedVehicleType, 'desktop');
+    this.vehicleImgMobile = this.imagePath(selectedVehicleType, 'mobile');
+
+    console.log(`Tipo de veículo selecionado: ${selectedVehicleType}`);
+  }
+
+  imagePath(type: string, device: 'desktop' | 'mobile'): string {
+    return `/assets/images/vehicle_type/${type.toLowerCase()}_${device}.png`;
+  }
+
+  updateCategories(): void {
+    const carCategories = [
+      'COMPACT_SEDAN',
+      'SUBCOMPACT_HATCH',
+      'MEDIUM_CONVERTIBLE',
+      'LARGE_SEDAN',
+      'LARGE_SUV',
+      'COMPACT_SPORTS',
+      'COMPACT_VAN',
+      'COMPACT_SUV'
+    ];
+    const motorcycleCategories = [
+      'TOURING',
+      'STREET',
+      'SPORT',
+      'CUSTOM',
+      'QUAD_UTV',
+      'NAKED',
+      'CUB',
+      'CARGO_TRICYCLE',
+      'ATV_QUAD',
+      'MOPED',
+      'TRICYCLE',
+      'TRAIL',
+      'SCOOTER'
+    ];
+    const truckCategories = ['URBAN_TRUCK'];
+
+    this.categories = this.selectedType === 0 ? carCategories
+      : this.selectedType === 1 ? motorcycleCategories : truckCategories;
+  }
+
+  fetchVehicles(): void {
+    this.errorMessage = null;
+    const filters: VehicleFilterOptions = { type: this.selectedType ?? 0 };
+    this.vehicleService.filterVehicles(filters).subscribe(
+      (vehicles: Vehicle[]) => {
+        this.vehicles = vehicles;
+        console.log(this.vehicles);
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = `Erro ao buscar veículos: ${error.message}`;
+      }
+    );
   }
 }
