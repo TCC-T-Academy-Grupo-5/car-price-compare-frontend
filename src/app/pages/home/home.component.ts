@@ -34,7 +34,7 @@ import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component
   styles: ``
 })
 export class HomeComponent implements OnInit {
-  selectedType: number = 0;
+  selectedType = 0;
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   categories: string[] = [];
   vehicles: Vehicle[] = [];
