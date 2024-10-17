@@ -31,3 +31,4 @@ vehicle:
     car: 'Car'
     motorcycle: 'Mortorcycle'
     truck: 'Truck'
+  brand: 'Brand'

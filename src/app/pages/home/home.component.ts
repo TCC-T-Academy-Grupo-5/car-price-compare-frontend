@@ -9,6 +9,8 @@ import {VehicleFilterOptions} from '../../core/interfaces/vehicle-filter';
 import {Vehicle} from '@models/vehicle';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import {HttpErrorResponse} from '@angular/common/http';
+import {BrandFilterOptions} from '../../core/interfaces/brand-filter';
+import {Brand} from '@models/brand';
 
 @Component({
   selector: 'tcc-home',
@@ -35,12 +37,13 @@ export class HomeComponent implements OnInit {
   selectedType: number | null = null;
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   categories: string[] = [];
-  vehicles: Vehicle[] = [];
+  brands: Brand[] = [];
   errorMessage: string | null = null;
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(private vehicleService: VehicleService) {
+  }
 
   ngOnInit(): void {
     this.vehicleImgDesktop = 'car';
@@ -52,7 +55,7 @@ export class HomeComponent implements OnInit {
     this.selectedType = type;
     const selectedVehicleType = this.vehicleTypes[type];
     this.updateCategories();
-    this.fetchVehicles();
+    this.fetchBrands();
 
     this.vehicleImgDesktop = this.imagePath(selectedVehicleType, 'desktop');
     this.vehicleImgMobile = this.imagePath(selectedVehicleType, 'mobile');
@@ -96,17 +99,17 @@ export class HomeComponent implements OnInit {
       : this.selectedType === 1 ? motorcycleCategories : truckCategories;
   }
 
-  fetchVehicles(): void {
+  fetchBrands(): void {
     this.errorMessage = null;
-    const filters: VehicleFilterOptions = { type: this.selectedType ?? 0 };
-    this.vehicleService.filterVehicles(filters).subscribe(
-      (vehicles: Vehicle[]) => {
-        this.vehicles = vehicles;
-        console.log(this.vehicles);
+    const filters: BrandFilterOptions = {type: this.selectedType ?? 0};
+    this.vehicleService.filterBrands(filters).subscribe({
+      next: (brands: Brand[]) => {
+        this.brands = brands;
+        console.log(this.brands);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao buscar veículos: ${error.message}`;
       }
-    );
+    });
   }
 }
