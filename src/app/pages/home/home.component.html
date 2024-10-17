@@ -35,7 +35,7 @@
     </div>
 
     <div>
-      <tcc-filter-brand [brands]="brands"></tcc-filter-brand>
+      <tcc-filter-brand [brands]="brands" (brandSelected)="onBrandSelected($event)"></tcc-filter-brand>
     </div>
 
     <!--    <div class="menu" tccOutsideClick elementId="menu" [closeOnOutsideClick]="true" [closeOnEscapeKey]="true">-->

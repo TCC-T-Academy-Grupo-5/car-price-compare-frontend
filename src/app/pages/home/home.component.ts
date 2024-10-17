@@ -64,6 +64,10 @@ export class HomeComponent implements OnInit {
     this.updateImagePaths(type);
   }
 
+  onBrandSelected(brandId: string): void {
+    console.log(`Marca selecionada: ${brandId}`);
+  }
+
   updateImagePaths(type: number): void {
     const selectedVehicleType = this.vehicleTypes[type];
     this.vehicleImgDesktop = this.imagePath(selectedVehicleType, 'desktop');
