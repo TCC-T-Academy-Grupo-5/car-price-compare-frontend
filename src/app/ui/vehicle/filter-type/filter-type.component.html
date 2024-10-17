@@ -1,0 +1,49 @@
+<h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
+<div class="tcc-flex gap-4 md:gap-8">
+
+  <button
+    class="card"
+    tabindex="0"
+    (click)="selectVehicleType(0)"
+    (keydown.enter)="selectVehicleType(0)"
+    [ngClass]="{ 'active': selectedType === 0 }"
+  >
+    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+      <i class="material-symbols-outlined text-4xl">
+        {{ selectedType === 0 ? 'check' : 'directions_car' }}
+      </i>
+      <p>{{ 'vehicle.types.car' | translate }}</p>
+    </div>
+  </button>
+
+  <button
+    class="card"
+    tabindex="0"
+    (click)="selectVehicleType(1)"
+    (keydown.enter)="selectVehicleType(1)"
+    [ngClass]="{ 'active': selectedType === 1 }"
+  >
+    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+      <i class="material-symbols-outlined text-4xl">
+        {{ selectedType === 1 ? 'check' : 'two_wheeler' }}
+      </i>
+      <p>{{ 'vehicle.types.motorcycle' | translate }}</p>
+    </div>
+  </button>
+
+  <button
+    class="card"
+    tabindex="0"
+    (click)="selectVehicleType(2)"
+    (keydown.enter)="selectVehicleType(2)"
+    [ngClass]="{ 'active': selectedType === 2 }"
+  >
+    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+      <i class="material-symbols-outlined text-4xl">
+        {{ selectedType === 2 ? 'check' : 'local_shipping' }}
+      </i>
+      <p>{{ 'vehicle.types.truck' | translate }}</p>
+    </div>
+  </button>
+
+</div>
