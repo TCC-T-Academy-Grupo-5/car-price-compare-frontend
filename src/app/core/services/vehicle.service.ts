@@ -10,7 +10,6 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class VehicleService {
-
   private apiUrl = `${environment.apiUrl}`;
   private vehiclesSubject = new BehaviorSubject<Vehicle[]>([]);
   filteredVehicles$ = this.vehiclesSubject.asObservable();
@@ -25,6 +24,7 @@ export class VehicleService {
 
     return this.http.get<Vehicle[]>(`${this.apiUrl}/vehicle/brand`, { params }).pipe(
       map((vehicles: Vehicle[]) => {
+        console.log('Veículos recebidos do servidor:', vehicles);
         this.vehiclesSubject.next(vehicles);
         return vehicles;
       })

@@ -68,6 +68,10 @@ $font-sizes: (
     }
   }
 
+  .active {
+    @apply ring-2 ring-highlight dark:ring-highlight-light shadow-lg;
+  }
+
   .tcc-shared-bar {
     @apply
     fixed
@@ -96,35 +100,67 @@ $font-sizes: (
     @apply fixed top-10 left-0 w-full z-40;
   }
 
-  .browse-type {
+  .card {
 
-    .card {
-      height: 116px;
-      width: 116px;
+    &:hover,
+    &:focus {
       @apply
-      rounded
-      border
-      border-gray-300
-      shadow-lg
-      hover:shadow-xl
-      transition-shadow
+      transform
+      scale-105
+      transition-transform
       duration-300
       ease-in-out
+      outline-highlight
+      dark:accent-highlight-light;
     }
+
+    @apply
+    h-28
+    w-full
+    md:w-48
+    md:h-20
+    rounded
+    border
+    border-gray-300
+    shadow-lg
+    hover:shadow-xl
+    transition-shadow
+    duration-300
+    ease-in-out
+    bg-primary-light
+    dark:bg-primary;
+  }
+
+  .browse-type {
+    @apply h-auto w-full md:justify-around md:w-auto;
   }
 
   .menu-overlay {
-    @apply fixed top-0 right-0 w-64 h-full bg-white shadow-lg transition-transform duration-500 ease-in-out;
+    @apply
+    fixed
+    top-0
+    right-0
+    w-64
+    h-full
+    bg-white
+    shadow-lg
+    transition-transform
+    duration-500
+    ease-in-out;
   }
+
   .menu {
     @apply flex flex-col;
   }
 
   .navbar-link {
-    @apply flex items-center p-3 space-x-3 hover:bg-secondary-light dark:hover:bg-secondary rounded-lg
+    @apply
+    flex
+    items-center
+    p-3
+    space-x-3
+    hover:bg-secondary-light
+    dark:hover:bg-secondary
+    rounded-lg
   }
 }
-
-/*
-4. TODO +
-  -------------------------------------------------------------------------------- */

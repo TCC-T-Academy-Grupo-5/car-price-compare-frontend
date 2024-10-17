@@ -9,6 +9,7 @@ import {VehicleFilterOptions} from '../../core/interfaces/vehicle-filter';
 import {Vehicle} from '@models/vehicle';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import {HttpErrorResponse} from '@angular/common/http';
+import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component';
 
 @Component({
   selector: 'tcc-home',
@@ -26,13 +27,14 @@ import {HttpErrorResponse} from '@angular/common/http';
     DatePipe,
     RouterOutlet,
     RouterLink,
-    InteractionDirective
+    InteractionDirective,
+    FilterTypeComponent
   ],
   templateUrl: './home.component.html',
   styles: ``
 })
 export class HomeComponent implements OnInit {
-  selectedType: number | null = null;
+  selectedType: number = 0;
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   categories: string[] = [];
   vehicles: Vehicle[] = [];
@@ -43,21 +45,22 @@ export class HomeComponent implements OnInit {
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
-    this.vehicleImgDesktop = 'car';
-    this.vehicleImgMobile = 'car';
-    this.selectVehicleType(0);
+    this.updateImagePaths(this.selectedType);
+    this.fetchVehicles();
   }
 
-  selectVehicleType(type: number): void {
+  onTypeSelected(type: number): void {
+    console.log(`Tipo selecionado: ${type}`);
     this.selectedType = type;
-    const selectedVehicleType = this.vehicleTypes[type];
     this.updateCategories();
     this.fetchVehicles();
+    this.updateImagePaths(type);
+  }
 
+  updateImagePaths(type: number): void {
+    const selectedVehicleType = this.vehicleTypes[type];
     this.vehicleImgDesktop = this.imagePath(selectedVehicleType, 'desktop');
     this.vehicleImgMobile = this.imagePath(selectedVehicleType, 'mobile');
-
-    console.log(`Tipo de veículo selecionado: ${selectedVehicleType}`);
   }
 
   imagePath(type: string, device: 'desktop' | 'mobile'): string {
