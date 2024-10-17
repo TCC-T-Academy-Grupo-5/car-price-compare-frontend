@@ -9,8 +9,7 @@ import {VehicleFilterOptions} from '../../core/interfaces/vehicle-filter';
 import {Vehicle} from '@models/vehicle';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import {HttpErrorResponse} from '@angular/common/http';
-import {BrandFilterOptions} from '../../core/interfaces/brand-filter';
-import {Brand} from '@models/brand';
+import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component';
 
 @Component({
   selector: 'tcc-home',
@@ -28,39 +27,40 @@ import {Brand} from '@models/brand';
     DatePipe,
     RouterOutlet,
     RouterLink,
-    InteractionDirective
+    InteractionDirective,
+    FilterTypeComponent
   ],
   templateUrl: './home.component.html',
   styles: ``
 })
 export class HomeComponent implements OnInit {
-  selectedType: number | null = null;
+  selectedType: number = 0;
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   categories: string[] = [];
-  brands: Brand[] = [];
+  vehicles: Vehicle[] = [];
   errorMessage: string | null = null;
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
 
-  constructor(private vehicleService: VehicleService) {
-  }
+  constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
-    this.vehicleImgDesktop = 'car';
-    this.vehicleImgMobile = 'car';
-    this.selectVehicleType(0);
+    this.updateImagePaths(this.selectedType);
+    this.fetchVehicles();
   }
 
-  selectVehicleType(type: number): void {
+  onTypeSelected(type: number): void {
+    console.log(`Tipo selecionado: ${type}`);
     this.selectedType = type;
-    const selectedVehicleType = this.vehicleTypes[type];
     this.updateCategories();
-    this.fetchBrands();
+    this.fetchVehicles();
+    this.updateImagePaths(type);
+  }
 
+  updateImagePaths(type: number): void {
+    const selectedVehicleType = this.vehicleTypes[type];
     this.vehicleImgDesktop = this.imagePath(selectedVehicleType, 'desktop');
     this.vehicleImgMobile = this.imagePath(selectedVehicleType, 'mobile');
-
-    console.log(`Tipo de veículo selecionado: ${selectedVehicleType}`);
   }
 
   imagePath(type: string, device: 'desktop' | 'mobile'): string {
@@ -99,17 +99,17 @@ export class HomeComponent implements OnInit {
       : this.selectedType === 1 ? motorcycleCategories : truckCategories;
   }
 
-  fetchBrands(): void {
+  fetchVehicles(): void {
     this.errorMessage = null;
-    const filters: BrandFilterOptions = {type: this.selectedType ?? 0, pageSize: 100};
-    this.vehicleService.filterBrands(filters).subscribe({
-      next: (brands: Brand[]) => {
-        this.brands = brands;
-        console.log(this.brands);
+    const filters: VehicleFilterOptions = { type: this.selectedType ?? 0 };
+    this.vehicleService.filterVehicles(filters).subscribe(
+      (vehicles: Vehicle[]) => {
+        this.vehicles = vehicles;
+        console.log(this.vehicles);
       },
-      error: (error: HttpErrorResponse) => {
+      (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao buscar veículos: ${error.message}`;
       }
-    });
+    );
   }
 }

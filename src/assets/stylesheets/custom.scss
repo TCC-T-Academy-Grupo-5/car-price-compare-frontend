@@ -68,6 +68,10 @@ $font-sizes: (
     }
   }
 
+  .active {
+    @apply ring-2 ring-highlight dark:ring-highlight-light shadow-lg;
+  }
+
   .tcc-shared-bar {
     @apply
     fixed
@@ -96,8 +100,7 @@ $font-sizes: (
     @apply fixed top-10 left-0 w-full z-40;
   }
 
-  .browse-type,
-  .browse-brand {
+  .browse-type {
 
     .card {
       height: 116px;
