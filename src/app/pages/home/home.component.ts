@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
   fetchBrands(): void {
     this.errorMessage = null;
-    const filters: BrandFilterOptions = {type: this.selectedType ?? 0};
+    const filters: BrandFilterOptions = {type: this.selectedType ?? 0, pageSize: 100};
     this.vehicleService.filterBrands(filters).subscribe({
       next: (brands: Brand[]) => {
         this.brands = brands;

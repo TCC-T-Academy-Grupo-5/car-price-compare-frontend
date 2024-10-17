@@ -96,7 +96,8 @@ $font-sizes: (
     @apply fixed top-10 left-0 w-full z-40;
   }
 
-  .browse-type {
+  .browse-type,
+  .browse-brand {
 
     .card {
       height: 116px;
