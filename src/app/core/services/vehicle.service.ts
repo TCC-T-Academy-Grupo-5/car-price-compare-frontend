@@ -1,48 +1,33 @@
 import { Injectable } from '@angular/core';
 import {Vehicle} from '@models/vehicle';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {VehicleFilterOptions} from '../interfaces/vehicle-filter';
 import {environment} from '@environments/environment.development';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
-  private apiUrl = `${environment.apiUrl}/vehicles`;
-  private vehicles: Vehicle[] = [];
 
-  private filteredVehiclesSubject = new BehaviorSubject<Vehicle[]>(this.vehicles);
-  filteredVehicles$ = this.filteredVehiclesSubject.asObservable();
+  private apiUrl = `${environment.apiUrl}`;
+  private vehiclesSubject = new BehaviorSubject<Vehicle[]>([]);
+  filteredVehicles$ = this.vehiclesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  filterVehicles(filters: VehicleFilterOptions): void {
+  filterVehicles(filters: VehicleFilterOptions): Observable<Vehicle[]> {
     let params = new HttpParams();
-
-    if (filters.make) {
-      params = params.set('make', filters.make);
+    if (filters.type !== null && filters.type !== undefined) {
+      params = params.set('vehicleType', filters.type.toString());
     }
 
-    if (filters.model) {
-      params = params.set('model', filters.model);
-    }
-
-    if (filters.year) {
-      params = params.set('year', filters.year);
-    }
-
-    if (filters.priceRange) {
-      params = params.set('price_min', filters.priceRange[0]).set('price_max', filters.priceRange[1]);
-    }
-
-    this.http.get<Vehicle[]>(this.apiUrl, { params }).subscribe(
-      (vehicles) => {
-        this.filteredVehiclesSubject.next(vehicles);
-      },
-      (error) => {
-        console.error('Erro ao buscar veículos:', error);
-      }
+    return this.http.get<Vehicle[]>(`${this.apiUrl}/vehicle/brand`, { params }).pipe(
+      map((vehicles: Vehicle[]) => {
+        this.vehiclesSubject.next(vehicles);
+        return vehicles;
+      })
     );
   }
 }

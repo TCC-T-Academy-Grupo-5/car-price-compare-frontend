@@ -3,7 +3,7 @@ import {RouterLink} from "@angular/router";
 import {NgClass} from "@angular/common";
 import {UserComponent} from "@ui/user/user.component";
 import {TranslateModule} from "@ngx-translate/core";
-import {InteractionService} from "@services/interaction.service";
+import {InteractionDirective} from '@directives/EventListenerDirectives';
 
 @Component({
   selector: 'tcc-navbar',
@@ -12,7 +12,8 @@ import {InteractionService} from "@services/interaction.service";
     RouterLink,
     NgClass,
     UserComponent,
-    TranslateModule
+    TranslateModule,
+    InteractionDirective
   ],
   templateUrl: './navbar.component.html',
   styles: ``
@@ -21,13 +22,11 @@ export class NavbarComponent {
 
   @Input() isOpen = false;
 
-  constructor(private interaction: InteractionService) {}
-
-  toggleMenu(): void {
-    this.interaction.toggleMenu();
+  toggleMenu() {
+    this.isOpen = !this.isOpen;
   }
 
-  closeMenu(): void {
-    this.interaction.closeMenu();
+  closeMenu() {
+    this.isOpen = false;
   }
 }
