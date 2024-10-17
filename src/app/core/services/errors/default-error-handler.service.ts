@@ -13,6 +13,7 @@ export class DefaultErrorHandlerService implements ErrorHandlerInterface {
 
   handle(error: HttpErrorResponse): Observable<never> {
     this.snackbar.open('Ocorreu um erro desconhecido.', StatusType.ERROR);
+    console.error(error.message);
     return throwError(() => new Error('Erro desconhecido.'));
   }
 }

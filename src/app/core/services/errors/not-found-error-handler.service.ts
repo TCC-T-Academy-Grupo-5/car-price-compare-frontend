@@ -15,6 +15,7 @@ export class NotFoundErrorHandlerService implements ErrorHandlerInterface {
   handle(error: HttpErrorResponse): Observable<never> {
     const {WARNING} = StatusType;
     this.snackbar.open('Página não encontrada.', WARNING);
+    console.error(error.message);
     setTimeout(() => this.router.navigate(['/']), 3000);
     return throwError(() => new Error('Página não encontrada.'));
   }

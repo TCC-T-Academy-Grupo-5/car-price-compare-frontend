@@ -13,7 +13,7 @@ import {PasswordOrEmailErrorHandlerService} from "@services/errors/password-or-e
   providedIn: 'root',
 })
 export class ErrorService {
-  private errorHandlers: { [key: number]: ErrorHandlerInterface } = {};
+  private errorHandlers: Record<number, ErrorHandlerInterface> = {};
 
   constructor(
     private notFoundHandler: NotFoundErrorHandlerService,

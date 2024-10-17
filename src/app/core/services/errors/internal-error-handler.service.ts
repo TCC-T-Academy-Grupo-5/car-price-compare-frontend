@@ -13,6 +13,7 @@ export class InternalErrorHandlerService implements ErrorHandlerInterface {
 
   handle(error: HttpErrorResponse): Observable<never> {
     this.snackbar.open('Ocorreu um erro interno no servidor.', StatusType.ERROR);
+    console.error(error.message);
     return throwError(() => new Error('Erro interno.'));
   }
 }

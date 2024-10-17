@@ -14,6 +14,7 @@ export class PasswordOrEmailErrorHandlerService implements ErrorHandlerInterface
 
   handle(error: HttpErrorResponse): Observable<never> {
     this.snackbar.open('E-mail ou senha inválidos.', StatusType.ERROR);
+    console.error(error.message);
     return throwError(() => new Error('E-mail ou senha inválidos.'));
   }
 }

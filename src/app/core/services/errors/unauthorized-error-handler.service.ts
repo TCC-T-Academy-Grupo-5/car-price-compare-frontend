@@ -14,6 +14,7 @@ export class UnauthorizedErrorHandlerService implements ErrorHandlerInterface {
 
   handle(error: HttpErrorResponse): Observable<never> {
     this.snackbar.open('Erro de autenticação.', StatusType.WARNING);
+    console.error(error.message);
     setTimeout(() => this.router.navigate(['/login']), 3000);
     return throwError(() => new Error('Autenticação.'));
   }
