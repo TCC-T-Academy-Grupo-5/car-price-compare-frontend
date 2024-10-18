@@ -33,3 +33,4 @@ vehicle:
     motorcycle: 'Motocicleta'
     truck: 'Caminhão'
   brand: 'Marca'
+  category: 'Categoria'

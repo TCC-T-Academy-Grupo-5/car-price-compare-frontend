@@ -32,3 +32,4 @@ vehicle:
     motorcycle: 'Motorrad'
     truck: 'Lkw'
   brand: 'Marke'
+  category: 'Kategorie'

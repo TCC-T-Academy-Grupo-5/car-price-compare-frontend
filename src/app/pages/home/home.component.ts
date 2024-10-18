@@ -33,7 +33,7 @@ import {Brand} from '@models/brand';
     RouterLink,
     InteractionDirective,
     FilterTypeComponent,
-    FilterBrandComponent
+    FilterBrandComponent,
   ],
   templateUrl: './home.component.html',
   styles: ``
@@ -62,10 +62,6 @@ export class HomeComponent implements OnInit {
     this.updateCategories();
     this.fetchVehicles();
     this.updateImagePaths(type);
-  }
-
-  onBrandSelected(brandId: string): void {
-    console.log(`Marca selecionada: ${brandId}`);
   }
 
   updateImagePaths(type: number): void {

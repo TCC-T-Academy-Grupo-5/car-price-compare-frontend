@@ -32,3 +32,4 @@ vehicle:
     motorcycle: 'Mortorcycle'
     truck: 'Truck'
   brand: 'Brand'
+  category: 'Category'

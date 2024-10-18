@@ -100,20 +100,24 @@ $font-sizes: (
     @apply fixed top-10 left-0 w-full z-40;
   }
 
+  .card {
+    @apply
+    rounded
+    border
+    border-gray-300
+    shadow-lg
+    hover:shadow-xl
+    transition-shadow
+    duration-300
+    ease-in-out
+    p-4
+  }
+
   .browse-type {
 
     .card {
       height: 116px;
       width: 116px;
-      @apply
-      rounded
-      border
-      border-gray-300
-      shadow-lg
-      hover:shadow-xl
-      transition-shadow
-      duration-300
-      ease-in-out
     }
   }
 

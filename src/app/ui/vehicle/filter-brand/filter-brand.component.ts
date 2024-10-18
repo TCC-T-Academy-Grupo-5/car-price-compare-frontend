@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Brand} from '@models/brand';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
@@ -14,9 +14,8 @@ import {CommonModule} from '@angular/common';
 })
 export class FilterBrandComponent {
   @Input({required: true}) brands: Brand[] = [];
-  @Output() brandSelected = new EventEmitter<string>();
 
   onSelectBrand(brandId: string) {
-    this.brandSelected.emit(brandId);
+    console.log("Direcionar para nova rota, " + brandId);
   }
 }
