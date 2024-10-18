@@ -13,7 +13,7 @@ import {TranslateModule} from '@ngx-translate/core';
   styles: ``
 })
 export class FilterTypeComponent {
-  @Input() selectedType: number = 0;
+  @Input() selectedType = 0;
   @Output() typeSelected = new EventEmitter<number>();
 
   selectVehicleType(type: number): void {
