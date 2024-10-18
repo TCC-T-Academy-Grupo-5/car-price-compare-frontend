@@ -1,4 +1,14 @@
-import {Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  Renderer2
+} from '@angular/core';
 
 @Directive({
   selector: '[tccOutsideClick]',
@@ -11,6 +21,7 @@ export class InteractionDirective implements OnInit, OnDestroy {
   @Output() clickOutside = new EventEmitter<void>();
   @Output() enterKey = new EventEmitter<void>();
   @Output() escapeKey = new EventEmitter<void>();
+  @Output() scrollEvent = new EventEmitter<number>();
 
   private clickListener: (() => void) | undefined;
   private keyupListener: (() => void) | undefined;
@@ -34,6 +45,12 @@ export class InteractionDirective implements OnInit, OnDestroy {
     if (this.keyupListener) {
       this.keyupListener();
     }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.scrollY;
+    this.scrollEvent.emit(scrollPosition);
   }
 
   private onDocumentClick = (event: MouseEvent) => {
