@@ -1,5 +1,5 @@
-<main class="bg-secondary-light dark:bg-secondary py-20 my-20 overflow-hidden text-center">
-  <div class="max-w-screen tcc-flex flex-col">
+<div class="bg-secondary-light dark:bg-secondary py-20 my-20 overflow-hidden text-center">
+  <div class="max-w-screen max-w-screen-xl mx-auto py-4 px-4 xl:px-2 tcc-flex flex-col">
     <p class="mt-2">{{ 'home.find_cars_compare_price' | translate }}</p>
     <h2>{{ 'home.find_dream_car' | translate }}</h2>
 
@@ -34,6 +34,10 @@
       <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)" />
     </div>
 
+    <div>
+      <tcc-filter-brand [brands]="brands"></tcc-filter-brand>
+    </div>
+
     <!--    <div class="menu" tccOutsideClick elementId="menu" [closeOnOutsideClick]="true" [closeOnEscapeKey]="true">-->
 <!--      <p>Conteúdo do Menu</p>-->
 <!--    </div>-->
@@ -41,4 +45,4 @@
 <!--    <a routerLink="vehicles">Filtrar Veículos Teste</a>-->
 <!--    <router-outlet></router-outlet>-->
   </div>
-</main>
+</div>

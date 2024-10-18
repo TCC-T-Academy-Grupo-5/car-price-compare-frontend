@@ -31,3 +31,5 @@ vehicle:
     car: 'Auto'
     motorcycle: 'Motorrad'
     truck: 'Lkw'
+  brand: 'Marke'
+  category: 'Kategorie'

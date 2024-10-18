@@ -32,3 +32,5 @@ vehicle:
     car: 'Coche'
     motorcycle: 'Motocicleta'
     truck: 'Camión'
+  brand: 'Marca'
+  category: 'Categoría'
