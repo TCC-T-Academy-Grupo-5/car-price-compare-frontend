@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Brand} from '@models/brand';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'tcc-filter-brand',
@@ -9,6 +10,7 @@ import {CommonModule} from '@angular/common';
   imports: [
     TranslateModule,
     CommonModule,
+    RouterLink,
   ],
   templateUrl: './filter-brand.component.html'
 })

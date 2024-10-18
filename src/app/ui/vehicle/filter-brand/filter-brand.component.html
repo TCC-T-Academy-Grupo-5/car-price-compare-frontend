@@ -1,9 +1,11 @@
 <h4 class="my-2">{{ 'vehicle.brand' | translate }}</h4>
 <div class="grid xl:grid-cols-8 lg:grid-cols-8 md:grid-cols-6 grid-cols-4 gap-2">
-  <button
+  <!-- TODO: atualizar routerlink apontando para a rota a ser criada que vai renderizar os modelos da marca -->
+  <a
     *ngFor="let brand of brands"
     class="card"
     tabindex="0"
+    [routerLink]="['/']"
     (click)="onSelectBrand(brand.id)"
     (keydown.enter)="onSelectBrand(brand.id)"
   >
@@ -11,5 +13,5 @@
       <img [src]="brand.imageUrl"  [alt]="brand.name"/>
       <p>{{ brand.name }}</p>
     </div>
-  </button>
+  </a>
 </div>
