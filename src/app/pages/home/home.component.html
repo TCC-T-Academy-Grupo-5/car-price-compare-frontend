@@ -1,48 +1,38 @@
-<div class="bg-secondary-light dark:bg-secondary py-20 my-20 overflow-hidden text-center">
-  <div class="max-w-screen max-w-screen-xl mx-auto py-4 px-4 xl:px-2 tcc-flex flex-col">
-    <p class="mt-2">{{ 'home.find_cars_compare_price' | translate }}</p>
-    <h2>{{ 'home.find_dream_car' | translate }}</h2>
+<div class="tcc-flex flex-col text-center">
+  <p class="mt-2">{{ 'home.find_cars_compare_price' | translate }}</p>
+  <h2>{{ 'home.find_dream_car' | translate }}</h2>
 
-    <div class="relative w-full h-64 md:h-[256px]">
-      <img
-        ngOptimizedImage
-        [src]="vehicleImgDesktop"
-        [alt]="vehicleTypes[selectedType] + ' image'"
-        class="absolute inset-0 hidden md:block object-contain w-full h-full"
-        height="256"
-        width="332"
-      />
+  <div class="relative w-full h-64 md:h-[256px]">
+    <img
+      [src]="vehicleImgDesktop"
+      [alt]="vehicleTypes[selectedType] + ' image'"
+      class="absolute inset-0 hidden md:block object-contain w-full h-full"
+      height="256"
+      width="332"
+    />
 
-      <img
-        ngOptimizedImage
-        [src]="vehicleImgMobile"
-        [alt]="vehicleTypes[selectedType] + ' image mobile'"
-        class="absolute inset-0 block md:hidden object-contain w-full h-full"
-        height="256"
-        width="332"
-      />
-    </div>
+    <img
+      [src]="vehicleImgMobile"
+      [alt]="vehicleTypes[selectedType] + ' image mobile'"
+      class="absolute inset-0 block md:hidden object-contain w-full h-full"
+      height="256"
+      width="332"
+    />
+  </div>
 
-    <div class="search-wrapper tcc-flex">
-      <input type="text" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
-      <span class="bg-highlight dark:bg-highlight-light rounded-full inline-flex items-center justify-center h-8 w-8">
+  <div class="search-wrapper tcc-flex">
+    <input type="text" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
+    <span class="bg-highlight dark:bg-highlight-light rounded-full inline-flex items-center justify-center h-8 w-8">
         <i class="material-symbols-outlined text-primary-light dark:text-primary text-sm">search</i>
       </span>
-    </div>
-
-    <div class="browse-type">
-      <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)" />
-    </div>
-
-    <div>
-      <tcc-filter-brand [brands]="brands"></tcc-filter-brand>
-    </div>
-
-    <!--    <div class="menu" tccOutsideClick elementId="menu" [closeOnOutsideClick]="true" [closeOnEscapeKey]="true">-->
-<!--      <p>Conteúdo do Menu</p>-->
-<!--    </div>-->
-
-<!--    <a routerLink="vehicles">Filtrar Veículos Teste</a>-->
-<!--    <router-outlet></router-outlet>-->
   </div>
+
+  <div class="browse-type">
+    <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)"/>
+  </div>
+
+  <div class="px-2">
+    <tcc-filter-brand [brands]="brands" />
+  </div>
+
 </div>

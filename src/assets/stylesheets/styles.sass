@@ -28,9 +28,9 @@ body
   margin: 0
   padding: 0
   box-sizing: border-box
-  @apply transition-colors duration-300 ease-in-out
+  @apply bg-secondary-light transition-colors duration-300 ease-in-out
   &.dark
-    @apply bg-primary text-primary-light
+    @apply bg-secondary text-primary-light
 
 a,
 i,
@@ -67,6 +67,8 @@ div.avatar-wrapper
     @apply bg-gradient-to-r from-secondary to-primary
     z-index: -1
 
+.container-responsive
+  @apply max-w-screen-xl mx-auto px-4 w-full
 /*
   2. Material Symbols
   ---------------------------------------------------------------------- */
