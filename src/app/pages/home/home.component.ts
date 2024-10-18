@@ -4,9 +4,6 @@ import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {VehicleService} from '@services/vehicle.service';
-import {VehicleFilterOptions} from '../../core/interfaces/vehicle-filter';
-import {Vehicle} from '@models/vehicle';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component';
@@ -14,6 +11,7 @@ import {FilterBrandComponent} from '@ui/vehicle/filter-brand/filter-brand.compon
 import {BrandService} from '@services/brand.service';
 import {BrandFilterOptions} from '../../core/interfaces/brand-filter';
 import {Brand} from '@models/brand';
+import {ErrorService} from '@services/errors/error.service';
 
 @Component({
   selector: 'tcc-home',
@@ -43,16 +41,14 @@ export class HomeComponent implements OnInit {
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   brands: Brand[] = [];
   categories: string[] = [];
-  vehicles: Vehicle[] = [];
-  errorMessage: string | null = null;
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
 
-  constructor(private vehicleService: VehicleService, private brandService: BrandService) {}
+  constructor(private brandService: BrandService, private errorService: ErrorService) {}
 
   ngOnInit(): void {
     this.updateImagePaths(this.selectedType);
-    this.fetchVehicles();
+    this.fetchBrands();
   }
 
   onTypeSelected(type: number): void {
@@ -60,7 +56,6 @@ export class HomeComponent implements OnInit {
     this.selectedType = type;
     this.fetchBrands();
     this.updateCategories();
-    this.fetchVehicles();
     this.updateImagePaths(type);
   }
 
@@ -110,21 +105,10 @@ export class HomeComponent implements OnInit {
     const filters: BrandFilterOptions = { vehicleType: this.selectedType, pageSize: 100 };
     this.brandService.filterBrands(filters).subscribe({
       next: (brands: Brand[]) => this.brands = brands,
-      error: (error: HttpErrorResponse) => console.error("Erro ao carregar marcas: ", error.message),
-    })
-  }
-
-  fetchVehicles(): void {
-    this.errorMessage = null;
-    const filters: VehicleFilterOptions = { type: this.selectedType ?? 0 };
-    this.vehicleService.filterVehicles(filters).subscribe(
-      (vehicles: Vehicle[]) => {
-        this.vehicles = vehicles;
-        console.log(this.vehicles);
+      error: (error: HttpErrorResponse) => {
+        this.errorService.handleError(error);
+        console.error("Erro ao carregar marcas: ", error.message);
       },
-      (error: HttpErrorResponse) => {
-        this.errorMessage = `Erro ao buscar veículos: ${error.message}`;
-      }
-    );
+    })
   }
 }
