@@ -1,58 +1,59 @@
 <div class="w-1/2 m-auto">
-  <div class="flex justify-between">
-    <img [src]="vehicle?.brandImageUrl" [alt]="vehicle?.brand" />
-    <img [src]="vehicle?.modelImageUrl" [alt]="vehicle?.model"/>
+  <div class="flex justify-center">
+    <img [src]="vehicle?.brandImageUrl" [alt]="vehicle?.brand"/>
   </div>
 
-  <h1 class="text-center text-2xl tracking-widest">{{ vehicle?.name | titlecase }}</h1>
+  <h1 class="text-center text-2xl tracking-widest mb-8">{{ vehicle?.name | uppercase }}</h1>
+  <h2 class="vehicle-section-header">Tabela FIPE - Dados atuais</h2>
 
-  <div class="grid grid-cols-2">
+  <div class="flex flex-col justify-center items-start gap-4 mb-10">
     <div class="vehicle-stat">
-      <span class="tracking-wide">fabricante</span>
-      <span class="stat-text">{{ vehicle?.brand | titlecase }}</span>
+      <span class="stat-header">fabricante</span>
+      <span class="stat-content">{{ vehicle?.brand | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
-      <span>modelo</span>
-      <span class="stat-text">{{ vehicle?.model | titlecase }}</span>
+      <span class="stat-header">modelo</span>
+      <span class="stat-content">{{ vehicle?.model | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
-      <span>ano</span>
-      <span class="stat-text">{{ vehicle?.year | titlecase }}</span>
+      <span class="stat-header">ano</span>
+      <span class="stat-content">{{ vehicle?.year | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
-      <span>versão</span>
-      <span class="stat-text">{{ vehicle?.name | titlecase }}</span>
+      <span class="stat-header">versão</span>
+      <span class="stat-content">{{ vehicle?.name | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
-      <span>código FIPE</span>
-      <span class="stat-text">{{ vehicle?.fipeCode | titlecase }}</span>
+      <span class="stat-header">código FIPE</span>
+      <span class="stat-content">{{ vehicle?.fipeCode | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
-      <span>mês de referência</span>
-      <span class="stat-text">{{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}</span>
+      <span class="stat-header">mês de referência</span>
+      <span class="stat-content">{{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}</span>
+    </div>
+
+    <div class="vehicle-stat">
+      <span class="stat-header">valor</span>
+      <span class="stat-content">{{ latestFipePrice?.price | currency : 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
     </div>
   </div>
-</div>
 
+  <h2 class="vehicle-section-header">Tabela FIPE - Histórico recente</h2>
 
-<p>{{ vehicle?.name }}</p>
-<p>{{ vehicle?.fipeCode }}</p>
-<p>{{ vehicle?.model }}</p>
-<p>{{ vehicle?.brand }}</p>
-<p>{{ vehicle?.year }}</p>
-<p>{{ vehicle?.category }}</p>
-<div *ngFor="let price of vehicle?.fipePrices">
-  {{ price.month }}/{{ price.year }}: {{ price.price }}
-</div>
-<div>
-  <img [src]="vehicle?.brandImageUrl" [alt]="vehicle?.brand"/>
-</div>
-<div>
-  <img [src]="vehicle?.modelImageUrl" [alt]="vehicle?.model"/>
-</div>
+  <table class="table">
+    <tr>
+      <th>mês de referência</th>
+      <th>valor</th>
+    </tr>
+    <tr *ngFor="let price of vehicle?.fipePrices">
+      <td>{{ price?.month }}/{{ price?.year }}</td>
+      <td>{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+    </tr>
+  </table>
 
+</div>

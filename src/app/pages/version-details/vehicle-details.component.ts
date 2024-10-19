@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Vehicle} from '@models/vehicle';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
-import {CommonModule} from '@angular/common';
+import {CommonModule, getLocaleCurrencyCode} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {FipePrice} from '@models/fipeprice';
 

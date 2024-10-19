@@ -1,4 +1,4 @@
-import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -7,10 +7,15 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import {YamlTranslateHttpLoader} from "@services/yaml-translate-http-loader";
+import {registerLocaleData} from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import localePtExtra from '@angular/common/locales/extra/pt';
 
 function YamlLoaderFactory(http: HttpClient) {
   return new YamlTranslateHttpLoader(http, './assets/translations/', '.yml');
 }
+
+registerLocaleData(localePt, 'pt-BR', localePtExtra)
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,6 +33,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideRouter(routes),
     provideHttpClient(withFetch()),
-    provideZoneChangeDetection({ eventCoalescing: true })
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
   ]
 };

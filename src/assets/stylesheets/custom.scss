@@ -132,12 +132,20 @@ $font-sizes: (
     @apply flex items-center p-3 space-x-3 hover:bg-secondary-light dark:hover:bg-secondary rounded-lg
   }
 
-  .vehicle-stat {
-    @apply flex flex-col items-start
+  .vehicle-section-header {
+    @apply text-xl mb-4 bg-highlight dark:bg-highlight-light text-secondary-light font-medium py-2 px-4 rounded
   }
 
-  .stat-text {
-    @apply font-medium text-base tracking-wide
+  .vehicle-stat {
+    @apply flex flex-row items-baseline gap-2
+  }
+
+  .stat-header {
+    @apply tracking-wide text-highlight dark:text-highlight-light font-normal w-36
+  }
+
+  .stat-content {
+    @apply text-lg font-normal tracking-wide
   }
 }
 
