@@ -5,13 +5,12 @@ import {TranslateModule} from "@ngx-translate/core";
 import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
-import {HttpErrorResponse} from '@angular/common/http';
 import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component';
 import {FilterBrandComponent} from '@ui/vehicle/filter-brand/filter-brand.component';
-import {BrandService} from '@services/brand.service';
-import {BrandFilterOptions} from '../../core/interfaces/brand-filter';
-import {Brand} from '@models/brand';
+import {BrandService} from '@services/vehicle/brand.service';
+import {Brand} from '@domain/vehicle/brand';
 import {ErrorService} from '@services/errors/error.service';
+import {HeadersService} from '@services/headers.service';
 
 @Component({
   selector: 'tcc-home',
@@ -37,14 +36,21 @@ import {ErrorService} from '@services/errors/error.service';
   styles: ``
 })
 export class HomeComponent implements OnInit {
-  selectedType = 0;
-  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   brands: Brand[] = [];
-  categories: string[] = [];
+  page = 1;
+  pageSize = 100;
+  selectedType = 0;
+  totalPages = 0;
+
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
+  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
 
-  constructor(private brandService: BrandService, private errorService: ErrorService) {}
+  constructor(
+    private brandService: BrandService,
+    private errorService: ErrorService,
+    private headersService: HeadersService
+  ) {}
 
   ngOnInit(): void {
     this.updateImagePaths(this.selectedType);
@@ -52,63 +58,36 @@ export class HomeComponent implements OnInit {
   }
 
   onTypeSelected(type: number): void {
-    console.log(`Tipo selecionado: ${type}`);
     this.selectedType = type;
     this.fetchBrands();
-    this.updateCategories();
     this.updateImagePaths(type);
   }
 
   updateImagePaths(type: number): void {
     const selectedVehicleType = this.vehicleTypes[type];
-    this.vehicleImgDesktop = this.imagePath(selectedVehicleType, 'desktop');
-    this.vehicleImgMobile = this.imagePath(selectedVehicleType, 'mobile');
-  }
-
-  imagePath(type: string, device: 'desktop' | 'mobile'): string {
-    return `/assets/images/vehicle_type/${type.toLowerCase()}_${device}.png`;
-  }
-
-  updateCategories(): void {
-    const carCategories = [
-      'COMPACT_SEDAN',
-      'SUBCOMPACT_HATCH',
-      'MEDIUM_CONVERTIBLE',
-      'LARGE_SEDAN',
-      'LARGE_SUV',
-      'COMPACT_SPORTS',
-      'COMPACT_VAN',
-      'COMPACT_SUV'
-    ];
-    const motorcycleCategories = [
-      'TOURING',
-      'STREET',
-      'SPORT',
-      'CUSTOM',
-      'QUAD_UTV',
-      'NAKED',
-      'CUB',
-      'CARGO_TRICYCLE',
-      'ATV_QUAD',
-      'MOPED',
-      'TRICYCLE',
-      'TRAIL',
-      'SCOOTER'
-    ];
-    const truckCategories = ['URBAN_TRUCK'];
-
-    this.categories = this.selectedType === 0 ? carCategories
-      : this.selectedType === 1 ? motorcycleCategories : truckCategories;
+    this.vehicleImgDesktop = `/assets/images/vehicle_type/${selectedVehicleType}_desktop.png`;
+    this.vehicleImgMobile = `/assets/images/vehicle_type/${selectedVehicleType}_mobile.png`;
   }
 
   fetchBrands(): void {
-    const filters: BrandFilterOptions = { vehicleType: this.selectedType, pageSize: 100 };
-    this.brandService.filterBrands(filters).subscribe({
-      next: (brands: Brand[]) => this.brands = brands,
-      error: (error: HttpErrorResponse) => {
+    const filters = { vehicleType: this.selectedType, page: this.page, pageSize: this.pageSize };
+
+    this.brandService.findByType(filters).subscribe({
+      next: (response) => {
+        console.log('Resposta da API:', response);
+        if (Array.isArray(response)) {
+          this.brands = response;
+          console.log('Marcas recebidas:', this.brands);
+        } else {
+          console.log('Resposta inválida ou vazia.');
+        }
+      },
+      error: (error) => {
         this.errorService.handleError(error);
         console.error("Erro ao carregar marcas: ", error.message);
-      },
-    })
+      }
+    });
   }
+
 }
+

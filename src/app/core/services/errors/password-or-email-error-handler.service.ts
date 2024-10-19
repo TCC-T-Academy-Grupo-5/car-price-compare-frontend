@@ -4,7 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {SnackbarService} from "@services/SnackbarService";
 import {Router} from "@angular/router";
-import {StatusType} from "@models/enums/statusType";
+import {StatusType} from "@domain/utils/statusType";
 
 @Injectable({
   providedIn: 'root'
