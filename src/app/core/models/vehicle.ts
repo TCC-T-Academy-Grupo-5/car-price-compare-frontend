@@ -1,11 +1,16 @@
+import {FipePrice} from '@models/fipeprice';
+
 export interface Vehicle {
   id: string;
-  name: string;
   fipeCode: string;
-  urlPathName: string;
-  fullUrl: string;
-  year: string;
-  brand: string;
+  name: string;
   model: string;
+  modelImageUrl: string;
+  brand: string;
+  brandImageUrl: string;
+  year: string;
+  type: string;
+  category: string;
   price: number;
+  fipePrices: FipePrice[];
 }
