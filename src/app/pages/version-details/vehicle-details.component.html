@@ -1,0 +1,16 @@
+<p>{{ vehicle?.name }}</p>
+<p>{{ vehicle?.fipeCode }}</p>
+<p>{{ vehicle?.model }}</p>
+<p>{{ vehicle?.brand }}</p>
+<p>{{ vehicle?.year }}</p>
+<p>{{ vehicle?.category }}</p>
+<div *ngFor="let price of vehicle?.fipePrices">
+  {{ price.month }}/{{ price.year }}: {{ price.price }}
+</div>
+<div>
+  <img [src]="vehicle?.brandImageUrl" [alt]="vehicle?.brand"/>
+</div>
+<div>
+  <img [src]="vehicle?.modelImageUrl" [alt]="vehicle?.model"/>
+</div>
+
