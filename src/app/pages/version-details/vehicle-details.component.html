@@ -1,3 +1,45 @@
+<div class="w-1/2 m-auto">
+  <div class="flex justify-between">
+    <img [src]="vehicle?.brandImageUrl" [alt]="vehicle?.brand" />
+    <img [src]="vehicle?.modelImageUrl" [alt]="vehicle?.model"/>
+  </div>
+
+  <h1 class="text-center text-2xl tracking-widest">{{ vehicle?.name | titlecase }}</h1>
+
+  <div class="grid grid-cols-2">
+    <div class="vehicle-stat">
+      <span class="tracking-wide">fabricante</span>
+      <span class="stat-text">{{ vehicle?.brand | titlecase }}</span>
+    </div>
+
+    <div class="vehicle-stat">
+      <span>modelo</span>
+      <span class="stat-text">{{ vehicle?.model | titlecase }}</span>
+    </div>
+
+    <div class="vehicle-stat">
+      <span>ano</span>
+      <span class="stat-text">{{ vehicle?.year | titlecase }}</span>
+    </div>
+
+    <div class="vehicle-stat">
+      <span>versão</span>
+      <span class="stat-text">{{ vehicle?.name | titlecase }}</span>
+    </div>
+
+    <div class="vehicle-stat">
+      <span>código FIPE</span>
+      <span class="stat-text">{{ vehicle?.fipeCode | titlecase }}</span>
+    </div>
+
+    <div class="vehicle-stat">
+      <span>mês de referência</span>
+      <span class="stat-text">{{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}</span>
+    </div>
+  </div>
+</div>
+
+
 <p>{{ vehicle?.name }}</p>
 <p>{{ vehicle?.fipeCode }}</p>
 <p>{{ vehicle?.model }}</p>

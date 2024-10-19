@@ -131,6 +131,14 @@ $font-sizes: (
   .navbar-link {
     @apply flex items-center p-3 space-x-3 hover:bg-secondary-light dark:hover:bg-secondary rounded-lg
   }
+
+  .vehicle-stat {
+    @apply flex flex-col items-start
+  }
+
+  .stat-text {
+    @apply font-medium text-base tracking-wide
+  }
 }
 
 /*
