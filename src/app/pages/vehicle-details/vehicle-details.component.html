@@ -1,35 +1,35 @@
 <div class="w-1/2 m-auto">
   <div class="flex justify-center">
-    <img [src]="vehicle?.brandImageUrl" [alt]="vehicle?.brand"/>
+    <img [src]="vehicleDetails?.brandImageUrl" [alt]="vehicleDetails?.brand"/>
   </div>
 
-  <h1 class="text-center text-2xl tracking-widest mb-8">{{ vehicle?.name | uppercase }}</h1>
+  <h1 class="text-center text-2xl tracking-widest mb-8">{{ vehicleDetails?.name | uppercase }}</h1>
   <h2 class="vehicle-section-header">Tabela FIPE - Dados atuais</h2>
 
   <div class="flex flex-col justify-center items-start gap-4 mb-10">
     <div class="vehicle-stat">
       <span class="stat-header">fabricante</span>
-      <span class="stat-content">{{ vehicle?.brand | titlecase }}</span>
+      <span class="stat-content">{{ vehicleDetails?.brand | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
       <span class="stat-header">modelo</span>
-      <span class="stat-content">{{ vehicle?.model | titlecase }}</span>
+      <span class="stat-content">{{ vehicleDetails?.model | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
       <span class="stat-header">ano</span>
-      <span class="stat-content">{{ vehicle?.year | titlecase }}</span>
+      <span class="stat-content">{{ vehicleDetails?.year | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
       <span class="stat-header">versão</span>
-      <span class="stat-content">{{ vehicle?.name | titlecase }}</span>
+      <span class="stat-content">{{ vehicleDetails?.name | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
       <span class="stat-header">código FIPE</span>
-      <span class="stat-content">{{ vehicle?.fipeCode | titlecase }}</span>
+      <span class="stat-content">{{ vehicleDetails?.fipeCode | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
@@ -50,7 +50,7 @@
       <th>mês de referência</th>
       <th>valor</th>
     </tr>
-    <tr *ngFor="let price of vehicle?.fipePrices">
+    <tr *ngFor="let price of vehicleDetails?.fipePrices">
       <td>{{ price?.month }}/{{ price?.year }}</td>
       <td>{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
     </tr>

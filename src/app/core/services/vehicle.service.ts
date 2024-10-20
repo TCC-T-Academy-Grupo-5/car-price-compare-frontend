@@ -30,8 +30,4 @@ export class VehicleService {
       })
     );
   }
-
-  getVehicleById(id: string): Observable<Vehicle> {
-    return this.http.get<Vehicle>(`${this.apiUrl}/vehicle/${id}`);
-  }
 }
