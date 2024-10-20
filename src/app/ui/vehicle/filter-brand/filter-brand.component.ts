@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {Brand} from '@models/brand';
+import {Brand} from '@domain/vehicle/brand';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'tcc-filter-brand',
@@ -17,7 +17,10 @@ import {RouterLink} from "@angular/router";
 export class FilterBrandComponent {
   @Input({required: true}) brands: Brand[] = [];
 
-  onSelectBrand(brandId: string) {
-    console.log("Direcionar para nova rota, " + brandId);
+  constructor(private router: Router) {}
+
+  onSelectBrand(brandName: string): void {
+    console.log("Direcionar para nova rota, " + brandName);
+    this.router.navigate(['models', brandName]).then(r => console.log('redirect', r));
   }
 }

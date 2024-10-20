@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {SnackbarService} from "@services/SnackbarService";
 import {Observable, throwError} from "rxjs";
 import {Router} from "@angular/router";
-import { StatusType } from '@models/enums/statusType';
+import { StatusType } from '@domain/utils/statusType';
 import {ErrorHandlerInterface} from "@services/errors/error-handler-interface";
 
 @Injectable({

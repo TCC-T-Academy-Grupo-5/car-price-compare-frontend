@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {ErrorHandlerInterface} from "@services/errors/error-handler-interface";
 import {Observable, throwError} from 'rxjs';
 import {SnackbarService} from "@services/SnackbarService";
-import {StatusType} from "@models/enums/statusType";
+import {StatusType} from "@domain/utils/statusType";
 
 @Injectable({
   providedIn: 'root'

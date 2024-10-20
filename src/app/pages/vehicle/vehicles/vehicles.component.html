@@ -1,0 +1,34 @@
+<h4 class="my-2">{{ 'vehicle.domain' | translate }}</h4>
+
+<div class="container mx-auto p-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      *ngFor="let vehicle of vehicles"
+      class="vehicle-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+    >
+      <img
+        *ngIf="vehicle.fullUrl"
+        [src]="vehicle.fullUrl"
+        alt="{{ vehicle.name }}"
+        class="w-full h-40 object-cover rounded-t-lg"
+      />
+      <div class="p-4">
+        <h2 class="text-xl font-bold text-gray-800">{{ vehicle.name }}</h2>
+        <p class="text-gray-600" *ngIf="vehicle.brand">{{ vehicle.year }} - {{ vehicle.brand }}</p>
+        <p class="text-gray-600" *ngIf="!vehicle.brand">{{ vehicle.year }}</p>
+        <p class="text-sm text-gray-500">Model: {{ vehicle.model }}</p>
+        <p class="text-lg font-semibold mt-2">Price: {{ vehicle.price | currency: 'USD' }}</p>
+
+        <div class="mt-4">
+          <a
+            [href]="'https://fipe.org.br/' + vehicle.fipeCode"
+            target="_blank"
+            class="text-blue-500 hover:underline"
+          >
+            Check Fipe Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
