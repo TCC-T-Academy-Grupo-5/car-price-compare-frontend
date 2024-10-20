@@ -3,4 +3,6 @@ export interface FipePrice {
   price: number;
   month: number;
   year: number;
+  prevMonthDiff: number;
+  prevMonthDiffPercentage: number;
 }
