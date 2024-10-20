@@ -5,13 +5,15 @@ import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {FipePrice} from '@domain/vehicle/fipeprice';
-import {VehicleDetailsService} from '@services/vehicle-details.service';
+import {VehicleDetailsService} from '@services/vehicle/vehicle-details.service';
 import {VehicleDetails} from '@domain/vehicle/vehicledetails';
+import {MatColumnDef, MatTable} from '@angular/material/table';
+import {PriceHistoryTableComponent} from '@ui/vehicle/price-history-table/price-history-table.component';
 
 @Component({
   selector: 'tcc-vehicle-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatTable, MatColumnDef, PriceHistoryTableComponent],
   templateUrl: './vehicle-details.component.html'
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {

@@ -3,8 +3,16 @@
     <img [src]="vehicleDetails?.brandImageUrl" [alt]="vehicleDetails?.brand"/>
   </div>
 
-  <h1 class="text-center text-2xl tracking-widest mb-8">{{ vehicleDetails?.name | uppercase }}</h1>
-  <h2 class="vehicle-section-header">Tabela FIPE - Dados atuais</h2>
+  <h1 class="text-center text-2xl tracking-widest mb-4">{{ vehicleDetails?.name | uppercase }}</h1>
+  <div class="flex flex-col gap-2 justify-center items-start mb-8">
+    <span class="text-lg font-medium tracking-wide text-highlight dark:text-highlight-light">preço médio</span>
+    <span class="text-4xl font-bold">
+        {{ latestFipePrice?.price | currency : 'BRL':'symbol':'1.2-2':'pt-BR' }}
+      </span>
+    <span class="text-sm font-thin tracking-wide text-highlight dark:text-highlight-light">
+      atualizado em {{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}
+    </span>
+  </div>
 
   <div class="flex flex-col justify-center items-start gap-4 mb-10">
     <div class="vehicle-stat">
@@ -15,6 +23,11 @@
     <div class="vehicle-stat">
       <span class="stat-header">modelo</span>
       <span class="stat-content">{{ vehicleDetails?.model | titlecase }}</span>
+    </div>
+
+    <div *ngIf="vehicleDetails?.category" class="vehicle-stat">
+      <span class="stat-header">categoria</span>
+      <span class="stat-content">{{ vehicleDetails?.category | titlecase }}</span>
     </div>
 
     <div class="vehicle-stat">
@@ -31,29 +44,7 @@
       <span class="stat-header">código FIPE</span>
       <span class="stat-content">{{ vehicleDetails?.fipeCode | titlecase }}</span>
     </div>
-
-    <div class="vehicle-stat">
-      <span class="stat-header">mês de referência</span>
-      <span class="stat-content">{{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}</span>
-    </div>
-
-    <div class="vehicle-stat">
-      <span class="stat-header">valor</span>
-      <span class="stat-content">{{ latestFipePrice?.price | currency : 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
-    </div>
   </div>
 
-  <h2 class="vehicle-section-header">Tabela FIPE - Histórico recente</h2>
-
-  <table class="table">
-    <tr>
-      <th>mês de referência</th>
-      <th>valor</th>
-    </tr>
-    <tr *ngFor="let price of vehicleDetails?.fipePrices">
-      <td>{{ price?.month }}/{{ price?.year }}</td>
-      <td>{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
-    </tr>
-  </table>
-
+  <tcc-price-history-table [fipePrices]="vehicleDetails?.fipePrices!"></tcc-price-history-table>
 </div>

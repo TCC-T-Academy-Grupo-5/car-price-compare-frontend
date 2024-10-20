@@ -1,0 +1,24 @@
+<h2 class="text-xl mb-4 bg-highlight dark:bg-highlight-light text-secondary-light font-medium py-2 px-4 rounded">
+  Tabela FIPE - Histórico recente
+</h2>
+
+<table class="table-fixed">
+  <thead>
+  <tr class="bg-tertiary-light">
+    <th class="history-table-header">mês</th>
+    <th class="history-table-header">valor</th>
+    <th class="history-table-header">variação R$</th>
+    <th class="history-table-header">variação %</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let price of fipePrices" class="even:bg-tertiary-light">
+    <td class="w-40 p-2">{{ price?.month }}/{{ price?.year }}</td>
+    <td class="w-40 p-2">{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+    <td class="w-40 p-2">
+      <i class="material-symbols-outlined text-xl">{{ getPriceDiffIconName(price?.prevMonthDiff!) }}</i>
+      {{ Math.abs(price?.prevMonthDiff!) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+    <td class="w-40 p-2">{{ price?.prevMonthDiffPercentage | number: '1.2-2' }}%</td>
+  </tr>
+  </tbody>
+</table>
