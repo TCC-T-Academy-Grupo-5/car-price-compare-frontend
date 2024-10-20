@@ -1,4 +1,4 @@
-import {FipePrice} from '@models/fipeprice';
+import {FipePrice} from '@domain/vehicle/fipeprice';
 
 export interface VehicleDetails {
   id: string;

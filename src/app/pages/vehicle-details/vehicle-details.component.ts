@@ -4,9 +4,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
 import {Subscription} from 'rxjs';
-import {FipePrice} from '@models/fipeprice';
+import {FipePrice} from '@domain/vehicle/fipeprice';
 import {VehicleDetailsService} from '@services/vehicle-details.service';
-import {VehicleDetails} from '@models/vehicledetails';
+import {VehicleDetails} from '@domain/vehicle/vehicledetails';
 
 @Component({
   selector: 'tcc-vehicle-details',
