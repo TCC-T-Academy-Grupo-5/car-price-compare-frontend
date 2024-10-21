@@ -1,0 +1,19 @@
+<h2 class="detail-section-header">
+  Ofertas
+</h2>
+
+<div class="flex flex-col gap-4">
+  <div *ngFor="let deal of deals" class="flex justify-start card p-0">
+    <div class="w-44 h-44 overflow-hidden">
+      <img [src]="deal.imageUrl" [alt]="deal.versionName" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"/>
+    </div>
+    <div class="flex flex-col">
+      <span>{{ deal.modelName }}</span>
+      <span>{{ deal.versionName }}</span>
+      <span>{{ deal.price | currency: 'BRL':'symbol':'1.2-2' }}</span>
+      <span>{{ deal.year }}</span>
+      <span>{{ deal.mileageInKm | number }} km</span>
+      <span>{{ deal.city }} - {{ deal.state }}</span>
+    </div>
+  </div>
+</div>
