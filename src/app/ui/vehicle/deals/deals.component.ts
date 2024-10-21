@@ -5,18 +5,20 @@ import {Subscription} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
+import {DealComponent} from '@ui/vehicle/deals/deal/deal.component';
 
 @Component({
   selector: 'tcc-deals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DealComponent],
   templateUrl: './deals.component.html'
 })
 export class DealsComponent implements OnInit, OnDestroy {
   @Input({required: true}) vehicleId = '';
-  @Input({required: true}) latestFipePrice: number = 0;
+  @Input({required: true}) latestFipePrice = 0;
   deals: Deal[] = [];
   relatedDeals: Deal[] = [];
+  isLoading = true;
 
   dealsSubscription: Subscription | undefined;
 
@@ -26,20 +28,21 @@ export class DealsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dealsSubscription = this.dealsService.getVehicleDeals(this.vehicleId).subscribe({
       next: (deals: Deal[]) => {
+        this.isLoading = true;
+
+        this.deals = [];
+
         deals.sort((a, b) => a.price - b.price);
         deals.forEach((deal: Deal) => {
           if (deal.isFullMatch) {
-            this.deals.push(deal);
+            this.calculatePriceDifference(deal);
+            this.deals!.push(deal);
           } else {
-            this.relatedDeals.push(deal);
+            this.relatedDeals!.push(deal);
           }
-
-          const fipePriceDiff = deal.price - this.latestFipePrice;
-          const fipePriceDiffPercentage = (fipePriceDiff / this.latestFipePrice) * 100;
-
-          deal.fipePriceDiff = fipePriceDiff;
-          deal.fipePriceDiffPercentage = fipePriceDiffPercentage;
         })
+
+        this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
         this.errorService.handleError(error);
@@ -52,5 +55,11 @@ export class DealsComponent implements OnInit, OnDestroy {
     this.dealsSubscription?.unsubscribe();
   }
 
-  protected readonly Math = Math;
+  private calculatePriceDifference(deal: Deal): void {
+    const fipePriceDiff = deal.price - this.latestFipePrice;
+    const fipePriceDiffPercentage = (fipePriceDiff / this.latestFipePrice) * 100;
+
+    deal.fipePriceDiff = fipePriceDiff;
+    deal.fipePriceDiffPercentage = fipePriceDiffPercentage;
+  }
 }
