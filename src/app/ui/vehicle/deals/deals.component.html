@@ -1,5 +1,5 @@
 <h2 class="detail-section-header">Ofertas</h2>
-<div *ngIf="!isLoading; else loading">
+<div *ngIf="!isLoading; else loading" class="mb-4">
   <div *ngIf="deals.length > 0; else noDeals">
     <div class="flex flex-col gap-4">
       <tcc-deal *ngFor="let deal of deals" [deal]="deal"></tcc-deal>
@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<h2 class="detail-section-header">Ofertas relacionadas</h2>
+<h2 class="text-lg mb-2">Ofertas relacionadas</h2>
 <div *ngIf="!isLoading; else loading">
   <div *ngIf="relatedDeals.length > 0; else noDeals">
     <div class="flex flex-col gap-4">

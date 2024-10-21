@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DealsService {
-  private dealImageDefaultResolution = '0200x0200'
+  private dealImageDefaultResolution = '0225x0200'
 
   constructor(private http: HttpClient) { }
 
