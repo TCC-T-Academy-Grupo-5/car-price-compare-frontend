@@ -124,6 +124,7 @@ $font-sizes: (
   .menu-overlay {
     @apply fixed top-0 right-0 w-64 h-full bg-white shadow-lg transition-transform duration-500 ease-in-out;
   }
+
   .menu {
     @apply flex flex-col;
   }
@@ -142,6 +143,10 @@ $font-sizes: (
 
   .stat-content {
     @apply text-lg font-normal tracking-wide
+  }
+
+  .detail-section-header {
+    @apply text-xl mb-4 bg-highlight dark:bg-highlight-light text-secondary-light font-medium py-2 px-4 rounded
   }
 
   .history-table-header {
