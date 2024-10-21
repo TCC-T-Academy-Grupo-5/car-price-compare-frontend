@@ -8,19 +8,31 @@
       <img [src]="deal.imageUrl" [alt]="deal.versionName"
            class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"/>
     </div>
-    <div class="flex flex-col justify-center gap-2">
+    <div class="flex flex-col justify-between gap-2 p-2">
       <div class="flex flex-col">
         <span class="font-semibold tracking-wide">{{ deal.modelName }}</span>
         <span class="font-semibold tracking-wide text-sm">{{ deal.versionName }}</span>
       </div>
-      <span class="font-bold text-2xl">{{ deal.price | currency: 'BRL':'symbol':'1.2-2' }}</span>
-      <div class="flex flex-col text-sm">
-        <span>{{ deal.year }}</span>
-        <div class="flex gap-1 items-center">
+
+      <div class="flex flex-col">
+        <span class="font-bold text-2xl">{{ deal.price | currency: 'BRL':'symbol':'1.2-2' }}</span>
+        <span *ngIf="deal.fipePriceDiff! < 0" class="flex gap-0.5 align-baseline text-xs text-primary-light tracking-wide w-fit px-2 py-1 rounded bg-green-600 font-bold">
+          {{ Math.abs(deal.fipePriceDiff!) | currency:'BRL':'symbol':'1.2-2' }}
+          abaixo da FIPE
+          ({{ Math.abs(deal.fipePriceDiffPercentage!) | number: '1.2-2' }}%)
+        </span>
+      </div>
+
+      <div class="flex md:flex-row sm:flex-col gap-4 text-sm">
+        <div class="flex gap-0.5 items-center">
+          <i class="material-symbols-outlined text-xs">calendar_month</i>
+          <span>{{ deal.year }}</span>
+        </div>
+        <div class="flex gap-0.5 items-center">
           <i class="material-symbols-outlined text-xs">speed</i>
           <span>{{ deal.mileageInKm | number }} km</span>
         </div>
-        <div class="flex gap-1 items-center">
+        <div class="flex gap-0.5 items-center">
           <i class="material-symbols-outlined text-xs">location_on</i>
           <span>{{ deal.city }} - {{ deal.state }}</span>
         </div>

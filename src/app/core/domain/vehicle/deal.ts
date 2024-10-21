@@ -2,6 +2,8 @@ export interface Deal {
   vehicleId: string;
   store: string;
   price: number;
+  fipePriceDiff?: number;
+  fipePriceDiffPercentage?: number;
   mileageInKm: number;
   modelName: number;
   versionName: number;
