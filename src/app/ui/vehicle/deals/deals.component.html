@@ -1,0 +1,22 @@
+<h2 class="detail-section-header">{{ 'vehicle.deals.header' | translate }}</h2>
+<div *ngIf="!isLoading; else loading" class="mb-4">
+  <div *ngIf="deals.length > 0; else noDeals">
+    <div class="flex flex-col gap-4 mb-4">
+      <tcc-deal *ngFor="let deal of deals" [deal]="deal"></tcc-deal>
+    </div>
+    <h3 class="text-lg mb-2">{{ 'vehicle.deals.related_deals' | translate }}</h3>
+    <div *ngIf="relatedDeals.length > 0; else noDeals">
+      <div class="flex flex-col gap-4">
+        <tcc-deal *ngFor="let deal of relatedDeals" [deal]="deal"></tcc-deal>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <mat-spinner mode="indeterminate" [diameter]="50" [strokeWidth]="5" class="mx-auto mt-12"></mat-spinner>
+</ng-template>
+
+<ng-template #noDeals>
+  <p class="text-center mt-12">{{ 'vehicle.deals.empty_state' | translate }}</p>
+</ng-template>

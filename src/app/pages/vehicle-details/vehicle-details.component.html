@@ -1,0 +1,57 @@
+<div class="w-full m-auto">
+  <div class="flex justify-center mb-2">
+    <img [src]="vehicleDetails?.brandImageUrl" [alt]="vehicleDetails?.brand"/>
+  </div>
+
+  <h1 class="text-center text-xl sm:text-2xl tracking-widest mb-10">{{ vehicleDetails?.name | uppercase }}</h1>
+  <div class="flex flex-col gap-10">
+    <div class="flex flex-col gap-2 justify-center items-start">
+      <span class="text-base sm:text-lg font-medium tracking-wide text-highlight dark:text-highlight-light">
+        {{ 'vehicle.average_price' | translate | lowercase }}
+      </span>
+      <span class="text-2xl sm:text-4xl font-bold">
+        {{ latestFipePrice?.price | currency : 'BRL':'symbol':'1.2-2':'pt-BR' }}
+      </span>
+      <span class="text-xs sm:text-sm font-thin tracking-wide text-highlight dark:text-highlight-light">
+        {{ 'vehicle.updated_at' | translate | lowercase }}
+        {{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="vehicle-stat">
+        <span class="stat-header">{{ 'vehicle.make' | translate | lowercase }}</span>
+        <span class="stat-content">{{ vehicleDetails?.brand | titlecase }}</span>
+      </div>
+
+      <div class="vehicle-stat">
+        <span class="stat-header">{{ 'vehicle.model' | translate | lowercase }}</span>
+        <span class="stat-content">{{ vehicleDetails?.model | titlecase }}</span>
+      </div>
+
+      <div *ngIf="vehicleDetails?.category" class="vehicle-stat">
+        <span class="stat-header">{{ 'vehicle.category' | translate | lowercase }}</span>
+        <span class="stat-content">{{ vehicleDetails?.category | titlecase }}</span>
+      </div>
+
+      <div class="vehicle-stat">
+        <span class="stat-header">{{ 'vehicle.year' | translate | lowercase }}</span>
+        <span class="stat-content">{{ vehicleDetails?.year | titlecase }}</span>
+      </div>
+
+      <div class="vehicle-stat">
+        <span class="stat-header">{{ 'vehicle.version' | translate | lowercase }}</span>
+        <span class="stat-content">{{ vehicleDetails?.name | titlecase }}</span>
+      </div>
+
+      <div class="vehicle-stat">
+        <span class="stat-header">{{ 'vehicle.fipe_code' | translate | lowercase }}</span>
+        <span class="stat-content">{{ vehicleDetails?.fipeCode | titlecase }}</span>
+      </div>
+    </div>
+
+    <tcc-price-history-table [fipePrices]="vehicleDetails?.fipePrices!"></tcc-price-history-table>
+
+    <tcc-deals *ngIf="vehicleDetails" [vehicleId]="vehicleId" [latestFipePrice]="latestFipePrice?.price!"></tcc-deals>
+  </div>
+</div>
