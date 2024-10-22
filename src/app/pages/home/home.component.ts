@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   vehicleImgMobile!: string;
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
 
-  searchText: string = '';
+  searchText = '';
   brandsSuggestions: Brand[] = [];
   modelSuggestions: Model[] = [];
 
