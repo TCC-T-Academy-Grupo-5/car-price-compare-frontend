@@ -1,14 +1,14 @@
 <h2 class="detail-section-header">
-  Tabela FIPE - Histórico recente
+  {{ 'vehicle.fipe_history.header' | translate }}
 </h2>
 
 <table class="table-fixed">
   <thead>
   <tr class="bg-tertiary-light">
-    <th class="history-table-header">mês</th>
-    <th class="history-table-header">valor</th>
-    <th class="history-table-header">variação R$</th>
-    <th class="history-table-header">variação %</th>
+    <th class="history-table-header">{{ 'vehicle.fipe_history.month' | translate }}</th>
+    <th class="history-table-header">{{ 'vehicle.fipe_history.price' | translate }}</th>
+    <th class="history-table-header">{{ 'vehicle.fipe_history.variation' | translate }}</th>
+    <th class="history-table-header">{{ 'vehicle.fipe_history.variation_percentage' | translate }}</th>
   </tr>
   </thead>
   <tbody>
@@ -17,7 +17,8 @@
     <td class="w-40 p-2">{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
     <td class="w-40 p-2">
       <i class="material-symbols-outlined text-xl">{{ getPriceDiffIconName(price?.prevMonthDiff!) }}</i>
-      {{ Math.abs(price?.prevMonthDiff!) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+      {{ Math.abs(price?.prevMonthDiff!) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}
+    </td>
     <td class="w-40 p-2">{{ price?.prevMonthDiffPercentage | number: '1.2-2' }}%</td>
   </tr>
   </tbody>

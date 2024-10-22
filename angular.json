@@ -31,8 +31,7 @@
             ],
             "styles": [
               "src/assets/stylesheets/styles.sass",
-              "src/assets/stylesheets/custom.scss",
-              "node_modules/@angular/material/prebuilt-themes/azure-blue.css"
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": []
           },

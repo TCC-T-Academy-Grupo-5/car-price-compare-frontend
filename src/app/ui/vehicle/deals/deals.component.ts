@@ -7,11 +7,12 @@ import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
 import {DealComponent} from '@ui/vehicle/deals/deal/deal.component';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'tcc-deals',
   standalone: true,
-  imports: [CommonModule, DealComponent, MatProgressSpinner],
+  imports: [CommonModule, DealComponent, MatProgressSpinner, TranslateModule],
   templateUrl: './deals.component.html',
   host: {
     '[style.--mdc-circular-progress-active-indicator-color]': "'#009AFF'"

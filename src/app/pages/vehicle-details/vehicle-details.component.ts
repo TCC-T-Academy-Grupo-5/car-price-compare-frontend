@@ -10,11 +10,12 @@ import {VehicleDetails} from '@domain/vehicle/vehicledetails';
 import {MatColumnDef, MatTable} from '@angular/material/table';
 import {PriceHistoryTableComponent} from '@ui/vehicle/price-history-table/price-history-table.component';
 import {DealsComponent} from '@ui/vehicle/deals/deals.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'tcc-vehicle-details',
   standalone: true,
-  imports: [CommonModule, MatTable, MatColumnDef, PriceHistoryTableComponent, DealsComponent],
+  imports: [CommonModule, MatTable, MatColumnDef, PriceHistoryTableComponent, DealsComponent, TranslateModule],
   templateUrl: './vehicle-details.component.html'
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {

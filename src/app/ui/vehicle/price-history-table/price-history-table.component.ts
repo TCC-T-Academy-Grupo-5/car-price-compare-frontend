@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FipePrice} from '@domain/vehicle/fipeprice';
 import {CommonModule, CurrencyPipe, DecimalPipe} from '@angular/common';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'tcc-price-history-table',
@@ -8,7 +9,8 @@ import {CommonModule, CurrencyPipe, DecimalPipe} from '@angular/common';
   imports: [
     CurrencyPipe,
     DecimalPipe,
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   templateUrl: './price-history-table.component.html'
 })
