@@ -6,12 +6,16 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
 import {DealComponent} from '@ui/vehicle/deals/deal/deal.component';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'tcc-deals',
   standalone: true,
-  imports: [CommonModule, DealComponent],
-  templateUrl: './deals.component.html'
+  imports: [CommonModule, DealComponent, MatProgressSpinner],
+  templateUrl: './deals.component.html',
+  host: {
+    '[style.--mdc-circular-progress-active-indicator-color]': "'#009AFF'"
+  }
 })
 export class DealsComponent implements OnInit, OnDestroy {
   @Input({required: true}) vehicleId = '';
