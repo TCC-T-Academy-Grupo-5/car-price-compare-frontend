@@ -2,24 +2,24 @@
   {{ 'vehicle.fipe_history.header' | translate }}
 </h2>
 
-<table class="table-fixed">
+<table class="table-auto w-full">
   <thead>
   <tr class="bg-tertiary-light">
     <th class="history-table-header">{{ 'vehicle.fipe_history.month' | translate }}</th>
     <th class="history-table-header">{{ 'vehicle.fipe_history.price' | translate }}</th>
-    <th class="history-table-header">{{ 'vehicle.fipe_history.variation' | translate }}</th>
-    <th class="history-table-header">{{ 'vehicle.fipe_history.variation_percentage' | translate }}</th>
+    <th class="history-table-header text-end">{{ 'vehicle.fipe_history.variation' | translate }}</th>
+    <th class="history-table-header text-end">{{ 'vehicle.fipe_history.variation_percentage' | translate }}</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let price of fipePrices" class="even:bg-tertiary-light">
-    <td class="w-40 p-2">{{ price?.month }}/{{ price?.year }}</td>
-    <td class="w-40 p-2">{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
-    <td class="w-40 p-2">
-      <i class="material-symbols-outlined text-xl">{{ getPriceDiffIconName(price?.prevMonthDiff!) }}</i>
+    <td class="history-table-row">{{ price?.month }}/{{ price?.year }}</td>
+    <td class="history-table-row">{{ price?.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+    <td class="history-table-row text-end">
+      <i class="material-symbols-outlined text-xs sm:text-sm md:text-base">{{ getPriceDiffIconName(price?.prevMonthDiff!) }}</i>
       {{ Math.abs(price?.prevMonthDiff!) | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}
     </td>
-    <td class="w-40 p-2">{{ price?.prevMonthDiffPercentage | number: '1.2-2' }}%</td>
+    <td class="history-table-row text-end">{{ price?.prevMonthDiffPercentage | number: '1.2-2' }}%</td>
   </tr>
   </tbody>
 </table>

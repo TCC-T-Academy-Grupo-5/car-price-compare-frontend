@@ -138,19 +138,23 @@ $font-sizes: (
   }
 
   .stat-header {
-    @apply tracking-wide text-highlight dark:text-highlight-light font-thin w-36
+    @apply tracking-wide text-highlight dark:text-highlight-light font-thin min-w-24 text-sm sm:text-base
   }
 
   .stat-content {
-    @apply text-lg font-normal tracking-wide
+    @apply text-sm sm:text-lg font-normal tracking-wide
   }
 
   .detail-section-header {
-    @apply text-xl mb-4 bg-highlight dark:bg-highlight-light text-secondary-light font-medium py-2 px-4 rounded
+    @apply text-lg sm:text-xl mb-4 bg-highlight dark:bg-highlight-light text-secondary-light font-medium py-2 px-4 rounded
   }
 
   .history-table-header {
-    @apply p-2 tracking-wide text-highlight dark:text-highlight-light font-medium text-start
+    @apply p-2 tracking-wide text-highlight dark:text-highlight-light font-medium text-start text-xs sm:text-sm md:text-base
+  }
+
+  .history-table-row {
+    @apply w-40 p-2 text-xs sm:text-base
   }
 }
 

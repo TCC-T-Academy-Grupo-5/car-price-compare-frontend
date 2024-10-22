@@ -44,7 +44,7 @@ vehicle:
   fipe_history:
     header: 'Tabela FIPE - Histórico recente'
     month: 'mês'
-    price: 'malor'
+    price: 'valor'
     variation: 'variação R$'
     variation_percentage: 'variação %'
   deals:
