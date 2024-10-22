@@ -1,6 +1,6 @@
-import { Injectable, model } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {AbstractService} from '@services/vehicle/abstract.service';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Model} from '@domain/vehicle/model';
 
