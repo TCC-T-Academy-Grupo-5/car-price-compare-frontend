@@ -10,21 +10,21 @@
         <span class="text-base sm:text-lg font-medium tracking-wide text-highlight dark:text-highlight-light">
           {{ 'vehicle.average_price' | translate | lowercase }}
         </span>
-          <span class="text-2xl sm:text-4xl font-bold">
+        <span class="text-2xl sm:text-4xl font-bold">
           {{ latestFipePrice?.price | currency : 'BRL':'symbol':'1.2-2':'pt-BR' }}
         </span>
-          <span class="text-xs sm:text-sm font-thin tracking-wide text-highlight dark:text-highlight-light">
+        <span class="text-xs sm:text-sm font-thin tracking-wide text-highlight dark:text-highlight-light">
           {{ 'vehicle.updated_at' | translate | lowercase }}
-            {{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}
+          {{ latestFipePrice?.month }}/{{ latestFipePrice?.year }}
         </span>
       </div>
 
-      <div>
-        <button type="button" class="p-2 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded shadow-xl">
-          <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary">notifications</i>
-          Acompanhar ofertas
-        </button>
-      </div>
+      <button type="button"
+              (click)="onAlertClick()"
+              class="p-2 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded shadow-xl">
+        <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary">notifications</i>
+        Acompanhar ofertas
+      </button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">

@@ -11,6 +11,7 @@ import {MatColumnDef, MatTable} from '@angular/material/table';
 import {PriceHistoryTableComponent} from '@ui/vehicle/price-history-table/price-history-table.component';
 import {DealsComponent} from '@ui/vehicle/deals/deals.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {NotificationService} from '@services/user/notification.service';
 
 @Component({
   selector: 'tcc-vehicle-details',
@@ -26,6 +27,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleDetailsSubscription: Subscription | undefined;
 
   constructor(private vehicleDetailsService: VehicleDetailsService,
+              private notificationService: NotificationService,
               private activatedRoute: ActivatedRoute,
               private errorService: ErrorService) {}
 
@@ -45,5 +47,9 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
       this.vehicleDetailsSubscription?.unsubscribe();
+  }
+
+  onAlertClick() {
+    this.notificationService.createNotification(this.vehicleId);
   }
 }
