@@ -20,13 +20,30 @@
     />
   </div>
 
-  <div class="search-wrapper tcc-flex">
-    <input type="text" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
-    <span class="bg-highlight dark:bg-highlight-light rounded-full inline-flex items-center justify-center h-8 w-8">
-        <i class="material-symbols-outlined text-primary-light dark:text-primary text-sm">search</i>
+    <div class="search-wrapper tcc-flex">
+      <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="{{ 'placeholder.search' | translate }}" class="outline-none">
+      <span class="bg-highlight dark:bg-highlight-light rounded-full inline-flex items-center justify-center h-8 w-8">
+          <i class="material-symbols-outlined text-primary-light dark:text-primary text-sm">search</i>
       </span>
-  </div>
+    </div>
 
+    <div *ngIf="brandsSuggestions.length > 0 || modelSuggestions.length > 0" class="w-1/2 max-h-96 bg-white border border-gray-300 mt-1 overflow-y-auto shadow-lg z-10">
+    
+      <ul *ngIf="brandsSuggestions.length > 0" class="suggestions-list">
+        <p class="font-bold px-3 py-2 dark:text-primary">Brand</p>
+        <li *ngFor="let brand of brandsSuggestions" class="px-3 py-2 hover:bg-gray-100 cursor-pointer dark:text-primary" (click)="onBrandSelected(brand.name)" (keydown.enter)="onBrandSelected(brand.name)" tabindex="0">
+          {{ brand.name }}
+        </li>
+      </ul>
+    
+      <ul *ngIf="modelSuggestions.length > 0" class="suggestions-list">
+        <p class="font-bold px-3 py-2 dark:text-primary">Models</p>
+        <li *ngFor="let model of modelSuggestions" class="px-3 py-2 hover:bg-gray-100 cursor-pointer dark:text-primary" (click)="onModelSelected(model.name)" (keydown.enter)="onModelSelected(model.name)" tabindex="0">
+          {{ model.name }}
+        </li>
+      </ul>
+    
+    </div>
   <div class="browse-type">
     <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)"/>
   </div>

@@ -3,7 +3,7 @@ import {CommonModule, DatePipe, NgOptimizedImage} from "@angular/common";
 import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component';
 import {FilterBrandComponent} from '@ui/vehicle/filter-brand/filter-brand.component';
@@ -11,6 +11,9 @@ import {BrandService} from '@services/vehicle/brand.service';
 import {Brand} from '@domain/vehicle/brand';
 import {ErrorService} from '@services/errors/error.service';
 import {HeadersService} from '@services/headers.service';
+import { ModelService } from '@services/vehicle/model.service';
+import { Model } from '@domain/vehicle/model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'tcc-home',
@@ -31,6 +34,7 @@ import {HeadersService} from '@services/headers.service';
     InteractionDirective,
     FilterTypeComponent,
     FilterBrandComponent,
+    FormsModule,
   ],
   templateUrl: './home.component.html',
   styles: ``
@@ -46,10 +50,16 @@ export class HomeComponent implements OnInit {
   vehicleImgMobile!: string;
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
 
+  searchText = '';
+  brandsSuggestions: Brand[] = [];
+  modelSuggestions: Model[] = [];
+
   constructor(
     private brandService: BrandService,
     private errorService: ErrorService,
-    private headersService: HeadersService
+    private headersService: HeadersService,
+    private modelService: ModelService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -89,5 +99,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onSearchTextChange(): void {
+    if (this.searchText.length > 0) {
+      this.modelService.getByModel(this.searchText).subscribe((response) => {
+        this.modelSuggestions = response;
+      });
+      this.brandService.getByBrand(this.searchText).subscribe((response) => {
+        this.brandsSuggestions = response;
+      });
+    } else {
+      this.modelSuggestions = [];
+      this.brandsSuggestions = [];
+    }
+  }
+
+  onBrandSelected(name: string | undefined): void {
+    this.router.navigate(['/models'], { queryParams: { brand: name } });
+  }
+
+  onModelSelected(name: string | undefined): void {
+    this.router.navigate(['/vehicles'], { queryParams: { model: name } });
+  }
 }
 
