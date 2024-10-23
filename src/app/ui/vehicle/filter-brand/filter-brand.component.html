@@ -5,11 +5,12 @@
     class="card"
     tabindex="0"
     [routerLink]="['/models']"
-    [queryParams]="{ brand: brand.name }"
+    [queryParams]="{ brand: brand.name, vehicleType: vehicleType }"
   >
-  <div class="flex flex-col justify-center items-center gap-2">
-    <img [src]="brand.imageUrl" [alt]="brand.name" />
-    <p>{{ brand.name }}</p>
-  </div>
+    <div class="flex flex-col justify-center items-center gap-2">
+      <img [src]="brand.imageUrl" [alt]="brand.name" />
+      <p>{{ brand.name }}</p>
+    </div>
   </a>
+
 </div>

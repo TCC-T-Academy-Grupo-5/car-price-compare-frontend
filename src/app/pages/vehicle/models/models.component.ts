@@ -22,10 +22,9 @@ import {ErrorService} from '@services/errors/error.service';
 export class ModelsComponent implements OnInit {
   models: Model[] = [];
   brandName!: string;
-  type!: number;
+  vehicleType!: number | undefined | '';
   page = 1;
   pageSize = 10;
-  totalItems = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,22 +36,25 @@ export class ModelsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.brandName = params['brand'] || '';
-      if (this.brandName) {
+      this.vehicleType = params['vehicleType'] ? Number(params['vehicleType']) : undefined;
+
+      console.log('Vehicle Type capturado:', this.vehicleType);
+      console.log('Brand capturada:', this.brandName);
+
+      if (this.brandName && this.vehicleType !== undefined) {
         this.getModels();
       }
     });
   }
 
   public getModels(): void {
-    const filters = { vehicleType: this.type, brand: this.brandName, page: this.page, pageSize: this.pageSize };
+    const filters = { vehicleType: this.vehicleType, brand: this.brandName, page: this.page, pageSize: this.pageSize };
+
+    console.log('Filtros enviados:', filters); // TODO remove
+
     this.modelService.findByBrand(filters).subscribe({
-      next: (models: Model[]) => {
-        this.models = models;
-        console.log('Modelos carregados:', this.models);
-      },
-      error: (err) => {
-        console.error('Erro ao carregar modelos:', err);
-      }
+      next: (models: Model[]) => this.models = models,
+      error: (err) => this.error.handleError(err)
     });
   }
 
