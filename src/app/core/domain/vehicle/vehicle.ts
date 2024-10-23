@@ -1,13 +1,11 @@
-export interface Vehicle {
+import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
+
+export interface Vehicle extends VehicleFilters {
   id?: string;
-  fipeCode?: string;
   fullUrl?: string;
   imageUrl?: string;
   name?: string;
-  model?: string;
-  price?: number;
+  fipePrice?: number;
   priceRange?: [number, number];
   urlPathName?: string;
-  year?: string;
-  brand?: string;
 }

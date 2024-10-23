@@ -45,19 +45,15 @@ export class HomeComponent implements OnInit {
   pageSize = 100;
   selectedType = 0;
   totalPages = 0;
-
-  vehicleImgDesktop!: string;
-  vehicleImgMobile!: string;
-  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
-
   searchText = '';
   brandsSuggestions: Brand[] = [];
   modelSuggestions: Model[] = [];
+  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
+  vehicleImgDesktop!: string;
+  vehicleImgMobile!: string;
 
   constructor(
     private brandService: BrandService,
-    private errorService: ErrorService,
-    private headersService: HeadersService,
     private modelService: ModelService,
     private router: Router
   ) {}
@@ -84,28 +80,36 @@ export class HomeComponent implements OnInit {
 
     this.brandService.findByType(filters).subscribe({
       next: (response) => {
-        console.log('Resposta da API:', response);
         if (Array.isArray(response)) {
           this.brands = response;
-          console.log('Marcas recebidas:', this.brands);
         } else {
           console.log('Resposta inválida ou vazia.');
         }
       },
       error: (error) => {
-        this.errorService.handleError(error);
-        console.error("Erro ao carregar marcas: ", error.message);
+        console.error("Erro ao carregar marcas:", error.message);
       }
     });
   }
 
   onSearchTextChange(): void {
     if (this.searchText.length > 0) {
-      this.modelService.getByModel(this.searchText).subscribe((response) => {
-        this.modelSuggestions = response;
+      this.modelService.getByModel(this.searchText).subscribe({
+        next: (response) => {
+          this.modelSuggestions = response;
+        },
+        error: (err) => {
+          console.error('Erro ao carregar modelos:', err.message);
+        }
       });
-      this.brandService.getByBrand(this.searchText).subscribe((response) => {
-        this.brandsSuggestions = response;
+
+      this.brandService.getByBrand(this.searchText).subscribe({
+        next: (response) => {
+          this.brandsSuggestions = response;
+        },
+        error: (err) => {
+          console.error('Erro ao carregar marcas:', err.message);
+        }
       });
     } else {
       this.modelSuggestions = [];
@@ -114,11 +118,14 @@ export class HomeComponent implements OnInit {
   }
 
   onBrandSelected(name: string | undefined): void {
-    this.router.navigate(['/models'], { queryParams: { brand: name } });
+    if (name) {
+      this.router.navigate(['/models'], { state: { brand: name, vehicleType: this.selectedType } });
+    }
   }
 
   onModelSelected(name: string | undefined): void {
-    this.router.navigate(['/vehicles'], { queryParams: { model: name } });
+    if (name) {
+      this.router.navigate(['/vehicles'], { state: { model: name } });
+    }
   }
 }
-

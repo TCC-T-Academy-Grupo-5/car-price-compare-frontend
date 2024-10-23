@@ -19,7 +19,7 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
   }
 
   protected apiEndpoint(): string {
-    return 'brand';
+    return 'vehicle/brand';
   }
 
   public findByType(filters: { vehicleType: number, page: number, pageSize: number }): Observable<PaginatedBrand> {
