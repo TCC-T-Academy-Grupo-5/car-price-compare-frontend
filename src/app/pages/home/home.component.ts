@@ -9,8 +9,6 @@ import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component
 import {FilterBrandComponent} from '@ui/vehicle/filter-brand/filter-brand.component';
 import {BrandService} from '@services/vehicle/brand.service';
 import {Brand} from '@domain/vehicle/brand';
-import {ErrorService} from '@services/errors/error.service';
-import {HeadersService} from '@services/headers.service';
 import { ModelService } from '@services/vehicle/model.service';
 import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
