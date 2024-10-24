@@ -1,15 +1,17 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
+import {catchError, throwError} from 'rxjs';
 
 export const requestInterceptor: HttpInterceptorFn = (req, next) => {
-  if (localStorage.getItem('token')) {
-    const token = localStorage.getItem('token');
-    const clonedReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return next(clonedReq);
-  }
+  const token = localStorage.getItem("token");
+  const clonedReq = token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}`}}) : req;
 
-  return next(req);
+  return next(clonedReq).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 403) {
+        localStorage.removeItem('token');
+      }
+
+      return throwError(() => error);
+    }),
+  );
 };
