@@ -11,8 +11,9 @@
   </i>
 
   <mat-menu #userMenu="matMenu" xPosition="before" id="{{ menuId }}">
-    <button mat-menu-item (click)="openLoginPopup()">Login</button>
-    <button mat-menu-item (click)="openRegisterPopup()">Register</button>
+    <button mat-menu-item *ngIf="!isLoggedIn" (click)="openLoginPopup()">Login</button>
+    <button mat-menu-item *ngIf="!isLoggedIn" (click)="openRegisterPopup()">Register</button>
+    <button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">Logout</button>
   </mat-menu>
 </div>
 
