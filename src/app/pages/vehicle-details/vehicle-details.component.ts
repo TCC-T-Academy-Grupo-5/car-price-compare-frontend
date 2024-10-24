@@ -26,10 +26,10 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   notificationId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
-  isUserSubscribed = false;
+  isUserSubscribed: boolean | undefined;
 
   vehicleDetailsSubscription: Subscription | undefined;
-  disableNewAlertSubscription: Subscription | undefined;
+  currentUserVehicleSubscription: Subscription | undefined;
 
   constructor(private vehicleDetailsService: VehicleDetailsService,
               private notificationService: NotificationService,
@@ -38,6 +38,24 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loadVehicleDetails();
+    this.loadCurrentUserVehicleSubscription();
+  }
+
+  ngOnDestroy() {
+    this.vehicleDetailsSubscription?.unsubscribe();
+    this.currentUserVehicleSubscription?.unsubscribe();
+  }
+
+  onAlertClick() {
+    if (!this.notificationId) {
+      this.createNotification();
+    } else {
+      this.deleteNotification();
+    }
+  }
+
+  private loadVehicleDetails() {
     this.vehicleId = this.activatedRoute.snapshot.params['vehicleId'];
     this.vehicleDetailsSubscription = this.vehicleDetailsService.getVehicleById(this.vehicleId).subscribe({
       next: (vehicleDetails: VehicleDetails) => {
@@ -49,18 +67,18 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
         console.error(error.message);
       }
     });
+  }
 
-    this.disableNewAlertSubscription = this.notificationService.isUserSubscribedToVehicle(this.vehicleId).subscribe({
-      next: (isAlreadySubscribed: boolean) => this.isUserSubscribed = isAlreadySubscribed,
+  private loadCurrentUserVehicleSubscription() {
+    this.currentUserVehicleSubscription = this.notificationService.isUserSubscribedToVehicle(this.vehicleId).subscribe({
+      next: (response: {exists: boolean, notificationId?: string}) => {
+        this.isUserSubscribed = response.exists;
+        this.notificationId = response.notificationId ?? '';
+      },
     })
   }
 
-  ngOnDestroy() {
-    this.vehicleDetailsSubscription?.unsubscribe();
-    this.disableNewAlertSubscription?.unsubscribe();
-  }
-
-  onAlertClick() {
+  private createNotification() {
     const notificationRequest: NotificationRequest = {
       notificationType: 1,
       currentFipePrice: this.latestFipePrice?.price ?? 0,
@@ -75,6 +93,16 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
         console.error('Error creating notification for vehicle ', this.vehicleId, error.message);
         this.isUserSubscribed = false;
       }
+    });
+  }
+
+  private deleteNotification() {
+    this.notificationService.deleteNotification(this.notificationId).subscribe({
+      next: () => {
+        this.isUserSubscribed = false;
+        this.notificationId = '';
+      },
+      error: (error: HttpErrorResponse) => console.error(error.message)
     });
   }
 }
