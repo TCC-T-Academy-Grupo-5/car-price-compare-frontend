@@ -24,7 +24,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
-  shouldDisableAlerts = false;
+  shouldDisableAlertSetup = false;
 
   vehicleDetailsSubscription: Subscription | undefined;
   disableNewAlertSubscription: Subscription | undefined;
@@ -49,7 +49,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     });
 
     this.disableNewAlertSubscription = this.notificationService.isUserSubscribedToVehicle(this.vehicleId).subscribe({
-      next: (isAlreadySubscribed: boolean) => this.shouldDisableAlerts = isAlreadySubscribed,
+      next: (isAlreadySubscribed: boolean) => this.shouldDisableAlertSetup = isAlreadySubscribed,
     })
   }
 
@@ -60,12 +60,19 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
 
   onAlertClick() {
     const notificationRequest: NotificationRequest = {
-      notificationType: 0,
+      notificationType: 1,
       currentFipePrice: this.latestFipePrice?.price ?? 0,
       vehicleId: this.vehicleId
     };
     this.notificationService.createNotification(notificationRequest).subscribe({
-      next: response => console.log("Notificação criada: " + response),
+      next: () => {
+        console.log('Notification created successfully for vehicle ', this.vehicleId)
+        this.shouldDisableAlertSetup = true;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error creating notification for vehicle ', this.vehicleId, error.message);
+        this.shouldDisableAlertSetup = false;
+      }
     });
   }
 }

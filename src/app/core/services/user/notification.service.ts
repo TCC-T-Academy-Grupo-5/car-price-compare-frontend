@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, catchError, Observable, of} from 'rxjs';
 import {map} from "rxjs/operators";
 import {NotificationRequest} from '@domain/vehicle/notification-request';
 import {environment} from "@environments/environment";
@@ -15,8 +15,8 @@ export class NotificationService {
   constructor(private http: HttpClient) {
   }
 
-  createNotification(notificationRequest: NotificationRequest): Observable<any> {
-    return this.http.post(this.apiUrl, notificationRequest);
+  createNotification(notificationRequest: NotificationRequest): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl, notificationRequest);
   }
 
   getNotificationsObservable(): Observable<string[]> {
