@@ -18,27 +18,28 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
     super(http);
   }
 
-  protected apiEndpoint(): string {
-    return 'vehicle/brand';
+  protected endpoint(): string {
+    return 'brand';
   }
 
-  public findByType(filters: { vehicleType: number, page: number, pageSize: number }): Observable<PaginatedBrand> {
+  findByType(filters: { vehicleType: number, page: number, pageSize: number }): Observable<PaginatedBrand> {
     return new Observable<PaginatedBrand>((observer) => {
       this.filter(filters).subscribe({
         next: (response: HttpResponse<PaginatedBrand>) => {
           observer.next(response.body!);
           observer.complete();
-        },
-        error: (err: HttpErrorResponse) => {
-          observer.error(err);
-        }
+        }, error: (err: HttpErrorResponse) => observer.error(err)
       });
     });
   }
 
-  public getByBrand(brand: string): Observable<Brand[]> {
+  findById(brandId: string): Observable<Brand> {
+    return this.http.get<Brand>(`${this.entrypoint}/brand/${brandId}`);
+  }
+
+  getByBrand(brand: string): Observable<Brand[]> {
     return new Observable<Brand[]>((observer) => {
-      this.http.get<Brand[]>(`${this.apiUrl}/${this.apiEndpoint()}?name=${brand}`, { observe: 'response' }).subscribe({
+      this.http.get<Brand[]>(`${this.entrypoint}/${this.endpoint()}?name=${brand}`, { observe: 'response' }).subscribe({
         next: (response: HttpResponse<Brand[]>) => {
           observer.next(response.body!);
           observer.complete();

@@ -16,5 +16,4 @@ import {RouterLink} from "@angular/router";
 })
 export class FilterBrandComponent {
   @Input({ required: true }) brands: Brand[] = [];
-  @Input({ required: false }) vehicleType = 0;
 }

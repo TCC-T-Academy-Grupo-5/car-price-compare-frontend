@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
   page = 1;
   pageSize = 100;
   selectedType = 0;
-  totalPages = 0;
   searchText = '';
   brandsSuggestions: Brand[] = [];
   modelSuggestions: Model[] = [];
@@ -117,13 +116,13 @@ export class HomeComponent implements OnInit {
 
   onBrandSelected(name: string | undefined): void {
     if (name) {
-      this.router.navigate(['/models'], { state: { brand: name, vehicleType: this.selectedType } });
-    }
+      this.router.navigate(['/models'], {state: {brand: name, vehicleType: this.selectedType}}).then();
+     }
   }
 
   onModelSelected(name: string | undefined): void {
     if (name) {
-      this.router.navigate(['/vehicles'], { state: { model: name } });
+      this.router.navigate(['/vehicles'], { state: { model: name } }).then();
     }
   }
 }

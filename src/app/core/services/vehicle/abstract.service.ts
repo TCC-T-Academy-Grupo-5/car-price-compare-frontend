@@ -7,15 +7,15 @@ import {environment} from '@environments/environment.development';
   providedIn: 'root'
 })
 export abstract class AbstractService<T, F> {
-  protected apiUrl: string;
+  protected entrypoint: string;
 
   protected constructor(protected http: HttpClient) {
-    this.apiUrl = `${environment.apiUrl}`;
+    this.entrypoint = `${environment.entrypoint}`;
   }
 
   public filter(filters: F): Observable<HttpResponse<T>> {
     const params = this.paramsFromFilter(filters);
-    return this.http.get<T>(`${this.apiUrl}/${this.apiEndpoint()}`, {
+    return this.http.get<T>(`${this.entrypoint}/${this.endpoint()}`, {
       params,
       observe: 'response'
     });
@@ -32,5 +32,5 @@ export abstract class AbstractService<T, F> {
     return params;
   }
 
-  protected abstract apiEndpoint(): string;
+  protected abstract endpoint(): string;
 }
