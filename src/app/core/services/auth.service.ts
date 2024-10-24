@@ -22,10 +22,18 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+
   public register(data: Register): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, data, { observe: 'response' }).pipe(
         map((response: HttpResponse<RegisterResponse>) => response.body!),
         catchError(this.handleError)
+    );
+  }
+
+  public validateToken(token: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/token`, token, { observe: 'response' }).pipe(
+      map((response: HttpResponse<boolean>) => response.body!),
+      catchError(this.handleError)
     );
   }
 
