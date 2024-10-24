@@ -4,6 +4,9 @@ import {TranslateModule} from "@ngx-translate/core";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '@ui/login/login.component';
+import { RegisterComponent } from '@ui/register/register.component';
 
 @Component({
   selector: 'tcc-user',
@@ -21,7 +24,7 @@ import {MatButton} from "@angular/material/button";
   styles: ``
 })
 export class UserComponent {
-  isLoggedIn = true;
+  isLoggedIn = false;
   profileImgSrc = 'https://upload.wikimedia.org/wikipedia/pt/0/07/Daenerys_Targaryen.png';
   defaultImgSrc = 'assets/icons/default_avatar.svg';
 
@@ -32,7 +35,7 @@ export class UserComponent {
   readonly menuId = 'userMenu';
   menuOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private dialog: MatDialog) {}
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
@@ -65,5 +68,27 @@ export class UserComponent {
     if (event.key === 'Enter' || event.key === ' ') {
       this.toggleMenu();
     }
+  }
+
+  openLoginPopup(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      width: '400px', 
+      disableClose: true,
+    });
+
+    dialogRef.componentInstance.close.subscribe(() => {
+      dialogRef.close(); 
+    });
+  }
+
+  openRegisterPopup(): void {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: '400px',
+      disableClose: true,
+    });
+
+    dialogRef.componentInstance.close.subscribe(() => {
+      dialogRef.close(); 
+    });
   }
 }
