@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {FipePrice} from '@domain/vehicle/fipeprice';
 import {VehicleDetailsService} from '@services/vehicle/vehicle-details.service';
 import {VehicleDetails} from '@domain/vehicle/vehicledetails';
