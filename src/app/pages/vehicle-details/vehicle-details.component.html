@@ -20,11 +20,11 @@
       </div>
 
       <button type="button"
-              [disabled]="shouldDisableAlertSetup"
+              [disabled]="isUserSubscribed"
               (click)="onAlertClick()"
-              class="p-2 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded shadow-xl">
-        <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary">notifications</i>
-        Acompanhar ofertas
+              class="py-2 px-3 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded-3xl shadow-xl">
+        <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary"> {{ isUserSubscribed ? 'notifications_active' : 'notifications' }}</i>
+        {{ isUserSubscribed ? 'Deixar de acompanhar' : 'Acompanhar' }}
       </button>
     </div>
 

@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, Observable, of} from 'rxjs';
 import {map} from "rxjs/operators";
 import {NotificationRequest} from '@domain/vehicle/notification-request';
 import {environment} from "@environments/environment";
+import {NotificationResponse} from "@domain/vehicle/notification-response";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class NotificationService {
   constructor(private http: HttpClient) {
   }
 
-  createNotification(notificationRequest: NotificationRequest): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl, notificationRequest);
+  createNotification(notificationRequest: NotificationRequest): Observable<NotificationResponse> {
+    return this.http.post<NotificationResponse>(this.apiUrl, notificationRequest);
   }
 
   getNotificationsObservable(): Observable<string[]> {

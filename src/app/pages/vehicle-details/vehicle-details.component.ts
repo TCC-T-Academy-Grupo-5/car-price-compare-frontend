@@ -13,6 +13,7 @@ import {DealsComponent} from '@ui/vehicle/deals/deals.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {NotificationService} from '@services/user/notification.service';
 import {NotificationRequest} from '@domain/vehicle/notification-request';
+import {NotificationResponse} from '@domain/vehicle/notification-response';
 
 @Component({
   selector: 'tcc-vehicle-details',
@@ -22,9 +23,10 @@ import {NotificationRequest} from '@domain/vehicle/notification-request';
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId = '';
+  notificationId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
-  shouldDisableAlertSetup = false;
+  isUserSubscribed = false;
 
   vehicleDetailsSubscription: Subscription | undefined;
   disableNewAlertSubscription: Subscription | undefined;
@@ -49,7 +51,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     });
 
     this.disableNewAlertSubscription = this.notificationService.isUserSubscribedToVehicle(this.vehicleId).subscribe({
-      next: (isAlreadySubscribed: boolean) => this.shouldDisableAlertSetup = isAlreadySubscribed,
+      next: (isAlreadySubscribed: boolean) => this.isUserSubscribed = isAlreadySubscribed,
     })
   }
 
@@ -65,13 +67,13 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
       vehicleId: this.vehicleId
     };
     this.notificationService.createNotification(notificationRequest).subscribe({
-      next: () => {
-        console.log('Notification created successfully for vehicle ', this.vehicleId)
-        this.shouldDisableAlertSetup = true;
+      next: (notificationResponse: NotificationResponse) => {
+        this.isUserSubscribed = true;
+        this.notificationId = notificationResponse.notificationId;
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error creating notification for vehicle ', this.vehicleId, error.message);
-        this.shouldDisableAlertSetup = false;
+        this.isUserSubscribed = false;
       }
     });
   }
