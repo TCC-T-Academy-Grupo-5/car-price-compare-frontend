@@ -23,9 +23,10 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
-  alertDisabled = false;
+  shouldDisableAlerts = false;
 
   vehicleDetailsSubscription: Subscription | undefined;
+  disableNewAlertSubscription: Subscription | undefined;
 
   constructor(private vehicleDetailsService: VehicleDetailsService,
               private notificationService: NotificationService,
@@ -45,19 +46,17 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
        }
      });
 
-     this.notificationService.getNotificationsObservable().subscribe({
-       next: (notifications: string[]) => this.alertDisabled = notifications.includes(this.vehicleId),
-       error: (error: HttpErrorResponse) => console.error(error.message),
+     this.disableNewAlertSubscription = this.notificationService.isUserSubscribedToVehicle(this.vehicleId).subscribe({
+       next: (isAlreadySubscribed: boolean) => this.shouldDisableAlerts = isAlreadySubscribed,
      })
   }
 
   ngOnDestroy() {
       this.vehicleDetailsSubscription?.unsubscribe();
+      this.disableNewAlertSubscription?.unsubscribe();
   }
 
   onAlertClick() {
     this.notificationService.createNotification(this.vehicleId);
   }
-
-  protected readonly alert = alert;
 }

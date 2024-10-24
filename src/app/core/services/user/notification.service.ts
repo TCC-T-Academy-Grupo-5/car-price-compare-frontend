@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,11 @@ export class NotificationService {
 
   getNotificationsObservable(): Observable<string[]> {
     return this.notificationsSubject.asObservable();
+  }
+
+  isUserSubscribedToVehicle(vehicleId: string): Observable<boolean> {
+    return this.notificationsSubject.pipe(
+        map((notifications: string[]) => notifications.includes(vehicleId))
+    );
   }
 }
