@@ -33,7 +33,7 @@ export class ModelService extends AbstractService<Model[], VehicleFilters> {
 
   public getByModel(model: string): Observable<Model[]> {
     return new Observable<Model[]>((observer) => {
-      this.http.get<Model[]>(`${this.apiUrl}?name=${model}`, { observe: 'response' }).subscribe({
+      this.http.get<Model[]>(`${this.apiUrl}/${this.apiEndpoint()}?name=${model}`, { observe: 'response' }).subscribe({
         next: (response: HttpResponse<Model[]>) => {
           observer.next(response.body!);
           observer.complete();

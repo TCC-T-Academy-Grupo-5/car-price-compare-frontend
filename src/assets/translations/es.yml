@@ -51,3 +51,7 @@ vehicle:
     header: 'Ofertas'
     related_deals: 'Ofertas relacionadas'
     empty_state: 'Ninguna oferta encontrada'
+    create_alert:
+      follow: 'Seguir'
+      unfollow: 'Dejar de seguir'
+      success: 'Se le notificará cuando encontremos ofertas por debajo del valor FIPE para este vehículo'
