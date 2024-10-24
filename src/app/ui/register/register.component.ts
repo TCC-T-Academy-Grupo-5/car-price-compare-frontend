@@ -14,7 +14,7 @@ import { RegisterResponse } from '@domain/user/registerResponse';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
-  @Output() close: EventEmitter<void> = new EventEmitter();
+  @Output() closeEvent = new EventEmitter<void>();
   registerForm: FormGroup;
   isPopupOpen = true;
 
@@ -38,7 +38,7 @@ export class RegisterComponent {
 
   closePopup() {
     this.isPopupOpen = false;
-    this.close.emit();
+    this.closeEvent.emit();
   }
 
   onSubmit() {

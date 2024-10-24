@@ -46,7 +46,7 @@
     <span mat-menu-item [routerLink]="['/profile']" class="w-full">
       Edit Profile
     </span>
-    <span mat-menu-item (click)="logout()" class="w-full">
+    <span mat-menu-item (click)="logout()" (keydown.enter)="logout()" tabindex="0" class="w-full">
       Logout
     </span>
   </mat-menu>

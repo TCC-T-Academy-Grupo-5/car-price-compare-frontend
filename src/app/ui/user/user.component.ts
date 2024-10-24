@@ -102,7 +102,7 @@ export class UserComponent implements OnInit{
       disableClose: true,
     });
 
-    dialogRef.componentInstance.close.subscribe(() => {
+    dialogRef.componentInstance.closeEvent.subscribe(() => {
       dialogRef.close();
     });
   }

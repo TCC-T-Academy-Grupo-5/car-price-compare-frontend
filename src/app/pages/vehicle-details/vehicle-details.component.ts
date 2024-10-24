@@ -98,7 +98,6 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
         this.translateService.get('vehicle.deals.create_alert.success').subscribe(
           (message: string) => this.snackbarService.open(message)
         )
-        // this.snackbarService.open("Você será avisado quando encontrarmos ofertas abaixo da FIPE para este veículo")
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error creating notification for vehicle ', this.vehicleId, error.message);
