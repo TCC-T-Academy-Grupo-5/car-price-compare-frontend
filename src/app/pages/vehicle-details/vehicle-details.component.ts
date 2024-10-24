@@ -10,10 +10,12 @@ import {VehicleDetails} from '@domain/vehicle/vehicledetails';
 import {MatColumnDef, MatTable} from '@angular/material/table';
 import {PriceHistoryTableComponent} from '@ui/vehicle/price-history-table/price-history-table.component';
 import {DealsComponent} from '@ui/vehicle/deals/deals.component';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {NotificationService} from '@services/user/notification.service';
 import {NotificationRequest} from '@domain/vehicle/notification-request';
 import {NotificationResponse} from '@domain/vehicle/notification-response';
+import {SnackbarService} from '@services/SnackbarService';
+import {AuthService} from '@services/auth.service';
 
 @Component({
   selector: 'tcc-vehicle-details',
@@ -27,6 +29,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
   isUserSubscribed: boolean | undefined;
+  isUserLoggedIn: boolean | undefined;
 
   vehicleDetailsSubscription: Subscription | undefined;
   currentUserVehicleSubscription: Subscription | undefined;
@@ -34,12 +37,16 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   constructor(private vehicleDetailsService: VehicleDetailsService,
               private notificationService: NotificationService,
               private activatedRoute: ActivatedRoute,
-              private errorService: ErrorService) {
+              private errorService: ErrorService,
+              private snackbarService: SnackbarService,
+              private authService: AuthService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
     this.loadVehicleDetails();
     this.loadCurrentUserVehicleSubscription();
+    this.validateUserLoggedIn();
   }
 
   ngOnDestroy() {
@@ -88,6 +95,10 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
       next: (notificationResponse: NotificationResponse) => {
         this.isUserSubscribed = true;
         this.notificationId = notificationResponse.notificationId;
+        this.translateService.get('vehicle.deals.create_alert.success').subscribe(
+          (message: string) => this.snackbarService.open(message)
+        )
+        // this.snackbarService.open("Você será avisado quando encontrarmos ofertas abaixo da FIPE para este veículo")
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error creating notification for vehicle ', this.vehicleId, error.message);
@@ -104,5 +115,11 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
       },
       error: (error: HttpErrorResponse) => console.error(error.message)
     });
+  }
+
+  private validateUserLoggedIn() {
+    this.authService.isLoggedIn().subscribe({
+      next: (isLoggedIn: boolean) => this.isUserLoggedIn = isLoggedIn,
+    })
   }
 }
