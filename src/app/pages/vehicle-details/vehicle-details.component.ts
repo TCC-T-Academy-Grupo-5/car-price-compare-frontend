@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
 import {CommonModule} from '@angular/common';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {FipePrice} from '@domain/vehicle/fipeprice';
 import {VehicleDetailsService} from '@services/vehicle/vehicle-details.service';
 import {VehicleDetails} from '@domain/vehicle/vehicledetails';
@@ -23,6 +23,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
+  alertDisabled = false;
 
   vehicleDetailsSubscription: Subscription | undefined;
 
@@ -43,6 +44,11 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
          console.error(error.message);
        }
      });
+
+     this.notificationService.getNotificationsObservable().subscribe({
+       next: (notifications: string[]) => this.alertDisabled = notifications.includes(this.vehicleId),
+       error: (error: HttpErrorResponse) => console.error(error.message),
+     })
   }
 
   ngOnDestroy() {
@@ -52,4 +58,6 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
   onAlertClick() {
     this.notificationService.createNotification(this.vehicleId);
   }
+
+  protected readonly alert = alert;
 }

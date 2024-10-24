@@ -20,6 +20,7 @@
       </div>
 
       <button type="button"
+              [disabled]="alertDisabled"
               (click)="onAlertClick()"
               class="p-2 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded shadow-xl">
         <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary">notifications</i>
