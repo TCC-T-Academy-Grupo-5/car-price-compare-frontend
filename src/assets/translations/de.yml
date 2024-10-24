@@ -1,52 +1,61 @@
 actions:
-  create: 'Erstelle {{object}}'
-  edit: 'Bearbeite {{object}}'
-  delete: 'Lösche {{object}}'
-close: 'Schliessen'
-dark: 'dunkel'
+  create: "Erstellen %s"
+  delete: "Löschen %s"
+  edit: "Bearbeiten %s"
+close: "Schließen"
+dark: "Dunkel"
 home:
-  find_cars_compare_price: 'Finde Autos zum Vergleich von Preisen'
-  find_dream_car: 'Finde dein Traumauto'
+  find_cars_compare_price: "Finden Sie Autos, um Preise zu vergleichen"
+  find_dream_car: "Finden Sie Ihr Traumauto"
+  browse_by_type: "Nach Typ durchsuchen"
 languages:
-  de: 'Deutsch'
-  en: 'Englisch'
-  es: 'Spanisch'
-  pt: 'Portugiesisch'
-light: 'hell'
+  de: "Deutsch"
+  en: "Englisch"
+  es: "Spanisch"
+  pt: "Portugiesisch"
+light: "Hell"
 messages:
-  error: 'Fehler {{action}} {{object}}.'
-  success: '{{object}} {{action}} erfolgreich.'
+  error: "Fehler beim %s %s."
+  success: "%s %s erfolgreich."
+models:
+  brand:
+    one: "Marke"
+    plural: "Marken"
+  model:
+    one: "Modell"
+    plural: "Modelle"
+not_found: "Kein %s gefunden"
 placeholder:
-  search: 'Suche'
-profile: 'Profil'
+  search: "Suchen"
+profile: "Profil"
 sign:
-  in: 'Einloggen'
-  out: 'Ausloggen'
-switch_theme_to: 'Wechsle zu {{theme}}-Thema'
-title: 'Auto Wert'
-translate: 'Übersetzen'
+  in: "Einloggen"
+  out: "Ausloggen"
+switch_theme_to: "Thema wechseln zu %s"
+title: "Fahrzeugwert"
+translate: "Übersetzen"
 vehicle:
-  type: 'Fahrzeugtyp'
-  types:
-    car: 'Auto'
-    motorcycle: 'Motorrad'
-    truck: 'Lkw'
-  brand: 'Marke'
-  category: 'Kategorie'
-  average_price: 'Durchschnittspreis'
-  updated_at: 'Aktualisiert am'
-  make: 'Hersteller'
-  model: 'Modell'
-  year: 'Jahr'
-  version: 'Version'
-  fipe_code: 'FIPE-Code'
-  fipe_history:
-    header: 'FIPE-Tabelle - Kürzliche Historie'
-    month: 'monat'
-    price: 'preis'
-    variation: 'variation R$'
-    variation_percentage: 'variations %'
+  average_price: "Durchschnittspreis"
+  brand: "Marke"
+  category: "Kategorie"
   deals:
-    header: 'Angebote'
-    related_deals: 'Ähnliche Angebote'
-    empty_state: 'Keine Angebote gefunden'
+    empty_state: "Keine Angebote gefunden"
+    header: "Angebote"
+    related_deals: "Verwandte Angebote"
+  fipe_code: "FIPE-Code"
+  fipe_history:
+    header: "FIPE-Tabelle - Aktuelle Historie"
+    month: "Monat"
+    price: "Preis"
+    variation: "Variation R$"
+    variation_percentage: "Variation %"
+  make: "Hersteller"
+  model: "Modell"
+  type: "Fahrzeugtyp"
+  types:
+    car: "Auto"
+    motorcycle: "Motorrad"
+    truck: "Lkw"
+  updated_at: "Aktualisiert am"
+  version: "Version"
+  year: "Jahr"

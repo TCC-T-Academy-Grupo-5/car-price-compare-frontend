@@ -1,53 +1,61 @@
 actions:
-  create: 'Crear {{object}}'
-  edit: 'Editar {{object}}'
-  delete: 'Eliminar {{object}}'
-close: 'Cerrar'
-dark: 'oscuro'
+  create: "Crear %s"
+  delete: "Eliminar %s"
+  edit: "Editar %s"
+close: "Cerrar"
+dark: "Oscuro"
 home:
-  find_cars_compare_price: 'Encuentra coches para comparar precios'
-  find_dream_car: 'Encuentra tu coche soñado'
-  browse_by_type: 'Navegar por tipo'
+  find_cars_compare_price: "Encuentra coches para comparar precios"
+  find_dream_car: "Encuentra el coche de tus sueños"
+  browse_by_type: "Navegar por tipo"
 languages:
-  de: 'Alemán'
-  en: 'Inglés'
-  es: 'Español'
-  pt: 'Portugués'
-light: 'claro'
+  de: "Alemán"
+  en: "Inglés"
+  es: "Español"
+  pt: "Portugués"
+light: "Claro"
 messages:
-  error: 'Error {{action}} {{object}}.'
-  success: '{{object}} {{action}} con éxito.'
+  error: "Error al %s %s."
+  success: "%s %s con éxito."
+models:
+  brand:
+    one: "Marca"
+    plural: "Marcas"
+  model:
+    one: "Modelo"
+    plural: "Modelos"
+not_found: "Ningún %s encontrado"
 placeholder:
-  search: 'Buscar'
-profile: 'Perfil'
+  search: "Buscar"
+profile: "Perfil"
 sign:
-  in: 'Iniciar sesión'
-  out: 'Cerrar sesión'
-switch_theme_to: 'Cambiar tema a {{theme}}'
-title: 'Valor del Auto'
-translate: 'Traducir'
+  in: "Iniciar sesión"
+  out: "Cerrar sesión"
+switch_theme_to: "Cambiar tema a %s"
+title: "Valor del Vehículo"
+translate: "Traducir"
 vehicle:
-  type: 'Tipo de vehículo'
-  types:
-    car: 'Coche'
-    motorcycle: 'Motocicleta'
-    truck: 'Camión'
-  brand: 'Marca'
-  category: 'Categoría'
-  average_price: 'Precio medio'
-  updated_at: 'Actualizado en'
-  make: 'Fabricante'
-  model: 'Modelo'
-  year: 'Año'
-  version: 'Versión'
-  fipe_code: 'Código FIPE'
-  fipe_history:
-    header: 'Tabla FIPE - Historial reciente'
-    month: 'mes'
-    price: 'precio'
-    variation: 'variación R$'
-    variation_percentage: 'variación %'
+  average_price: "Precio Promedio"
+  brand: "Marca"
+  category: "Categoría"
   deals:
-    header: 'Ofertas'
-    related_deals: 'Ofertas relacionadas'
-    empty_state: 'Ninguna oferta encontrada'
+    empty_state: "No se encontraron ofertas"
+    header: "Ofertas"
+    related_deals: "Ofertas Relacionadas"
+  fipe_code: "Código FIPE"
+  fipe_history:
+    header: "Tabla FIPE - Historial Reciente"
+    month: "Mes"
+    price: "Valor"
+    variation: "Variación R$"
+    variation_percentage: "Variación %"
+  make: "Fabricante"
+  model: "Modelo"
+  type: "Tipo de Vehículo"
+  types:
+    car: "Coche"
+    motorcycle: "Motocicleta"
+    truck: "Camión"
+  updated_at: "Actualizado en"
+  version: "Versión"
+  year: "Año"
