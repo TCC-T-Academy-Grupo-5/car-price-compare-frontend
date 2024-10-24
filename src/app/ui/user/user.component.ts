@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
@@ -23,7 +23,7 @@ import { RegisterComponent } from '@ui/register/register.component';
   templateUrl: './user.component.html',
   styles: ``
 })
-export class UserComponent {
+export class UserComponent implements OnInit{
   isLoggedIn = false;
   profileImgSrc = 'https://upload.wikimedia.org/wikipedia/pt/0/07/Daenerys_Targaryen.png';
   defaultImgSrc = 'assets/icons/default_avatar.svg';
@@ -37,6 +37,12 @@ export class UserComponent {
 
   constructor(private router: Router, private dialog: MatDialog) {}
 
+  ngOnInit(): void {
+    let token = localStorage.getItem("token");
+
+    this.isLoggedIn = token ? true : false;
+  }
+
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
@@ -46,7 +52,8 @@ export class UserComponent {
   }
 
   logout(): void {
-    this.router.navigate(['/']).then((r) => console.log('redirect:', r));
+    localStorage.removeItem("token");
+    this.isLoggedIn = false;
   }
 
   handleImgError(event: Event): void {
