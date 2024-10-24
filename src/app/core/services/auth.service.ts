@@ -37,7 +37,10 @@ export class AuthService {
 
   public validateToken(token: string): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiUrl}/token`, token, { observe: 'response' }).pipe(
-      map((response: HttpResponse<boolean>) => response.body!),
+      map((response: HttpResponse<boolean>) => {
+        this.loggedInSubject.next(response.body!)
+        return response.body!;
+      }),
       catchError(this.handleError)
     );
   }
