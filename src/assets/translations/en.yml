@@ -50,3 +50,7 @@ vehicle:
     header: 'Deals'
     related_deals: 'Related Deals'
     empty_state: 'No deals found'
+    create_alert:
+      follow: 'Follow'
+      unfollow: 'Unfollow'
+      success: 'You will be notified when we find offers below the FIPE value for this vehicle'
