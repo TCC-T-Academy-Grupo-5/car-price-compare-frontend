@@ -7,6 +7,7 @@ import {MatButton} from "@angular/material/button";
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '@ui/login/login.component';
 import { RegisterComponent } from '@ui/register/register.component';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'tcc-user',
@@ -35,12 +36,18 @@ export class UserComponent implements OnInit{
   readonly menuId = 'userMenu';
   menuOpen = false;
 
-  constructor(private router: Router, private dialog: MatDialog) {}
+  constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit(): void {
     let token = localStorage.getItem("token");
-
-    this.isLoggedIn = token ? true : false;
+    if (token) {
+      this.authService.validateToken(token).subscribe(data => {
+        if (data) this.isLoggedIn = true;
+        else localStorage.removeItem("token");
+      })
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 
   toggleMenu(): void {
