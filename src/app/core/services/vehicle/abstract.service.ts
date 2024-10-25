@@ -6,16 +6,16 @@ import {environment} from '@environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export abstract class AbstractService<T, F extends Record<string, unknown>> {
-  protected apiUrl: string;
+export abstract class AbstractService<T, F> {
+  protected entrypoint: string;
 
   protected constructor(protected http: HttpClient) {
-    this.apiUrl = `${environment.apiUrl}/vehicle`;
+    this.entrypoint = `${environment.entrypoint}`;
   }
 
   public filter(filters: F): Observable<HttpResponse<T>> {
     const params = this.paramsFromFilter(filters);
-    return this.http.get<T>(`${this.apiUrl}/${this.apiEndpoint()}`, {
+    return this.http.get<T>(`${this.entrypoint}/${this.endpoint()}`, {
       params,
       observe: 'response'
     });
@@ -23,8 +23,8 @@ export abstract class AbstractService<T, F extends Record<string, unknown>> {
 
   protected paramsFromFilter(filters: F): HttpParams {
     let params = new HttpParams();
-    Object.keys(filters).forEach(key => {
-      const value = filters[key];
+    Object.keys(filters as Record<string, unknown>).forEach(key => {
+      const value = (filters as Record<string, unknown>)[key];
       if (value !== undefined && value !== null) {
         params = params.set(key, value.toString());
       }
@@ -32,5 +32,5 @@ export abstract class AbstractService<T, F extends Record<string, unknown>> {
     return params;
   }
 
-  protected abstract apiEndpoint(): string;
+  protected abstract endpoint(): string;
 }

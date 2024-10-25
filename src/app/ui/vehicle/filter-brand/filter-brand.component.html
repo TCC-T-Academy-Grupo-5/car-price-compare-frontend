@@ -1,15 +1,26 @@
-<h4 class="my-2">{{ 'vehicle.brand' | translate }}</h4>
-<div class="grid xl:grid-cols-9 lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-2">
-  <a
-    *ngFor="let brand of brands"
-    class="card"
-    tabindex="0"
-    [routerLink]="['/models']"
-    [queryParams]="{ brand: brand.name }"
-  >
-  <div class="flex flex-col justify-center items-center gap-2">
-    <img [src]="brand.imageUrl" [alt]="brand.name" />
-    <p>{{ brand.name }}</p>
+<div *ngIf="brands.length > 0; else noBrandsTemplate">
+  <div class="grid xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-4">
+    <a
+      *ngFor="let brand of brands"
+      class="card"
+      tabindex="0"
+      [routerLink]="['/models', brand.id]"
+    >
+
+      <div class="flex flex-col items-center">
+        <img [src]="brand.imageUrl" [alt]="brand.name + ' logo'" class="brand-logo" />
+        <p>{{ brand.name }}</p>
+      </div>
+
+      <ng-template class="centralize">
+        <tcc-spinner [object]="'models.brand' | translate" />
+        <tcc-skeleton-loader />
+      </ng-template>
+
+    </a>
   </div>
-  </a>
 </div>
+
+<ng-template #noBrandsTemplate>
+  <tcc-spinner />
+</ng-template>

@@ -9,11 +9,11 @@ import {FilterTypeComponent} from '@ui/vehicle/filter-type/filter-type.component
 import {FilterBrandComponent} from '@ui/vehicle/filter-brand/filter-brand.component';
 import {BrandService} from '@services/vehicle/brand.service';
 import {Brand} from '@domain/vehicle/brand';
-import {ErrorService} from '@services/errors/error.service';
-import {HeadersService} from '@services/headers.service';
 import { ModelService } from '@services/vehicle/model.service';
 import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
+import {TranslationsPipe} from '@pipes/translations.pipe';
+import {SpinnerComponent} from '@shared/spinner/spinner.component';
 
 @Component({
   selector: 'tcc-home',
@@ -35,6 +35,8 @@ import { FormsModule } from '@angular/forms';
     FilterTypeComponent,
     FilterBrandComponent,
     FormsModule,
+    SpinnerComponent,
+    TranslationsPipe,
   ],
   templateUrl: './home.component.html',
   styles: ``
@@ -44,22 +46,17 @@ export class HomeComponent implements OnInit {
   page = 1;
   pageSize = 100;
   selectedType = 0;
-  totalPages = 0;
-
-  vehicleImgDesktop!: string;
-  vehicleImgMobile!: string;
-  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
-
   searchText = '';
   brandsSuggestions: Brand[] = [];
   modelSuggestions: Model[] = [];
+  vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
+  vehicleImgDesktop!: string;
+  vehicleImgMobile!: string;
 
   constructor(
     private brandService: BrandService,
-    private errorService: ErrorService,
-    private headersService: HeadersService,
     private modelService: ModelService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -91,19 +88,25 @@ export class HomeComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.errorService.handleError(error);
-        console.error("Erro ao carregar marcas: ", error.message);
+        console.error("Erro ao carregar marcas:", error.message);
       }
     });
   }
 
   onSearchTextChange(): void {
     if (this.searchText.length > 0) {
-      this.modelService.getByModel(this.searchText).subscribe((response) => {
-        this.modelSuggestions = response;
+      this.modelService.getByModel(this.searchText).subscribe({
+        next: (response) => {
+          this.modelSuggestions = response;
+        },
+        error: (err) => {
+          console.error('Erro ao carregar modelos:', err.message);
+        }
       });
-      this.brandService.getByBrand(this.searchText).subscribe((response) => {
-        this.brandsSuggestions = response;
+
+      this.brandService.getByBrand(this.searchText).subscribe({
+        next: (response) =>  this.brandsSuggestions = response,
+        error: (err) => console.error('Erro ao carregar marcas:', err.message)
       });
     } else {
       this.modelSuggestions = [];
@@ -112,11 +115,14 @@ export class HomeComponent implements OnInit {
   }
 
   onBrandSelected(name: string | undefined): void {
-    this.router.navigate(['/models'], { queryParams: { brand: name } });
+    if (name) {
+      this.router.navigate(['/models'], {state: {brand: name, vehicleType: this.selectedType}}).then();
+     }
   }
 
   onModelSelected(name: string | undefined): void {
-    this.router.navigate(['/vehicles'], { queryParams: { model: name } });
+    if (name) {
+      this.router.navigate(['/vehicles'], { state: { model: name } }).then();
+    }
   }
 }
-

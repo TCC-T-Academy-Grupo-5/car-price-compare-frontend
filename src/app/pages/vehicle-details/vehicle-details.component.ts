@@ -10,7 +10,12 @@ import {VehicleDetails} from '@domain/vehicle/vehicledetails';
 import {MatColumnDef, MatTable} from '@angular/material/table';
 import {PriceHistoryTableComponent} from '@ui/vehicle/price-history-table/price-history-table.component';
 import {DealsComponent} from '@ui/vehicle/deals/deals.component';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {NotificationService} from '@services/user/notification.service';
+import {NotificationRequest} from '@domain/vehicle/notification-request';
+import {NotificationResponse} from '@domain/vehicle/notification-response';
+import {SnackbarService} from '@services/SnackbarService';
+import {AuthService} from '@services/auth.service';
 
 @Component({
   selector: 'tcc-vehicle-details',
@@ -20,30 +25,100 @@ import {TranslateModule} from '@ngx-translate/core';
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId = '';
+  notificationId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
+  isUserSubscribed: boolean | undefined;
+  isUserLoggedIn: boolean | undefined;
 
   vehicleDetailsSubscription: Subscription | undefined;
+  currentUserVehicleSubscription: Subscription | undefined;
 
   constructor(private vehicleDetailsService: VehicleDetailsService,
+              private notificationService: NotificationService,
               private activatedRoute: ActivatedRoute,
-              private errorService: ErrorService) {}
+              private errorService: ErrorService,
+              private snackbarService: SnackbarService,
+              private authService: AuthService,
+              private translateService: TranslateService) {
+  }
 
   ngOnInit() {
-     this.vehicleId = this.activatedRoute.snapshot.params['vehicleId'];
-     this.vehicleDetailsSubscription = this.vehicleDetailsService.getVehicleById(this.vehicleId).subscribe({
-       next: (vehicleDetails: VehicleDetails) => {
-         this.vehicleDetails = vehicleDetails;
-         this.latestFipePrice = vehicleDetails.fipePrices.at(0);
-       },
-       error: (error: HttpErrorResponse) => {
-         this.errorService.handleError(error);
-         console.error(error.message);
-       }
-     });
+    this.loadVehicleDetails();
+    this.loadCurrentUserVehicleSubscription();
+    this.validateUserLoggedIn();
   }
 
   ngOnDestroy() {
-      this.vehicleDetailsSubscription?.unsubscribe();
+    this.vehicleDetailsSubscription?.unsubscribe();
+    this.currentUserVehicleSubscription?.unsubscribe();
+  }
+
+  onAlertClick() {
+    if (!this.notificationId) {
+      this.createNotification();
+    } else {
+      this.deleteNotification();
+    }
+  }
+
+  private loadVehicleDetails() {
+    this.vehicleId = this.activatedRoute.snapshot.params['vehicleId'];
+    this.vehicleDetailsSubscription = this.vehicleDetailsService.getVehicleById(this.vehicleId).subscribe({
+      next: (vehicleDetails: VehicleDetails) => {
+        this.vehicleDetails = vehicleDetails;
+        this.latestFipePrice = vehicleDetails.fipePrices.at(0);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorService.handleError(error);
+        console.error(error.message);
+      }
+    });
+  }
+
+  private loadCurrentUserVehicleSubscription() {
+    this.currentUserVehicleSubscription = this.notificationService.isUserSubscribedToVehicle(this.vehicleId).subscribe({
+      next: (response: {exists: boolean, notificationId?: string}) => {
+        this.isUserSubscribed = response.exists;
+        this.notificationId = response.notificationId ?? '';
+      },
+    })
+  }
+
+  private createNotification() {
+    const notificationRequest: NotificationRequest = {
+      notificationType: 1,
+      currentFipePrice: this.latestFipePrice?.price ?? 0,
+      vehicleId: this.vehicleId
+    };
+    this.notificationService.createNotification(notificationRequest).subscribe({
+      next: (notificationResponse: NotificationResponse) => {
+        this.isUserSubscribed = true;
+        this.notificationId = notificationResponse.notificationId;
+        this.translateService.get('vehicle.deals.create_alert.success').subscribe(
+          (message: string) => this.snackbarService.open(message)
+        )
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error creating notification for vehicle ', this.vehicleId, error.message);
+        this.isUserSubscribed = false;
+      }
+    });
+  }
+
+  private deleteNotification() {
+    this.notificationService.deleteNotification(this.notificationId).subscribe({
+      next: () => {
+        this.isUserSubscribed = false;
+        this.notificationId = '';
+      },
+      error: (error: HttpErrorResponse) => console.error(error.message)
+    });
+  }
+
+  private validateUserLoggedIn() {
+    this.authService.isLoggedIn().subscribe({
+      next: (isLoggedIn: boolean) => this.isUserLoggedIn = isLoggedIn,
+    })
   }
 }

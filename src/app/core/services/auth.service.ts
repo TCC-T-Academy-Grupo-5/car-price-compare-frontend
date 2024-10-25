@@ -6,36 +6,56 @@ import { RegisterResponse } from '@domain/user/registerResponse';
 import { Token } from '@domain/user/token';
 import { UserProfile } from '@domain/user/userProfile';
 import { environment } from '@environments/environment.development';
-import { catchError, map, Observable } from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable} from 'rxjs';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private loggedInSubject = new BehaviorSubject<boolean>(this.hasLocalToken());
+  private entrypoint = `${environment.entrypoint}/auth`;
 
   constructor(private http: HttpClient) {}
 
   public login(data: Login): Observable<Token> {
-    return this.http.post<Token>(`${this.apiUrl}/login`, data, { observe: 'response' }).pipe(
-      map((response: HttpResponse<Token>) => response.body!),
-      catchError(this.handleError)
+    return this.http.post<Token>(`${this.entrypoint}/login`, data, { observe: 'response' }).pipe(
+      map((response: HttpResponse<Token>) => {
+        localStorage.setItem('token', response.body!.token)
+        this.loggedInSubject.next(true);
+        return response.body!;
+      }),
     );
   }
 
   public register(data: Register): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, data, { observe: 'response' }).pipe(
+    return this.http.post<RegisterResponse>(`${this.entrypoint}/register`, data, { observe: 'response' }).pipe(
         map((response: HttpResponse<RegisterResponse>) => response.body!),
         catchError(this.handleError)
     );
   }
 
   public validateToken(token: string): Observable<boolean> {
-    return this.http.post<boolean>(`${this.apiUrl}/token`, token, { observe: 'response' }).pipe(
-      map((response: HttpResponse<boolean>) => response.body!),
-      catchError(this.handleError)
+    return this.http.post<boolean>(`${this.entrypoint}/token`, token, { observe: 'response' }).pipe(
+      map((response: HttpResponse<boolean>) => {
+        this.loggedInSubject.next(response.body!)
+        return response.body!;
+      }),
     );
+  }
+
+  public logout(): void {
+    localStorage.removeItem('token');
+    this.loggedInSubject.next(false);
+  }
+
+  private hasLocalToken(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  public isLoggedIn(): Observable<boolean> {
+    return this.loggedInSubject.asObservable();
   }
 
   getUserInfo(): Observable<UserProfile> {
@@ -51,4 +71,24 @@ export class AuthService {
     });
   }
 
+  public isTokenExpired(token: string | null): boolean {
+    if (!token) return true;
+
+    const expirationDate = this.getTokenExpirationDate(token);
+    return expirationDate ? expirationDate < new Date() : false;
+  }
+
+  private getTokenExpirationDate(token: string): Date | null {
+
+    const decodedToken = jwtDecode(token);
+
+    if (decodedToken.exp === undefined) {
+      return null;
+    }
+
+    const date = new Date(0);
+    date.setUTCSeconds(decodedToken.exp);
+
+    return date;
+  }
 }

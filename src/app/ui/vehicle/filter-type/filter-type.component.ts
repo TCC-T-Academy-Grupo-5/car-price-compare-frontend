@@ -16,7 +16,7 @@ export class FilterTypeComponent {
   @Input() selectedType = 0;
   @Output() typeSelected = new EventEmitter<number>();
 
-  selectVehicleType(type: number): void {
+  selectVehicleType(type: number) {
     this.typeSelected.emit(type);
   }
 }

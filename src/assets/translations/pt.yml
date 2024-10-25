@@ -1,53 +1,66 @@
 actions:
-  create: 'Criar {{object}}'
-  edit: 'Editar {{object}}'
-  delete: 'Deletar {{object}}'
-close: 'Fechar'
-dark: 'escuro'
+  create: "Criar %s"
+  delete: "Excluir %s"
+  edit: "Editar %s"
+close: "Fechar"
+dark: "Escuro"
 home:
-  find_cars_compare_price: 'Encontre carros para comparar preços'
-  find_dream_car: 'Encontre seu carro dos sonhos'
-  browse_by_type: 'Navegar por tipo'
+  find_cars_compare_price: "Encontre carros para comparar preços"
+  find_dream_car: "Encontre o veículo dos seus sonhos"
+  browse_by_type: "Navegar por tipo"
 languages:
-  de: 'Alemão'
-  en: 'Inglês'
-  es: 'Espanhol'
-  pt: 'Português'
-light: 'claro'
+  de: "Alemão"
+  en: "Inglês"
+  es: "Espanhol"
+  pt: "Português"
+light: "Claro"
 messages:
-  error: 'Erro ao {{action}} {{object}}.'
-  success: '{{object}} {{action}} com sucesso.'
+  error: "Erro ao %s %s."
+  success: "%s %s com sucesso."
+models:
+  brand:
+    one: "Marca"
+    plural: "Marcas"
+  model:
+    one: "Modelo"
+    plural: "Modelos"
+not_found: "Nenhum %s encontrado"
 placeholder:
-  search: 'Buscar'
-profile: 'Perfil'
+  search: "Buscar"
+profile: "Perfil"
 sign:
-  in: 'Entrar'
-  out: 'Sair'
-switch_theme_to: 'Mudar tema para {{theme}}'
-title: 'Valor do Carro'
-translate: 'Traduzir'
+  in: "Entrar"
+  out: "Sair"
+switch_theme_to: "Mudar o tema para %s"
+title: "Valor do Veículo"
+translate: "Traduzir"
 vehicle:
-  type: 'Tipo de veículo'
-  types:
-    car: 'Carro'
-    motorcycle: 'Motocicleta'
-    truck: 'Caminhão'
-  brand: 'Marca'
-  category: 'Categoria'
-  average_price: 'Preço médio'
-  updated_at: 'Atualizado em'
-  make: 'Fabricante'
-  model: 'Modelo'
-  year: 'Ano'
-  version: 'Versão'
-  fipe_code: 'Código FIPE'
-  fipe_history:
-    header: 'Tabela FIPE - Histórico recente'
-    month: 'mês'
-    price: 'valor'
-    variation: 'variação R$'
-    variation_percentage: 'variação %'
+  average_price: "Preço Médio"
+  brand: "Marca"
+  category: "Categoria"
   deals:
-    header: 'Ofertas'
-    related_deals: 'Ofertas relacionadas'
-    empty_state: 'Nenhuma oferta encontrada'
+    create_alert:
+      follow: 'Seguir'
+      unfollow: 'Deixar de seguir'
+      success: 'Você será avisado quando encontrarmos ofertas abaixo da FIPE para este veículo'
+    empty_state: "Nenhuma oferta encontrada"
+    header: "Ofertas"
+    related_deals: "Ofertas Relacionadas"
+  fipe_code: "Código FIPE"
+  fipe_history:
+    header: "Tabela FIPE - Histórico Recente"
+    month: "Mês"
+    price: "Preço"
+    variation: "Variação R$"
+    variation_percentage: "Variação %"
+  make: "Fabricante"
+  model: "Modelo"
+  type: "Tipo de Veículo"
+  types:
+    car: "Carro"
+    motorcycle: "Motocicleta"
+    truck: "Caminhão"
+  updated_at: "Atualizado em"
+  version: "Versão"
+  year: "Ano"
+>>>>>>> refactor/vechicle-component

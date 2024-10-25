@@ -1,34 +1,47 @@
-<h4 class="my-2">{{ 'vehicle.domain' | translate }}</h4>
+<h4 class="my-2 text-primary dark:text-primary">{{ 'vehicle.list' | translate }}</h4>
 
 <div class="container mx-auto p-4">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div
-      *ngFor="let vehicle of vehicles"
-      class="vehicle-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-    >
-      <img
-        *ngIf="vehicle.fullUrl"
-        [src]="vehicle.fullUrl"
-        alt="{{ vehicle.name }}"
-        class="w-full h-40 object-cover rounded-t-lg"
-      />
-      <div class="p-4">
-        <h2 class="text-xl font-bold text-gray-800">{{ vehicle.name }}</h2>
-        <p class="text-gray-600" *ngIf="vehicle.brand">{{ vehicle.year }} - {{ vehicle.brand }}</p>
-        <p class="text-gray-600" *ngIf="!vehicle.brand">{{ vehicle.year }}</p>
-        <p class="text-sm text-gray-500">Model: {{ vehicle.model }}</p>
-        <p class="text-lg font-semibold mt-2">Price: {{ vehicle.price | currency: 'USD' }}</p>
+  <ng-container *ngIf="isLoading; else vehicleList">
+    <tcc-skeleton-loader [count]="3" [showAnimation]="true" />
+  </ng-container>
 
-        <div class="mt-4">
-          <a
-            [href]="'https://fipe.org.br/' + vehicle.fipeCode"
-            target="_blank"
-            class="text-blue-500 hover:underline"
-          >
-            Check Fipe Code
-          </a>
-        </div>
-      </div>
+  <ng-template #vehicleList>
+    <div *ngIf="vehicles.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a
+        *ngFor="let vehicle of vehicles"
+        [routerLink]="['/vehicle-details', vehicle.id]"
+        class="card use-skeleton bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
+        tabindex="0"
+      >
+        <img
+          *ngIf="vehicle.imageUrl"
+          [src]="vehicle.imageUrl"
+          [alt]="vehicle.name"
+          class="w-full h-48 object-cover rounded-t-lg mb-4"
+        />
+
+        <h2 class="text-xl font-bold text-primary dark:text-primary">{{ vehicle.name }}</h2>
+
+        <p *ngIf="vehicle.model" class="text-primary dark:text-primary">Modelo: {{ vehicle.model }}</p>
+
+        <p *ngIf="vehicle.brand" class="text-primary dark:text-primary">Marca: {{ vehicle.brand }}</p>
+
+        <p class="text-primary dark:text-primary">Ano: {{ vehicle.year }}</p>
+
+        <p *ngIf="vehicle.vehicleType" class="text-primary dark:text-primary">Tipo: {{ vehicle.vehicleType }}</p>
+
+        <p *ngIf="vehicle.fipePrice" class="text-primary dark:text-primary">
+          Preço FIPE: {{ vehicle.fipePrice | currency }}
+        </p>
+
+        <p *ngIf="vehicle.priceRange" class="text-primary dark:text-primary">
+          Faixa de Preço: {{ vehicle.priceRange[0] | currency }} - {{ vehicle.priceRange[1] | currency }}
+        </p>
+
+        <p *ngIf="vehicle.fullUrl" class="mt-2 text-sm text-primary dark:text-primary">
+          <a [href]="vehicle.fullUrl" target="_blank" class="hover:underline">Ver mais</a>
+        </p>
+      </a>
     </div>
-  </div>
+  </ng-template>
 </div>
