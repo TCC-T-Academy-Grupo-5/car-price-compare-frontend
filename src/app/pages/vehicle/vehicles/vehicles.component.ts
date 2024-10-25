@@ -6,6 +6,7 @@ import {VehicleService} from '@services/vehicle/vehicle.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ErrorService} from '@services/errors/error.service';
 import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
+import {SkeletonLoaderComponent} from '@shared/skeleton-loader/skeleton-loader';
 
 @Component({
   selector: 'tcc-vehicles',
@@ -15,7 +16,8 @@ import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
     NgForOf,
     NgIf,
     TranslateModule,
-    RouterLink
+    RouterLink,
+    SkeletonLoaderComponent
   ],
   templateUrl: './vehicles.component.html',
   styles: ``
@@ -27,6 +29,7 @@ export class VehiclesComponent implements OnInit {
   selectedType?: number;
   page = 1;
   pageSize = 10;
+  isLoading!: boolean;
 
   constructor(
     private vehicleService: VehicleService,
@@ -39,6 +42,7 @@ export class VehiclesComponent implements OnInit {
       this.selectedModelName = params['model'] || '';
       this.selectedBrand = params['brand'] || '';
       this.selectedType = params['type'] ? Number(params['type']) : undefined;
+      this.isLoading= true;
 
       this.getVehicles();
     });
@@ -57,8 +61,14 @@ export class VehiclesComponent implements OnInit {
       next: (vehicles: Vehicle[]) => {
         this.vehicles = vehicles;
         console.log('Veículos carregados:', this.vehicles);
+        this.isLoading = true; // TODO remove-me
+        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
+        this.isLoading = false;
       },
       error: (err) => {
+        this.isLoading = true; // TODO remove-me
+        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
+        this.isLoading = false;
         console.error('Erro ao carregar veículos:', err);
       }
     });

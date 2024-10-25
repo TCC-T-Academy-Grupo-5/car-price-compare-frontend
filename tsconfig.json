@@ -26,14 +26,16 @@
     "paths": {
       "@components/*": ["app/components/*"],
       "@directives/*": ["app/core/directives/*"],
+      "@domain/*": ["app/core/domain/*"],
       "@environments/*": ["environments/*"],
       "@flags/*": ["assets/flags/*"],
       "@icons/*": ["assets/icons/*"],
       "@images/*": ["assets/images/*"],
       "@interfaces/*": ["app/core/interfaces/*"],
       "@models/*": ["app/core/models/*"],
-      "@domain/*": ["app/core/domain/*"],
       "@pages/*": ["app/pages/*"],
+      "@pipes/*": ["app/core/pipes/*"],
+      "@shared/*": ["app/shared/*"],
       "@services/*": ["app/core/services/*"],
       "@style/*": ["assets/stylesheets/*"],
       "@ui/*": ["app/ui/*"]

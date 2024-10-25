@@ -5,9 +5,9 @@ actions:
 close: "Schließen"
 dark: "Dunkel"
 home:
-  find_cars_compare_price: "Finden Sie Autos, um Preise zu vergleichen"
-  find_dream_car: "Finden Sie Ihr Traumauto"
-  browse_by_type: "Nach Typ durchsuchen"
+  find_cars_compare_price: "Finde Autos zum Preisvergleich"
+  find_dream_car: "Finde dein Traumauto"
+  browse_by_type: "Nach Typ durchsuchen Fahrzeug"
 languages:
   de: "Deutsch"
   en: "Englisch"
@@ -24,15 +24,15 @@ models:
   model:
     one: "Modell"
     plural: "Modelle"
-not_found: "Kein %s gefunden"
+not_found: "Keine %s gefunden"
 placeholder:
-  search: "Suchen"
+  search: "Suche"
 profile: "Profil"
 sign:
-  in: "Einloggen"
-  out: "Ausloggen"
-switch_theme_to: "Thema wechseln zu %s"
-title: "Fahrzeugwert"
+  in: "Anmelden"
+  out: "Abmelden"
+switch_theme_to: "Wechsle das Thema zu %s"
+title: "Auto Wert"
 translate: "Übersetzen"
 vehicle:
   average_price: "Durchschnittspreis"
@@ -44,11 +44,11 @@ vehicle:
     related_deals: "Verwandte Angebote"
   fipe_code: "FIPE-Code"
   fipe_history:
-    header: "FIPE-Tabelle - Aktuelle Historie"
+    header: "FIPE-Tabelle - Kürzliche Historie"
     month: "Monat"
     price: "Preis"
-    variation: "Variation R$"
-    variation_percentage: "Variation %"
+    variation: "Abweichung €"
+    variation_percentage: "Abweichung %"
   make: "Hersteller"
   model: "Modell"
   type: "Fahrzeugtyp"

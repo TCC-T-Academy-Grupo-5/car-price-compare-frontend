@@ -4,6 +4,6 @@ export interface VehicleFilters {
   fipePrice?: number;
   vehicleType?: number | string;
   year?: string;
-  page: number;
-  pageSize: number;
+  page?: number;
+  pageSize?: number;
 }

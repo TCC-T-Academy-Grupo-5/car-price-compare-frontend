@@ -1,5 +1,4 @@
-<h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
-<div class="tcc-flex gap-4 md:gap-8">
+<div class="grid grid-cols-3 gap-4">
 
   <button
     class="card"
@@ -8,7 +7,7 @@
     (keydown.enter)="selectVehicleType(0)"
     [ngClass]="{ 'active': selectedType === 0 }"
   >
-    <div class="flex flex-col justify-center items-center gap-2">
+    <div class="content-btn-type">
       <i class="material-symbols-outlined text-4xl">
         directions_car
       </i>
@@ -23,7 +22,7 @@
     (keydown.enter)="selectVehicleType(1)"
     [ngClass]="{ 'active': selectedType === 1 }"
   >
-    <div class="flex flex-col justify-center items-center gap-2">
+    <div class="content-btn-type">
       <i class="material-symbols-outlined text-4xl">
         two_wheeler
       </i>
@@ -38,7 +37,7 @@
     (keydown.enter)="selectVehicleType(2)"
     [ngClass]="{ 'active': selectedType === 2 }"
   >
-    <div class="flex flex-col justify-center items-center gap-2">
+    <div class="content-btn-type">
       <i class="material-symbols-outlined text-4xl">
         local_shipping
       </i>

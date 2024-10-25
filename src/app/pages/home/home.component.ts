@@ -12,6 +12,8 @@ import {Brand} from '@domain/vehicle/brand';
 import { ModelService } from '@services/vehicle/model.service';
 import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
+import {TranslationsPipe} from '@pipes/translations.pipe';
+import {SpinnerComponent} from '@shared/spinner/spinner.component';
 
 @Component({
   selector: 'tcc-home',
@@ -33,6 +35,8 @@ import { FormsModule } from '@angular/forms';
     FilterTypeComponent,
     FilterBrandComponent,
     FormsModule,
+    SpinnerComponent,
+    TranslationsPipe,
   ],
   templateUrl: './home.component.html',
   styles: ``
@@ -52,7 +56,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private brandService: BrandService,
     private modelService: ModelService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -101,12 +105,8 @@ export class HomeComponent implements OnInit {
       });
 
       this.brandService.getByBrand(this.searchText).subscribe({
-        next: (response) => {
-          this.brandsSuggestions = response;
-        },
-        error: (err) => {
-          console.error('Erro ao carregar marcas:', err.message);
-        }
+        next: (response) =>  this.brandsSuggestions = response,
+        error: (err) => console.error('Erro ao carregar marcas:', err.message)
       });
     } else {
       this.modelSuggestions = [];

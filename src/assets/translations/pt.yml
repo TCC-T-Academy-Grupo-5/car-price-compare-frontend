@@ -1,12 +1,12 @@
 actions:
   create: "Criar %s"
-  delete: "Deletar %s"
+  delete: "Excluir %s"
   edit: "Editar %s"
 close: "Fechar"
 dark: "Escuro"
 home:
   find_cars_compare_price: "Encontre carros para comparar preços"
-  find_dream_car: "Encontre o(a) %s dos seus sonhos"
+  find_dream_car: "Encontre o veículo dos seus sonhos"
   browse_by_type: "Navegar por tipo"
 languages:
   de: "Alemão"
@@ -26,12 +26,12 @@ models:
     plural: "Modelos"
 not_found: "Nenhum %s encontrado"
 placeholder:
-  search: "Pesquisar"
+  search: "Buscar"
 profile: "Perfil"
 sign:
   in: "Entrar"
   out: "Sair"
-switch_theme_to: "Trocar tema para %s"
+switch_theme_to: "Mudar o tema para %s"
 title: "Valor do Veículo"
 translate: "Traduzir"
 vehicle:

@@ -8,4 +8,5 @@ export interface Vehicle extends VehicleFilters {
   fipePrice?: number;
   priceRange?: [number, number];
   urlPathName?: string;
+  model?: string;
 }

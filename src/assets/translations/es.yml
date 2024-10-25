@@ -6,8 +6,8 @@ close: "Cerrar"
 dark: "Oscuro"
 home:
   find_cars_compare_price: "Encuentra coches para comparar precios"
-  find_dream_car: "Encuentra el coche de tus sueños"
-  browse_by_type: "Navegar por tipo"
+  find_dream_car: "Encuentra el vehículo de tus sueños"
+  browse_by_type: "Explorar por tipo"
 languages:
   de: "Alemán"
   en: "Inglés"
@@ -24,7 +24,7 @@ models:
   model:
     one: "Modelo"
     plural: "Modelos"
-not_found: "Ningún %s encontrado"
+not_found: "No se encontró ningún %s"
 placeholder:
   search: "Buscar"
 profile: "Perfil"
@@ -46,7 +46,7 @@ vehicle:
   fipe_history:
     header: "Tabla FIPE - Historial Reciente"
     month: "Mes"
-    price: "Valor"
+    price: "Precio"
     variation: "Variación R$"
     variation_percentage: "Variación %"
   make: "Fabricante"
