@@ -6,6 +6,7 @@ import { RegisterResponse } from '@domain/user/registerResponse';
 import { Token } from '@domain/user/token';
 import { environment } from '@environments/environment.development';
 import {BehaviorSubject, catchError, map, Observable} from 'rxjs';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -64,4 +65,24 @@ export class AuthService {
     });
   }
 
+  public isTokenExpired(token: string | null): boolean {
+    if (!token) return true;
+
+    const expirationDate = this.getTokenExpirationDate(token);
+    return expirationDate ? expirationDate < new Date() : false;
+  }
+
+  private getTokenExpirationDate(token: string): Date | null {
+
+    const decodedToken = jwtDecode(token);
+
+    if (decodedToken.exp === undefined) {
+      return null;
+    }
+
+    const date = new Date(0);
+    date.setUTCSeconds(decodedToken.exp);
+
+    return date;
+  }
 }
