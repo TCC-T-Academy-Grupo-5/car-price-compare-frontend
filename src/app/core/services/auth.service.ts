@@ -1,9 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '@domain/user/login';
 import { Register } from '@domain/user/register';
 import { RegisterResponse } from '@domain/user/registerResponse';
 import { Token } from '@domain/user/token';
+import { UserProfile } from '@domain/user/userProfile';
 import { environment } from '@environments/environment.development';
 import { catchError, map, Observable } from 'rxjs';
 
@@ -35,6 +36,13 @@ export class AuthService {
       map((response: HttpResponse<boolean>) => response.body!),
       catchError(this.handleError)
     );
+  }
+
+  getUserInfo(): Observable<UserProfile> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<UserProfile>(`${this.apiUrl}/profile`, { headers });
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
