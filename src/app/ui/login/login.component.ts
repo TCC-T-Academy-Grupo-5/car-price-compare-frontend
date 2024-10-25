@@ -41,6 +41,7 @@ export class LoginComponent {
         next: (response: Token) => {
           this.snackBar.open('Login successful', 'Close', { duration: 3000 });
           this.closePopup();
+          location.reload();
           localStorage.setItem('token', response.token);
         },
         error: (err) => {
