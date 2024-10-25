@@ -39,6 +39,7 @@ export class LoginComponent {
         next: () => {
           this.snackBar.open('Login successful', 'Close', { duration: 3000 });
           this.closePopup();
+          location.reload();
         },
         error: (err) => {
           this.snackBar.open('Login failed: ' + (err.error?.message || 'Unknown error'), 'Close', { duration: 3000 });

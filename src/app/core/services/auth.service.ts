@@ -1,9 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '@domain/user/login';
 import { Register } from '@domain/user/register';
 import { RegisterResponse } from '@domain/user/registerResponse';
 import { Token } from '@domain/user/token';
+import { UserProfile } from '@domain/user/userProfile';
 import { environment } from '@environments/environment.development';
 import {BehaviorSubject, catchError, map, Observable} from 'rxjs';
 import {jwtDecode} from 'jwt-decode';
@@ -55,6 +56,13 @@ export class AuthService {
 
   public isLoggedIn(): Observable<boolean> {
     return this.loggedInSubject.asObservable();
+  }
+
+  getUserInfo(): Observable<UserProfile> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<UserProfile>(`${this.entrypoint}/profile`, { headers });
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
