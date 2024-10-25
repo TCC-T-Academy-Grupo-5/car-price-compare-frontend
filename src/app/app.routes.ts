@@ -12,5 +12,5 @@ export const routes: Routes = [
   {path: 'vehicles', component: VehiclesComponent},
   { path: 'models', component: ModelsComponent },
   {path: 'vehicle-details/:vehicleId', component: VehicleDetailsComponent},
-  {path: 'profile', component: ProfileComponent/*, canActivate: [AuthGuard]*/}
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
