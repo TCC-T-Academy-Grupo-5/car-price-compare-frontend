@@ -15,6 +15,8 @@ export const requestInterceptor: HttpInterceptorFn = (req, next) => {
       }
     });
     return next(clonedReq);
+  } else {
+    authService.logout();
   }
 
   return next(req);
