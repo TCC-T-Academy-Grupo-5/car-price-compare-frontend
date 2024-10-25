@@ -38,8 +38,12 @@ export class UserComponent implements OnInit{
 
   constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {}
 
+  navigateToProfile() {
+    this.router.navigate(['']).then(); // TODO adicionar rota correta para profile, criar tarefa no trello
+  }
+
   ngOnInit(): void {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
       this.authService.validateToken(token).subscribe(data => {
         if (data) this.isLoggedIn = true;
@@ -85,24 +89,16 @@ export class UserComponent implements OnInit{
   }
 
   openLoginPopup(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      width: '400px', 
+    this.dialog.open(LoginComponent, {
+      width: '400px',
       disableClose: true,
-    });
-
-    dialogRef.componentInstance.close.subscribe(() => {
-      dialogRef.close(); 
     });
   }
 
   openRegisterPopup(): void {
-    const dialogRef = this.dialog.open(RegisterComponent, {
+    this.dialog.open(RegisterComponent, {
       width: '400px',
       disableClose: true,
-    });
-
-    dialogRef.componentInstance.close.subscribe(() => {
-      dialogRef.close(); 
     });
   }
 }
