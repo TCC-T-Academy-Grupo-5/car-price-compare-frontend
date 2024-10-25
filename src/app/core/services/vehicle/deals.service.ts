@@ -14,7 +14,7 @@ export class DealsService {
   constructor(private http: HttpClient) { }
 
   getVehicleDeals(vehicleId: string): Observable<Deal[]> {
-    return this.http.get<Deal[]>(`${environment.apiUrl}/vehicle/${vehicleId}/deals`).pipe(
+    return this.http.get<Deal[]>(`${environment.entrypoint}/vehicle/${vehicleId}/deals`).pipe(
       map((deals: Deal[]) => deals.map(deal => {
         if (deal.store === 'Chaves Na Mão') {
           deal.imageUrl = deal.imageUrl.replace(/\d{4}x\d{4}|\d{3}x\d{3}/, this.dealImageDefaultResolution)

@@ -1,0 +1,62 @@
+<div *ngIf="loading; else content" class="card-wrapper">
+  <div *ngFor="let _ of [].constructor(count); index as i" class="card bg-primary-light">
+    <div class="h-48 w-full rounded mb-4 animate-bg" [ngClass]="{'animate-bg': showAnimation}"></div>
+    <h3 class="h-5 bg-tertiary-light rounded mb-2" [ngClass]="{'animate-pulse': showAnimation}">&nbsp;</h3>
+    <p class="space-y-2">
+      <span class="block h-3 bg-tertiary-light rounded" [ngClass]="{'animate-pulse': showAnimation}"></span>
+      <span class="block h-3 bg-tertiary-light rounded" [ngClass]="{'animate-pulse': showAnimation}"></span>
+      <span class="block h-3 bg-tertiary-light rounded" [ngClass]="{'animate-pulse': showAnimation}"></span>
+    </p>
+    <div class="flex items-center mt-4">
+      <div class="h-10 w-10 bg-tertiary-light rounded-full mr-4" [ngClass]="{'animate-pulse': showAnimation}"></div>
+      <div class="space-y-1">
+        <span class="block h-3 w-24 bg-tertiary-light rounded" [ngClass]="{'animate-pulse': showAnimation}"></span>
+        <span class="block h-3 w-16 bg-tertiary-light rounded" [ngClass]="{'animate-pulse': showAnimation}"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content>
+  <div class="not-found bg-blue-500 bg-opacity-70 px-4 py-2 rounded flex items-center justify-start gap-1">
+    <i class="material-symbols-outlined">info</i>
+    <span class="font-[400] lowercase">{{ 'not_found' | translate | translations: object }}</span>
+  </div>
+</ng-template>
+
+<style>
+  .animate-bg {
+    background-image: linear-gradient(
+      to right,
+      #e0e7ff 0%,
+      #c7d2fe 10%,
+      #e0e7ff 20%,
+      #e0e7ff 100%
+    );
+    background-size: 200% 100%;
+    animation: bgPos 1s linear infinite;
+  }
+
+  @keyframes bgPos {
+    0% { background-position:50% 0; }
+    100% { background-position:-150% 0; }
+  }
+
+  .animate-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity:1; }
+    50% { opacity:0.5; }
+  }
+
+  .content-card {
+    padding: 24px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+</style>

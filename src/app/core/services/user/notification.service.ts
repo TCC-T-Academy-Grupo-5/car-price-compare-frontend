@@ -9,7 +9,7 @@ import {NotificationResponse} from "@domain/vehicle/notification-response";
     providedIn: 'root'
 })
 export class NotificationService {
-    private apiUrl = `${environment.apiUrl}/user/notifications`;
+    private apiUrl = `${environment.entrypoint}/user/notifications`;
     private notificationsSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
     constructor(private http: HttpClient) {

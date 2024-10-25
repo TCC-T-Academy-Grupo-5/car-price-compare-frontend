@@ -14,7 +14,7 @@ export class VehicleService extends AbstractService<Vehicle[], VehicleFilters> {
     super(http);
   }
 
-  protected apiEndpoint(): string {
+  protected endpoint(): string {
     return 'vehicle';
   }
 
