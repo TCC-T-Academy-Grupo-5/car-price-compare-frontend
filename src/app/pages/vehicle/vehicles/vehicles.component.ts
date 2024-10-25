@@ -46,7 +46,6 @@ export class VehiclesComponent implements OnInit{
     this.vehicleService.findByModel({ vehicleType: this.type, model: this.modelName, page: this.page, pageSize: this.pageSize }).subscribe({
       next: (vehicles: Vehicle[]) => {
         this.vehicles = vehicles;
-        console.log('Veiculos carregados:', this.vehicles);
       },
       error: (err) => {
         console.error('Erro ao carregar veiculos:', err);

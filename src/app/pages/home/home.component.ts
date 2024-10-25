@@ -84,10 +84,8 @@ export class HomeComponent implements OnInit {
 
     this.brandService.findByType(filters).subscribe({
       next: (response) => {
-        console.log('Resposta da API:', response);
         if (Array.isArray(response)) {
           this.brands = response;
-          console.log('Marcas recebidas:', this.brands);
         } else {
           console.log('Resposta inválida ou vazia.');
         }

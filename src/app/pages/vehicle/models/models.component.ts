@@ -48,7 +48,6 @@ export class ModelsComponent implements OnInit {
     this.modelService.findByBrand(filters).subscribe({
       next: (models: Model[]) => {
         this.models = models;
-        console.log('Modelos carregados:', this.models);
       },
       error: (err) => {
         console.error('Erro ao carregar modelos:', err);
