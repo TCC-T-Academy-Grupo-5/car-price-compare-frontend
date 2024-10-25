@@ -1,20 +1,19 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Login } from '@domain/user/login';
 import { AuthService } from '@services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {InteractionDirective} from '@directives/EventListenerDirectives';
 
 @Component({
   selector: 'tcc-login',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, FormsModule, CommonModule, ReactiveFormsModule, InteractionDirective],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  @Output() closeEvent = new EventEmitter<void>();
-
   loginForm: FormGroup;
   isPopupOpen = true;
 
@@ -29,7 +28,7 @@ export class LoginComponent {
   }
 
   closePopup() {
-    this.closeEvent.emit();
+    this.isPopupOpen = false;
   }
 
   onSubmit() {

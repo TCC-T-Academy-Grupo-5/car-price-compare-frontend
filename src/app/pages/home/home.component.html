@@ -1,6 +1,5 @@
 <div class="tcc-flex flex-col text-center">
-  <p class="mt-2">{{ 'home.find_cars_compare_price' | translate }}</p>
-  <h2>{{ 'home.find_dream_car' | translate }}</h2>
+  <h3>{{ 'home.find_dream_car' | translate }}</h3>
 
   <div class="relative w-full h-64 md:h-[256px]">
     <img
@@ -44,12 +43,14 @@
       </ul>
 
     </div>
-  <div class="browse-type">
+    <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
     <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)"/>
-  </div>
 
-  <div class="px-2">
-    <tcc-filter-brand [brands]="brands" [vehicleType]="selectedType" />
-  </div>
+    <h4 class="my-2"> {{ 'models.brand.plural' | translate }} </h4>
+    <tcc-filter-brand [brands]="brands" />
+
+<!--  <ng-template #noBrands class="centralize">-->
+<!--    <tcc-spinner [object]="'models.brand' | translate" />-->
+<!--  </ng-template>-->
 
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -6,15 +6,15 @@ import { AuthService } from '@services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Register } from '@domain/user/register';
 import { RegisterResponse } from '@domain/user/registerResponse';
+import {InteractionDirective} from '@directives/EventListenerDirectives';
 
 @Component({
   selector: 'tcc-register',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, FormsModule, CommonModule, ReactiveFormsModule, InteractionDirective],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
-  @Output() closeEvent = new EventEmitter<void>();
   registerForm: FormGroup;
   isPopupOpen = true;
 
@@ -38,7 +38,6 @@ export class RegisterComponent {
 
   closePopup() {
     this.isPopupOpen = false;
-    this.closeEvent.emit();
   }
 
   onSubmit() {

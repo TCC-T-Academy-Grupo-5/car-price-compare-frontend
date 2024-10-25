@@ -4,7 +4,10 @@ import {ModelService} from '@services/vehicle/model.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
 import {Model} from '@domain/vehicle/model';
-import {ErrorService} from '@services/errors/error.service';
+import {Brand} from '@domain/vehicle/brand';
+import {BrandService} from '@services/vehicle/brand.service';
+import {SpinnerComponent} from '@shared/spinner/spinner.component';
+import {SkeletonLoaderComponent} from '@shared/skeleton-loader/skeleton-loader';
 
 @Component({
   selector: 'tcc-domain',
@@ -14,54 +17,72 @@ import {ErrorService} from '@services/errors/error.service';
     NgForOf,
     CurrencyPipe,
     NgIf,
-    RouterLink
+    RouterLink,
+    SkeletonLoaderComponent,
+    SpinnerComponent
   ],
   templateUrl: './models.component.html',
   styles: ``
 })
 export class ModelsComponent implements OnInit {
+  brandId!: string;
+  brand!: Brand;
   models: Model[] = [];
-  brandName!: string;
-  vehicleType!: number | undefined | '';
-  page = 1;
+  isLoading!: boolean;
   pageSize = 10;
+  pageNumber = 1;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private modelService: ModelService,
-    private router: Router,
-    private error: ErrorService
+    private brandService: BrandService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.brandName = params['brand'] || '';
-      this.vehicleType = params['vehicleType'] ? Number(params['vehicleType']) : undefined;
+    this.route.paramMap.subscribe(params => {
+      this.brandId = params.get('brandId')!;
+      this.fetchBrandDetails(this.brandId);
+      this.isLoading= true;
+    });
+  }
 
-      console.log('Vehicle Type capturado:', this.vehicleType);
-      console.log('Brand capturada:', this.brandName);
-
-      if (this.brandName && this.vehicleType !== undefined) {
-        this.getModels();
+  fetchModelsByBrand(brandId: string, pageSize: number, pageNumber: number): void {
+    this.modelService.findAllByBrandId(brandId, pageSize, pageNumber).subscribe({
+      next: (models: Model[]) => {
+        this.models = models;
+        this.isLoading = true; // TODO remove-me
+        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar os modelos:', err.message);
+        this.isLoading = true; // TODO remove-me
+        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
+        this.isLoading = false;
       }
     });
   }
 
-  public getModels(): void {
-    const filters = { vehicleType: this.vehicleType, brand: this.brandName, page: this.page, pageSize: this.pageSize };
-
-    console.log('Filtros enviados:', filters); // TODO remove
-
-    this.modelService.findByBrand(filters).subscribe({
-      next: (models: Model[]) => this.models = models,
-      error: (err) => this.error.handleError(err)
+  fetchBrandDetails(brandId: string): void {
+    this.brandService.findById(brandId).subscribe({
+      next: (brand: Brand) => {
+        this.brand = brand;
+        this.fetchModelsByBrand(this.brandId, this.pageSize, this.pageNumber);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar detalhes da marca:', err.message);
+        this.isLoading = true; // TODO remove-me
+        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
+        this.isLoading = false;
+      }
     });
   }
 
-  selectModel(modelName: string): void {
-    if (modelName) {
+  selectModel(modelId: string): void {
+    if (modelId) {
       this.router.navigate(['/vehicles'], {
-        queryParams: { model: String(modelName) }
+        queryParams: { model: String(modelId) }
       }).then(r => console.log('redirect', r));
     }
   }

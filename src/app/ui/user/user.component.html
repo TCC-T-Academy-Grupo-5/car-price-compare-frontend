@@ -43,11 +43,23 @@
   </div>
 
   <mat-menu #userMenu="matMenu" xPosition="before" id="{{ menuId }}">
-    <span mat-menu-item [routerLink]="['/profile']" class="w-full">
-      Edit Profile
-    </span>
-    <span mat-menu-item (click)="logout()" (keydown.enter)="logout()" tabindex="0" class="w-full">
-      Logout
-    </span>
+  <span
+    mat-menu-item
+    [routerLink]="['/profile']"
+    class="w-full"
+    tabindex="0"
+    (keydown.enter)="navigateToProfile()"
+  >
+    Edit Profile
+  </span>
+    <span
+      mat-menu-item
+      (click)="logout()"
+      (keydown.enter)="logout()"
+      class="w-full"
+      tabindex="0"
+    >
+    Logout
+  </span>
   </mat-menu>
 </ng-template>

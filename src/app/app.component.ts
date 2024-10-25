@@ -7,6 +7,7 @@ import {UserComponent} from '@ui/user/user.component';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import {VehiclesComponent} from '@pages/vehicle/vehicles/vehicles.component';
 import {ModelsComponent} from '@pages/vehicle/models/models.component';
+import {SpinnerComponent} from './shared/spinner/spinner.component';
 
 @Component({
   selector: 'tcc-root',
@@ -17,6 +18,7 @@ import {ModelsComponent} from '@pages/vehicle/models/models.component';
     HomeComponent,
     ModelsComponent,
     RouterOutlet,
+    SpinnerComponent,
     UserComponent,
     VehiclesComponent,
     InteractionDirective

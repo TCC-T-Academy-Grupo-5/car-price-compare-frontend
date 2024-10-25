@@ -9,12 +9,12 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class VehicleDetailsService {
-  private apiUrl = `${environment.apiUrl}`;
+  private entrypoint = `${environment.entrypoint}`;
 
   constructor(private http: HttpClient) {}
 
   getVehicleById(id: string): Observable<VehicleDetails> {
-    return this.http.get<VehicleDetails>(`${this.apiUrl}/vehicle/${id}`).pipe(
+    return this.http.get<VehicleDetails>(`${this.entrypoint}/vehicle/${id}`).pipe(
       map((vehicleDetails: VehicleDetails) => {
         const fipePrices = vehicleDetails.fipePrices;
 
