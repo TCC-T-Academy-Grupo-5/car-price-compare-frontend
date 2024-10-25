@@ -8,7 +8,7 @@ import { catchError, map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = `${environment.apiUrl}/user`;
+  private apiUrl = `${environment.entrypoint}/user`;
 
   constructor(private http: HttpClient) {}
   

@@ -62,7 +62,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<UserProfile>(`${this.apiUrl}/profile`, { headers });
+    return this.http.get<UserProfile>(`${this.entrypoint}/profile`, { headers });
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
