@@ -5,6 +5,8 @@ import { AuthService } from '@services/auth.service';
 import { UserProfile } from '@domain/user/userProfile';
 import { Rating } from '@domain/user/rating';
 import { Favorites } from '@domain/user/favorite';
+import { Update } from '@domain/user/update';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'tcc-profile',
@@ -21,13 +23,12 @@ export class ProfileComponent implements OnInit{
   user: UserProfile | undefined;
   isEditing: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {
     this.userForm = this.fb.group({
       firstName: [''],
       lastName: [''],
       email: [''],
-      cellphone: [''],
-      password: [''],
+      cellphone: ['']
     });
   }
 
@@ -37,7 +38,6 @@ export class ProfileComponent implements OnInit{
         this.user = data;
         this.favorites = data.favorites as unknown as Favorites[];
         this.ratings = data.rating;
-        console.log(this.user);
         this.userForm.patchValue(data);
       },
       (error) => {
@@ -50,9 +50,17 @@ export class ProfileComponent implements OnInit{
     this.isEditing = !this.isEditing;
   }
 
-  // TODO: Update user profile
   updateUserProfile() {
     const updatedUser = this.userForm.value;
-    
+
+    console.log(updatedUser);
+    this.userService.update(updatedUser, this.user?.id).subscribe(
+      (data) => {
+        location.reload();
+      },
+      (error) => {
+        console.error('Failed to load user info', error);
+      }
+    )
   }
 }
