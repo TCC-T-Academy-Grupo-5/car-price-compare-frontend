@@ -11,5 +11,5 @@ export interface Favorites {
     year: string,
     type: string,
     category: string,
-    fipePrices: FipePrice
+    fipePrices: FipePrice[]
 }
