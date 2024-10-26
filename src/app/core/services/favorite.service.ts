@@ -10,30 +10,30 @@ export class FavoriteService {
   private apiUrl = `${environment.entrypoint}/user`;
 
   constructor(private http: HttpClient) {}
-  
-  public getFavoriteByVehicleId(vehicleId: string): Observable<any> {
+
+  public getFavoriteByVehicleId(vehicleId: string): Observable<never> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  
-    return this.http.get<any>(`${this.apiUrl}/favorites/vehicle/${vehicleId}`, { headers }).pipe(
+
+    return this.http.get<never>(`${this.apiUrl}/favorites/vehicle/${vehicleId}`, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public addFavorite(id: string): Observable<any> {
+  public addFavorite(id: string): Observable<never> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  
-    return this.http.post<any>(`${this.apiUrl}/favorites`, {vehicleId: id}, { headers }).pipe(
+
+    return this.http.post<never>(`${this.apiUrl}/favorites`, {vehicleId: id}, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public removeFavorite(id: string): Observable<any> {
+  public removeFavorite(id: string): Observable<never> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  
-    return this.http.delete<any>(`${this.apiUrl}/favorites/${id}`, { headers }).pipe(
+
+    return this.http.delete<never>(`${this.apiUrl}/favorites/${id}`, { headers }).pipe(
       catchError(this.handleError)
     );
 

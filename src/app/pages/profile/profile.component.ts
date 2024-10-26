@@ -5,7 +5,6 @@ import { AuthService } from '@services/auth.service';
 import { UserProfile } from '@domain/user/userProfile';
 import { Rating } from '@domain/user/rating';
 import { Favorites } from '@domain/user/favorite';
-import { Update } from '@domain/user/update';
 import { UserService } from '@services/user.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class ProfileComponent implements OnInit{
   ratings: Rating[] = [];
   favorites: Favorites[] = [];
   user: UserProfile | undefined;
-  isEditing: boolean = false;
+  isEditing = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService) {
     this.userForm = this.fb.group({
@@ -55,7 +54,7 @@ export class ProfileComponent implements OnInit{
 
     console.log(updatedUser);
     this.userService.update(updatedUser, this.user?.id).subscribe(
-      (data) => {
+      () => {
         location.reload();
       },
       (error) => {

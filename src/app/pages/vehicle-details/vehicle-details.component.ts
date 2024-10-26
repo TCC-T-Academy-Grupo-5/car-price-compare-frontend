@@ -140,10 +140,10 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
 
   toggleFavorite() {
     this.isFavorite = !this.isFavorite;
-    
+
     if(this.isFavorite) {
-      this.favoriteService.addFavorite(this.vehicleId).subscribe((data) => this.checkIfVehicleIsFavorite());
-    } else 
-      this.favoriteService.removeFavorite(this.favoriteId).subscribe((data) => this.favoriteId = '');
+      this.favoriteService.addFavorite(this.vehicleId).subscribe(() => this.checkIfVehicleIsFavorite());
+    } else
+      this.favoriteService.removeFavorite(this.favoriteId).subscribe(() => this.favoriteId = '');
   }
 }
