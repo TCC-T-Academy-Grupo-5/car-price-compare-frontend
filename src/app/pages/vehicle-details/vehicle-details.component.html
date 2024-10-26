@@ -62,6 +62,8 @@
 
     <tcc-price-history-table [fipePrices]="vehicleDetails?.fipePrices!"></tcc-price-history-table>
 
+    <tcc-price-history-chart [fipePrices]="vehicleDetails?.fipePrices!"></tcc-price-history-chart>
+
     <tcc-deals *ngIf="vehicleDetails" [vehicleId]="vehicleId" [latestFipePrice]="latestFipePrice?.price!"></tcc-deals>
   </div>
 </div>

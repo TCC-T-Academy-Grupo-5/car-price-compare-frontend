@@ -16,11 +16,12 @@ import {NotificationRequest} from '@domain/vehicle/notification-request';
 import {NotificationResponse} from '@domain/vehicle/notification-response';
 import {SnackbarService} from '@services/SnackbarService';
 import {AuthService} from '@services/auth.service';
+import {PriceHistoryChartComponent} from '@ui/vehicle/price-history-chart/price-history-chart.component';
 
 @Component({
   selector: 'tcc-vehicle-details',
   standalone: true,
-  imports: [CommonModule, MatTable, MatColumnDef, PriceHistoryTableComponent, DealsComponent, TranslateModule],
+  imports: [CommonModule, MatTable, MatColumnDef, PriceHistoryTableComponent, DealsComponent, TranslateModule, PriceHistoryChartComponent],
   templateUrl: './vehicle-details.component.html'
 })
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
