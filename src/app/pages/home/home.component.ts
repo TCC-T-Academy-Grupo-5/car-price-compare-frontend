@@ -14,6 +14,7 @@ import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
 import {TranslationsPipe} from '@pipes/translations.pipe';
 import {SpinnerComponent} from '@shared/spinner/spinner.component';
+import { WebSocketService } from '@services/websocket.service';
 
 @Component({
   selector: 'tcc-home',
@@ -57,11 +58,22 @@ export class HomeComponent implements OnInit {
     private brandService: BrandService,
     private modelService: ModelService,
     private router: Router,
+    private webSocketService: WebSocketService
   ) {}
 
   ngOnInit(): void {
     this.updateImagePaths(this.selectedType);
     this.fetchBrands();
+
+    this.webSocketService.connect();
+
+    this.webSocketService.getMessages().subscribe(notification => {
+      console.log('Notificação recebida:', notification);
+    });
+  }
+
+  ngOnDestroy() {
+    this.webSocketService.disconnect();
   }
 
   onTypeSelected(type: number): void {
