@@ -17,6 +17,7 @@ import {NotificationResponse} from '@domain/vehicle/notification-response';
 import {SnackbarService} from '@services/SnackbarService';
 import {AuthService} from '@services/auth.service';
 import {PriceHistoryChartComponent} from '@ui/vehicle/price-history-chart/price-history-chart.component';
+import { FavoriteService } from '@services/favorite.service';
 
 @Component({
   selector: 'tcc-vehicle-details',
@@ -27,10 +28,12 @@ import {PriceHistoryChartComponent} from '@ui/vehicle/price-history-chart/price-
 export class VehicleDetailsComponent implements OnInit, OnDestroy {
   vehicleId = '';
   notificationId = '';
+  favoriteId = '';
   vehicleDetails: VehicleDetails | undefined;
   latestFipePrice: FipePrice | undefined;
   isUserSubscribed: boolean | undefined;
   isUserLoggedIn: boolean | undefined;
+  isFavorite = false;
 
   vehicleDetailsSubscription: Subscription | undefined;
   currentUserVehicleSubscription: Subscription | undefined;
@@ -41,13 +44,15 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
               private errorService: ErrorService,
               private snackbarService: SnackbarService,
               private authService: AuthService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private favoriteService: FavoriteService) {
   }
 
   ngOnInit() {
     this.loadVehicleDetails();
     this.loadCurrentUserVehicleSubscription();
     this.validateUserLoggedIn();
+    this.checkIfVehicleIsFavorite();
   }
 
   ngOnDestroy() {
@@ -121,5 +126,24 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     this.authService.isLoggedIn().subscribe({
       next: (isLoggedIn: boolean) => this.isUserLoggedIn = isLoggedIn,
     })
+  }
+
+  private checkIfVehicleIsFavorite() {
+    this.favoriteService.getFavoriteByVehicleId(this.vehicleId).subscribe({
+      next: (favoriteResponse: {id:string}) => {
+        this.isFavorite = true;
+        this.favoriteId = favoriteResponse.id;
+      },
+      error: () => this.isFavorite = false
+    })
+  }
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
+    
+    if(this.isFavorite) {
+      this.favoriteService.addFavorite(this.vehicleId).subscribe((data) => this.checkIfVehicleIsFavorite());
+    } else 
+      this.favoriteService.removeFavorite(this.favoriteId).subscribe((data) => this.favoriteId = '');
   }
 }
