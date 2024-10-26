@@ -1,9 +1,10 @@
-import {Component, Input, OnChanges, SimpleChanges, OnDestroy} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges, OnDestroy, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {FipePrice} from '@domain/vehicle/fipeprice';
-import { ThemeService } from '@services/theme.service';
-import {ChartData, ChartOptions} from 'chart.js';
+import {ThemeService} from '@services/theme.service';
+import {Chart, ChartData, ChartOptions} from 'chart.js';
 import {BaseChartDirective} from 'ng2-charts';
 import {Subscription} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'tcc-price-history-chart',
@@ -13,11 +14,14 @@ import {Subscription} from 'rxjs';
   ],
   templateUrl: './price-history-chart.component.html'
 })
-export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
+export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input({required: true}) fipePrices: FipePrice[] = [];
+  @ViewChild('priceChart') priceChart!: ElementRef<HTMLCanvasElement>;
+
   isDarkMode: boolean | undefined;
   chartMainColor = '';
   dataSetBorderColor = '';
+  chart!: Chart;
 
   public priceChartData!: ChartData<'line'>;
   public priceChartOptions: ChartOptions<'line'> = {
@@ -42,7 +46,7 @@ export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
         },
         title: {
           display: true,
-          text: 'Mês',
+          text: '',
           color: this.chartMainColor
         }
       },
@@ -55,7 +59,7 @@ export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
         },
         title: {
           display: true,
-          text: 'Preço (R$)',
+          text: '',
           color: this.chartMainColor
         }
       }
@@ -64,9 +68,38 @@ export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
 
   currentThemeSubscription: Subscription | undefined;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: ThemeService, private translateService: TranslateService) {
+  }
 
-  ngOnChanges(changes:SimpleChanges) {
+  ngOnInit() {
+    this.priceChartData = {
+      labels: [],
+      datasets: [
+        {
+          data: [],
+          label: '',
+          borderColor: this.dataSetBorderColor,
+          fill: false,
+        }
+      ]
+    }
+
+    this.currentThemeSubscription = this.themeService.getCurrentThemeObservable().subscribe(theme => {
+      this.isDarkMode = theme === 'dark';
+      this.chartMainColor = this.isDarkMode ? '#c0c0c5' : '#6e6e72';
+      this.dataSetBorderColor = this.isDarkMode ? '#2CF4CE' : '#00747C';
+      console.log('current theme subscription:  color', this.dataSetBorderColor)
+      this.updateChartColors();
+      this.updateChart();
+    })
+
+    this.translateService.onLangChange.subscribe(() => {
+      this.updateTranslations();
+      this.updateChart();
+    })
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     if (changes['fipePrices'] && this.fipePrices?.length) {
       this.fipePrices = [...this.fipePrices].sort((a, b) => {
         const yearDifference = a.year - b.year;
@@ -77,14 +110,10 @@ export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
       });
       const months = this.fipePrices.map(data => `${data.month}/${data.year}`);
       const prices = this.fipePrices.map(data => data.price);
-
-      this.currentThemeSubscription = this.themeService.getCurrentThemeObservable().subscribe(theme => {
-        this.isDarkMode = theme === 'dark';
-        this.chartMainColor = this.isDarkMode ?  '#c0c0c5' : '#6e6e72';
-        this.dataSetBorderColor = this.isDarkMode ?  '#2CF4CE' : '#00747C';
-        this.updateChartData(months, prices);
-        this.updateChartColors();
-      })
+      this.updateChartColors();
+      this.updateChartData(months, prices);
+      this.updateTranslations();
+      this.updateChart();
     }
   }
 
@@ -99,7 +128,7 @@ export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
         {
           data: prices,
           label: 'Preço por mês',
-          borderColor: this.isDarkMode ? '#2CF4CE' : '#00747C',
+          borderColor: this.dataSetBorderColor,
           fill: false,
         }
       ]
@@ -127,5 +156,39 @@ export class PriceHistoryChartComponent implements OnChanges, OnDestroy {
         yScale.title.color = this.chartMainColor;
       }
     }
+
+    if (this.priceChartData.datasets && this.priceChartData.datasets.length > 0) {
+      this.priceChartData.datasets.forEach((dataSet) => {
+        dataSet.borderColor = this.dataSetBorderColor;
+      })
+    }
+
+    console.log('updated data set border color ', this.dataSetBorderColor);
+  }
+
+  updateTranslations(): void {
+    this.translateService.stream('vehicle.fipe_history.month').subscribe(translation => {
+      if (this.priceChartOptions.scales?.['x']?.title) {
+        this.priceChartOptions.scales['x'].title.text = translation;
+      }
+    });
+
+    this.translateService.get('vehicle.fipe_history.price').subscribe(translation => {
+      if (this.priceChartOptions.scales?.['y']?.title) {
+        this.priceChartOptions.scales['y'].title.text = translation;
+      }
+    })
+  }
+
+  updateChart(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    this.chart = new Chart(this.priceChart.nativeElement, {
+      type: 'line',
+      data: this.priceChartData,
+      options: this.priceChartOptions
+    });
   }
 }
