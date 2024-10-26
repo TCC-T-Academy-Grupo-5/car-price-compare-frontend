@@ -53,6 +53,7 @@ vehicle:
     price: "Preis"
     variation: "Abweichung €"
     variation_percentage: "Abweichung %"
+    chart_legend: "Preis pro Monat"
   make: "Hersteller"
   model: "Modell"
   type: "Fahrzeugtyp"

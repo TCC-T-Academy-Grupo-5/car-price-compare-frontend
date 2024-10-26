@@ -66,7 +66,8 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
     }
   };
 
-  currentThemeSubscription: Subscription | undefined;
+  themeChangeSubscription: Subscription | undefined;
+  langChangeSubscription: Subscription | undefined;
 
   constructor(private themeService: ThemeService, private translateService: TranslateService) {
   }
@@ -84,7 +85,7 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
       ]
     }
 
-    this.currentThemeSubscription = this.themeService.getCurrentThemeObservable().subscribe(theme => {
+    this.themeChangeSubscription = this.themeService.getCurrentThemeObservable().subscribe(theme => {
       this.isDarkMode = theme === 'dark';
       this.chartMainColor = this.isDarkMode ? '#c0c0c5' : '#6e6e72';
       this.dataSetBorderColor = this.isDarkMode ? '#2CF4CE' : '#00747C';
@@ -93,7 +94,7 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
       this.updateChart();
     })
 
-    this.translateService.onLangChange.subscribe(() => {
+    this.langChangeSubscription = this.translateService.onLangChange.subscribe(() => {
       this.updateTranslations();
       this.updateChart();
     })
@@ -118,7 +119,8 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   ngOnDestroy() {
-    this.currentThemeSubscription?.unsubscribe();
+    this.themeChangeSubscription?.unsubscribe();
+    this.langChangeSubscription?.unsubscribe();
   }
 
   updateChartData(months: string[], prices: number[]): void {
@@ -127,7 +129,7 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
       datasets: [
         {
           data: prices,
-          label: 'Preço por mês',
+          label: '',
           borderColor: this.dataSetBorderColor,
           fill: false,
         }
@@ -162,8 +164,6 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
         dataSet.borderColor = this.dataSetBorderColor;
       })
     }
-
-    console.log('updated data set border color ', this.dataSetBorderColor);
   }
 
   updateTranslations(): void {
@@ -176,6 +176,12 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
     this.translateService.get('vehicle.fipe_history.price').subscribe(translation => {
       if (this.priceChartOptions.scales?.['y']?.title) {
         this.priceChartOptions.scales['y'].title.text = translation;
+      }
+    })
+
+    this.translateService.get('vehicle.fipe_history.chart_legend').subscribe(translation => {
+      if (this.priceChartData.datasets.length) {
+        this.priceChartData.datasets[0].label = translation;
       }
     })
   }
