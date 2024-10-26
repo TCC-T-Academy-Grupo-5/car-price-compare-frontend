@@ -51,7 +51,7 @@ vehicle:
     header: "FIPE-Tabelle - Kürzliche Historie"
     month: "Monat"
     price: "Preis"
-    variation: "Abweichung €"
+    variation: "Abweichung R$"
     variation_percentage: "Abweichung %"
     chart_legend: "Preis pro Monat"
   make: "Hersteller"
