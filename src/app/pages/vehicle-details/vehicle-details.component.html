@@ -19,13 +19,26 @@
         </span>
       </div>
 
-      <button type="button"
+      <div class="flex items-center gap-2">
+        <button type="button"
               *ngIf="isUserLoggedIn"
-              (click)="onAlertClick()"
-              class="py-2 px-3 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded-3xl shadow-xl">
-        <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary"> {{ notificationId ? 'notifications_active' : 'notifications' }}</i>
-        {{ notificationId ? ('vehicle.deals.create_alert.unfollow' | translate) : ('vehicle.deals.create_alert.follow' | translate) }}
-      </button>
+              (click)="toggleFavorite()"
+              class="text-2xl">
+        <i class="material-symbols-outlined text-4xl"
+        [class.text-yellow-500]="isFavorite"
+        [class.text-gray-400]="!isFavorite">
+          star
+        </i>
+        </button>
+
+        <button type="button"
+                *ngIf="isUserLoggedIn"
+                (click)="onAlertClick()"
+                class="py-2 px-3 font-medium text-xs sm:text-sm bg-accent dark:bg-accent-light text-primary-light dark:text-primary rounded-3xl shadow-xl">
+          <i class="material-symbols-outlined font-medium text-xl sm:text-2xl text-primary-light dark:text-primary"> {{ notificationId ? 'notifications_active' : 'notifications' }}</i>
+          {{ notificationId ? ('vehicle.deals.create_alert.unfollow' | translate) : ('vehicle.deals.create_alert.follow' | translate) }}
+        </button>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
