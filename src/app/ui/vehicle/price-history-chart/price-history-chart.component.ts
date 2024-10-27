@@ -191,7 +191,7 @@ export class PriceHistoryChartComponent implements OnInit, OnChanges, OnDestroy 
       this.chart.destroy();
     }
 
-    this.chart = new Chart(this.priceChart.nativeElement, {
+    this.chart = new Chart(this.priceChart?.nativeElement, {
       type: 'line',
       data: this.priceChartData,
       options: this.priceChartOptions
