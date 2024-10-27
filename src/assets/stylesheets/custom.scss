@@ -41,8 +41,6 @@ $font-sizes: (
   }
 }
 
-
-
 /*
 2. Layer Components
   -------------------------------------------------------------------------------- */
@@ -103,12 +101,63 @@ $font-sizes: (
   }
 
   .card-wrapper {
-    @apply grid gap-6 w-full rounded mb-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+
+    h4 { @apply text-xl font-semibold tracking-wider mt-2 }
+
+    &.skeleton {
+      @apply grid gap-6 w-full mb-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+
+      .animate-bg {
+        @apply bg-gradient-to-r from-transparent via-secondary-light dark:via-secondary to-transparent;
+        background-size: 200% 100%;
+        animation: skeletonMove 2s ease-in-out infinite;
+      }
+
+      .skeleton-image,
+      .skeleton-text,
+      .skeleton-circle {
+        @apply bg-tertiary-light dark:bg-tertiary animate-pulse;
+      }
+    }
+
+    @apply grid gap-6 rounded mb-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+
+    .image-wrapper {
+      @apply h-48 overflow-hidden rounded-t;
+
+      img {
+        @apply w-full h-full object-contain;
+      }
+    }
+  }
+
+  .grayscale {
+    @apply
+    filter
+    grayscale
+    hover:grayscale-0
+    transition
+    duration-300
   }
 
   .card {
     &.use-skeleton {
-      @apply bg-primary-light rounded shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer
+
+      &:hover > *:not(p) {
+        @apply text-highlight dark:text-highlight-light;
+      }
+
+      @apply
+      transform
+      transition
+      rounded
+      shadow-md
+      duration-300
+      cursor-pointer
+      bg-primary-light
+      dark:bg-primary
+      hover:scale-105
+      hover:shadow-lg
     }
 
     @apply
