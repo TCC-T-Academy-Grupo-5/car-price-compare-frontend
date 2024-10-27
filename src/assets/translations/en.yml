@@ -24,6 +24,9 @@ models:
   model:
     one: "Model"
     plural: "Models"
+  vehicle:
+    one: "Vehicle"
+    plural: "Vehicles"
 not_found: "No %s found"
 placeholder:
   search: "Search"

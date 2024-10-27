@@ -4,7 +4,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {Vehicle} from '@domain/vehicle/vehicle';
 import {VehicleService} from '@services/vehicle/vehicle.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {ErrorService} from '@services/errors/error.service';
 import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
 import {SkeletonLoaderComponent} from '@shared/skeleton-loader/skeleton-loader';
 
@@ -34,7 +33,6 @@ export class VehiclesComponent implements OnInit {
   constructor(
     private vehicleService: VehicleService,
     private route: ActivatedRoute,
-    private error: ErrorService
   ) {}
 
   ngOnInit() {
@@ -43,7 +41,6 @@ export class VehiclesComponent implements OnInit {
       this.selectedBrand = params['brand'] || '';
       this.selectedType = params['type'] ? Number(params['type']) : undefined;
       this.isLoading= true;
-
       this.getVehicles();
     });
   }
@@ -60,17 +57,8 @@ export class VehiclesComponent implements OnInit {
     this.vehicleService.findVehicles(filters).subscribe({
       next: (vehicles: Vehicle[]) => {
         this.vehicles = vehicles;
-        console.log('Veículos carregados:', this.vehicles);
-        this.isLoading = true; // TODO remove-me
-        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
         this.isLoading = false;
-      },
-      error: (err) => {
-        this.isLoading = true; // TODO remove-me
-        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
-        this.isLoading = false;
-        console.error('Erro ao carregar veículos:', err);
-      }
+      }, error: () => this.isLoading = false
     });
   }
 }

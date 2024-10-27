@@ -18,7 +18,7 @@ import {TranslationsPipe} from '@pipes/translations.pipe';
   styles: ``
 })
 export class SkeletonLoaderComponent implements OnInit {
-  @Input() count = 1;
+  @Input() count! : number;
   @Input() showAnimation = true;
   loading = true;
   object = 'item';

@@ -26,9 +26,9 @@ import {SkeletonLoaderComponent} from '@shared/skeleton-loader/skeleton-loader';
 })
 export class ModelsComponent implements OnInit {
   brandId!: string;
-  brand!: Brand;
+  brand: Brand | null = null;
   models: Model[] = [];
-  isLoading!: boolean;
+  isLoading = false;
   pageSize = 10;
   pageNumber = 1;
 
@@ -43,7 +43,7 @@ export class ModelsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.brandId = params.get('brandId')!;
       this.fetchBrandDetails(this.brandId);
-      this.isLoading= true;
+      this.isLoading = true;
     });
   }
 
@@ -51,14 +51,10 @@ export class ModelsComponent implements OnInit {
     this.modelService.findAllByBrandId(brandId, pageSize, pageNumber).subscribe({
       next: (models: Model[]) => {
         this.models = models;
-        this.isLoading = true; // TODO remove-me
-        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
         this.isLoading = false;
       },
       error: (err) => {
         console.error('Erro ao carregar os modelos:', err.message);
-        this.isLoading = true; // TODO remove-me
-        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
         this.isLoading = false;
       }
     });
@@ -72,8 +68,6 @@ export class ModelsComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao carregar detalhes da marca:', err.message);
-        this.isLoading = true; // TODO remove-me
-        setTimeout(() => this.isLoading = false, 3000); // TODO remove-me
         this.isLoading = false;
       }
     });
