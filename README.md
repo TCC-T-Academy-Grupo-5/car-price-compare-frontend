@@ -57,3 +57,4 @@ The project consists of:
 
 - Frontend: Located in the ./car-price-compare-frontend directory.
 - Backend: Located in the ../car-price-compare-backend directory.
+- Scraping Microservice: Located in the ../scraping-microservice directory.
