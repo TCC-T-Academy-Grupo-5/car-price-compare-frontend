@@ -53,6 +53,7 @@ vehicle:
     price: "Preço"
     variation: "Variação R$"
     variation_percentage: "Variação %"
+    chart_legend: "Preço por mês"
   make: "Fabricante"
   model: "Modelo"
   type: "Tipo de Veículo"
