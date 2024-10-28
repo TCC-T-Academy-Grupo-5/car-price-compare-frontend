@@ -9,6 +9,9 @@
     <div class="flex justify-between items-center gap-4">
       <tcc-theme></tcc-theme>
       <tcc-language></tcc-language>
+
+      <tcc-notification *ngIf="isLoggedIn"></tcc-notification>
+
       <tcc-user class="hidden md:block h-10 pt-2"></tcc-user>
 
       <button

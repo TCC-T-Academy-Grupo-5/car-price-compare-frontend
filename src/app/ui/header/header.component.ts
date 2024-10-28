@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {DatePipe, NgClass} from "@angular/common";
+import {CommonModule, DatePipe, NgClass} from "@angular/common";
 import {MatIconButton} from "@angular/material/button";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {LanguageComponent} from "@ui/language/language.component";
@@ -12,6 +12,8 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {NavbarComponent} from "@ui/navbar/navbar.component";
 import {InteractionDirective} from '@directives/EventListenerDirectives';
+import { NotificationComponent } from "../notification/notification.component";
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'tcc-header',
@@ -32,12 +34,32 @@ import {InteractionDirective} from '@directives/EventListenerDirectives';
     NgClass,
     RouterLink,
     ThemeComponent,
-    UserComponent
-  ],
+    UserComponent,
+    NotificationComponent,
+    CommonModule
+],
   templateUrl: './header.component.html'
 })
-export class HeaderComponent {
+
+export class HeaderComponent implements OnInit {
   isOpen = false;
+  isLoggedIn = false;
+
+  constructor (private authService: AuthService){}
+
+  ngOnInit(): void {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.authService.validateToken(token).subscribe(data => {
+        if (data) this.isLoggedIn = true;
+        else localStorage.removeItem("token");
+      })
+    } else {
+      this.isLoggedIn = false;
+    }
+
+    this.authService.isLoggedIn().subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+  }
 
   toggleMenu() {
     this.isOpen = !this.isOpen;
