@@ -31,10 +31,6 @@ export class ModelService extends AbstractService<Model[], VehicleFilters> {
     );
   }
 
-  public findAllModelOptionsByBrandId(brandId: string): Observable<SelectOption[]> {
-    return this.http.get<SelectOption[]>(`${this.entrypoint}/model/brand/${brandId}/options`);
-  }
-
   public getByModel(model: string): Observable<Model[]> {
     return new Observable<Model[]>((observer) => {
       this.http.get<Model[]>(`${this.entrypoint}/${this.endpoint()}?name=${model}`, { observe: 'response' }).subscribe({

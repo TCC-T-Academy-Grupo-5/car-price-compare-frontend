@@ -1,5 +1,5 @@
 <div>
-  <form>
+  <form (ngSubmit)="onSubmit()">
     <div class="grid grid-cols-2 gap-4">
       <select (change)="onTypeChange($event)">
         <option value="" disabled selected>Selecione o tipo de veículo</option>
@@ -8,30 +8,33 @@
         </option>
       </select>
       <select [disabled]="selectedType === undefined" (change)="onBrandChange($event)" >
-        <option value="" disabled selected>Selectione a marca</option>
+        <option value="" disabled selected>Selecione a marca</option>
         <ng-container *ngIf="brandOptions.length">
           <option *ngFor="let option of brandOptions" [value]="option.id">{{ option.name }}</option>
         </ng-container>
       </select>
       <select [disabled]="selectedBrandId === undefined" (change)="onModelChange($event)">
-        <option value="" disabled selected>Selectione o modelo</option>
+        <option value="" disabled selected>Selecione o modelo</option>
         <ng-container *ngIf="modelOptions.length">
           <option *ngFor="let option of modelOptions" [value]="option.id">{{ option.name }}</option>
         </ng-container>
       </select>
       <select [disabled]="selectedModelId === undefined" (change)="onYearChange($event)">
-        <option value="" disabled selected>Selectione o ano</option>
+        <option value="" disabled selected>Selecione o ano</option>
         <ng-container *ngIf="yearOptions.length">
           <option *ngFor="let option of yearOptions" [value]="option.id">{{ option.name }}</option>
         </ng-container>
       </select>
-      <select [disabled]="selectedYearId === undefined">
-        <option value="" disabled selected>Selectione a versão</option>
+      <select [disabled]="selectedYearId === undefined" (change)="onVehicleChange($event)">
+        <option value="" disabled selected>Selecione a versão</option>
         <ng-container *ngIf="vehicleOptions.length">
           <option *ngFor="let option of vehicleOptions" [value]="option.id">{{ option.name }}</option>
         </ng-container>
       </select>
     </div>
+
+    <button type="reset" (click)="onReset()">Limpar campos</button>
+    <button type="submit" [disabled]="!selectedVehicleId">Consultar</button>
   </form>
 </div>
 
