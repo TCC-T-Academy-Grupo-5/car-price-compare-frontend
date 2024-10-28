@@ -36,7 +36,9 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
   }
 
   findAllBrandOptionsByType(vehicleType: number): Observable<SelectOption[]> {
-    return this.http.get<SelectOption[]>(`${this.entrypoint}/brand/${vehicleType}/options`);
+    return this.http.get<SelectOption[]>(`${this.entrypoint}/brand/${vehicleType}/options`).pipe(
+      map((options: SelectOption[]) => options.sort((a, b) => a.name.localeCompare(b.name)))
+    );
   }
 
   findById(brandId: string): Observable<Brand> {

@@ -3,7 +3,7 @@
     <div class="grid grid-cols-2 gap-4">
       <select (change)="onTypeChange($event)">
         <option value="" disabled selected>Selecione o tipo de veículo</option>
-        <option *ngFor="let type of vehicleTypesObject | keyvalue"
+        <option *ngFor="let type of vehicleTypes | keyvalue"
                 [value]="type.value">{{ 'vehicle.types.' + type.key | translate }}
         </option>
       </select>
@@ -13,17 +13,23 @@
           <option *ngFor="let option of brandOptions" [value]="option.id">{{ option.name }}</option>
         </ng-container>
       </select>
-      <select [disabled]="selectedBrandId === undefined" class="max-h-20 overflow-y-scroll">
+      <select [disabled]="selectedBrandId === undefined" (change)="onModelChange($event)">
         <option value="" disabled selected>Selectione o modelo</option>
         <ng-container *ngIf="modelOptions.length">
           <option *ngFor="let option of modelOptions" [value]="option.id">{{ option.name }}</option>
         </ng-container>
       </select>
-      <select>
+      <select [disabled]="selectedModelId === undefined" (change)="onYearChange($event)">
         <option value="" disabled selected>Selectione o ano</option>
+        <ng-container *ngIf="yearOptions.length">
+          <option *ngFor="let option of yearOptions" [value]="option.id">{{ option.name }}</option>
+        </ng-container>
       </select>
-      <select>
+      <select [disabled]="selectedYearId === undefined">
         <option value="" disabled selected>Selectione a versão</option>
+        <ng-container *ngIf="vehicleOptions.length">
+          <option *ngFor="let option of vehicleOptions" [value]="option.id">{{ option.name }}</option>
+        </ng-container>
       </select>
     </div>
   </form>
