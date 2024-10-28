@@ -1,0 +1,58 @@
+<div
+  *ngIf="isPopupOpen"
+  tccOutsideClick
+  (clickOutside)="closePopup()"
+  class="fixed inset-0 z-40 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center"
+>
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full z-50 relative">
+    <h2 class="text-2xl font-semibold text-center">Login</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="space-y-6 mt-6">
+      <div>
+        <label for="email" class="block text-sm font-medium text-secondary">Email</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-highlight-light text-primary"
+          placeholder="Email"
+        />
+        <div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched" class="text-red-500 text-sm">
+          <div *ngIf="loginForm.controls['email'].errors">Email is not valid</div>
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-secondary">Password</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-highlight-light text-primary"
+          placeholder="Password"
+        />
+        <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="text-red-500 text-sm">
+          <div *ngIf="loginForm.controls['password'].errors">Password must be at least 8 characters</div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-highlight-light bg-highlight dark:bg-highlight text-primary-light"
+        >
+        Login
+      </button>
+    </form>
+
+    <button
+      (click)="closePopup()"
+      (keydown.escape)="closePopup()"
+      (clickOutside)="closePopup()"
+      tabindex="0"
+      tccOutsideClick
+      class="absolute top-4 right-4"
+    >
+      <span class="material-icons text-secondary dark:text-secondary hover:text-highlight">close</span>
+    </button>
+  </div>
+</div>

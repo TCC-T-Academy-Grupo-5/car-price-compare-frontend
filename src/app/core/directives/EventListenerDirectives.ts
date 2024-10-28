@@ -67,4 +67,9 @@ export class InteractionDirective implements OnInit, OnDestroy {
       this.enterKey.emit();
     }
   };
+
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    event.stopPropagation();
+  }
 }

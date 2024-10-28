@@ -11,7 +11,7 @@ import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class BrandService extends AbstractService<PaginatedBrand, { vehicleType: number, page: number, pageSize: number }> {
+export class BrandService extends AbstractService<PaginatedBrand, { vehicleType: number, pageNumber: number, pageSize: number }> {
 
   constructor(
     protected override http: HttpClient,
@@ -24,13 +24,16 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
     return 'brand';
   }
 
-  findByType(filters: { vehicleType: number, page: number, pageSize: number }): Observable<PaginatedBrand> {
+  findByType(filters: { vehicleType: number; pageNumber: number; pageSize: number; }, onlyPopular = false): Observable<PaginatedBrand> {
+    const endpoint = onlyPopular ? `${this.endpoint()}/popular` : this.endpoint();
+
     return new Observable<PaginatedBrand>((observer) => {
-      this.filter(filters).subscribe({
+      this.filter(filters, endpoint).subscribe({
         next: (response: HttpResponse<PaginatedBrand>) => {
           observer.next(response.body!);
           observer.complete();
-        }, error: (err: HttpErrorResponse) => observer.error(err)
+        },
+        error: (err: HttpErrorResponse) => observer.error(err)
       });
     });
   }
