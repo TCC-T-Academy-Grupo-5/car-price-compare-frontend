@@ -6,6 +6,8 @@ import { CommonModule, NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { WebSocketService } from '@services/websocket.service';
 import { AuthService } from '@services/auth.service';
+import { NotificationService } from '@services/user/notification.service';
+import { NotificationResponse } from '@domain/vehicle/notification-response';
 
 @Component({
   selector: 'tcc-notification',
@@ -31,11 +33,18 @@ import { AuthService } from '@services/auth.service';
       tabindex="0"
       class="material-symbols-outlined hidden md:block"
     >notifications</i>
+
+    <span *ngIf="notifications.length > 0" 
+            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+        {{ notifications.length }}
+    </span>
   </button>
   <mat-menu #notifMenu="matMenu" xPosition="before" id="{{ menuId }}">
     <ul>
-      <li *ngFor="let notification of notifications" class="p-2 border-b border-gray-200">
-        {{ notification.message }}
+      <li *ngFor="let notification of notifications" class="p-2 border-b border-gray-200" (click)="goToVehicleDetails(notification.vehicle.vehicleId)">
+        {{ notification.vehicle.name }} <br>
+        {{ notification.vehicle.brand }} <br>
+        {{ notification.currentFipePrice }}
       </li>
       <li *ngIf="notifications.length === 0" class="p-2 text-gray-500">Sem notificações</li>
     </ul>
@@ -45,24 +54,29 @@ import { AuthService } from '@services/auth.service';
   styles: []
 })
 export class NotificationComponent implements OnInit {
-  notifications: any[] = [];
+  notifications: NotificationResponse[] = [];
   notifMenu = 'notifyMenu';
   readonly menuId = 'notifyMenu';
   menuOpen = false;
   isLoggedIn: boolean = false;
 
-  constructor(private webSocketService: WebSocketService) {}
+  constructor(private webSocketService: WebSocketService,
+              private notificationService: NotificationService,
+              private router: Router) {}
 
   ngOnInit(): void {
-    this.notifications = [
-      { message: 'Notificação 1: Você tem uma nova mensagem.' },
-      { message: 'Notificação 2: Seu perfil foi atualizado.' },
-      { message: 'Notificação 3: Você recebeu uma nova conexão.' }
-    ];
-
+    this.updateNotifications();
+    
     this.webSocketService.getMessages().subscribe(notification => {
       console.log('Notificação recebida:', notification);
-      this.notifications.push(notification);
+      this.updateNotifications();
+    });
+  }
+
+  updateNotifications() {
+    this.notificationService.getNotification().subscribe((data) => {
+      this.notifications = data;
+      console.log(data);
     });
   }
 
@@ -82,5 +96,9 @@ export class NotificationComponent implements OnInit {
     if (notificationMenu && !notificationMenu.contains(target) && this.menuOpen) {
       this.closeMenu();
     }
+  }
+
+  goToVehicleDetails(id: string){
+    this.router.navigate([`/vehicle-details/${id}`]).then();
   }
 }
