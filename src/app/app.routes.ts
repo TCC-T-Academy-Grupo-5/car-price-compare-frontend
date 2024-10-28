@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {HomeComponent} from '@pages/home/home.component';
 import {VehiclesComponent} from '@pages/vehicle/vehicles/vehicles.component';
-import {VehicleDetailsComponent} from '@pages/vehicle-details/vehicle-details.component';
+import {VehicleDetailsComponent} from '@pages/vehicle/vehicle-details/vehicle-details.component';
 import {ModelsComponent} from '@pages/vehicle/models/models.component';
 import { ProfileComponent } from '@pages/profile/profile.component';
 import { AuthGuard } from './core/guards/auth.guard';

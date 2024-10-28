@@ -14,6 +14,7 @@ import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
 import {TranslationsPipe} from '@pipes/translations.pipe';
 import {SpinnerComponent} from '@shared/spinner/spinner.component';
+import {FilterComponent} from '@ui/filter/filter.component';
 
 @Component({
   selector: 'tcc-home',
@@ -37,6 +38,7 @@ import {SpinnerComponent} from '@shared/spinner/spinner.component';
     FormsModule,
     SpinnerComponent,
     TranslationsPipe,
+    FilterComponent,
   ],
   templateUrl: './home.component.html',
   styles: ``

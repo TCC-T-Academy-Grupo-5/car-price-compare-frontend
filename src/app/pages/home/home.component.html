@@ -43,6 +43,9 @@
       </ul>
 
     </div>
+
+    <tcc-filter></tcc-filter>
+
     <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
     <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)"/>
 

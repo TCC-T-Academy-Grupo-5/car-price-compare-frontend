@@ -5,6 +5,8 @@ import {AbstractService} from '@services/vehicle/abstract.service';
 import {PaginatedBrand} from '@domain/vehicle/paginate-brand';
 import {HeadersService} from '@services/headers.service';
 import { Brand } from '@domain/vehicle/brand';
+import {SelectOption} from '@domain/vehicle/select-option';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,10 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
         }, error: (err: HttpErrorResponse) => observer.error(err)
       });
     });
+  }
+
+  findAllBrandOptionsByType(vehicleType: number): Observable<SelectOption[]> {
+    return this.http.get<SelectOption[]>(`${this.entrypoint}/brand/${vehicleType}/options`);
   }
 
   findById(brandId: string): Observable<Brand> {

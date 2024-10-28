@@ -5,6 +5,7 @@ import {catchError, Observable, throwError} from 'rxjs';
 import {Model} from '@domain/vehicle/model';
 import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
 import {map} from 'rxjs/operators';
+import {SelectOption} from '@domain/vehicle/select-option';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class ModelService extends AbstractService<Model[], VehicleFilters> {
       map((response: HttpResponse<Model[]>) => response.body || []),
       catchError((err) => throwError(err))
     );
+  }
+
+  public findAllModelOptionsByBrandId(brandId: string): Observable<SelectOption[]> {
+    return this.http.get<SelectOption[]>(`${this.entrypoint}/model/brand/${brandId}/options`);
   }
 
   public getByModel(model: string): Observable<Model[]> {
