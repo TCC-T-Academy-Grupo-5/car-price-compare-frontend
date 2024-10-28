@@ -19,7 +19,14 @@ export class NotificationService {
         const token = localStorage.getItem('token');
         const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
-        return this.http.get<NotificationResponse[]>(this.apiUrl,  { headers } );
+        return this.http.get<NotificationResponse[]>(`${this.apiUrl}?status=0`,  { headers } );
+    }
+
+    updateNotificationStatus(id: string): Observable<NotificationResponse[]> {
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+        return this.http.post<NotificationResponse[]>(`${this.apiUrl}/${id}`,  { headers } );
     }
 
     createNotification(notificationRequest: NotificationRequest): Observable<NotificationResponse> {

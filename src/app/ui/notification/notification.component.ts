@@ -41,7 +41,7 @@ import { NotificationResponse } from '@domain/vehicle/notification-response';
   </button>
   <mat-menu #notifMenu="matMenu" xPosition="before" id="{{ menuId }}">
     <ul>
-      <li *ngFor="let notification of notifications" class="p-2 border-b border-gray-200" (click)="goToVehicleDetails(notification.vehicle.vehicleId)">
+      <li *ngFor="let notification of notifications" class="p-2 border-b border-gray-200" (click)="goToVehicleDetails(notification.vehicle.vehicleId, notification.notificationId)">
         {{ notification.vehicle.name }} <br>
         {{ notification.vehicle.brand }} <br>
         {{ notification.currentFipePrice }}
@@ -76,7 +76,6 @@ export class NotificationComponent implements OnInit {
   updateNotifications() {
     this.notificationService.getNotification().subscribe((data) => {
       this.notifications = data;
-      console.log(data);
     });
   }
 
@@ -98,7 +97,17 @@ export class NotificationComponent implements OnInit {
     }
   }
 
-  goToVehicleDetails(id: string){
-    this.router.navigate([`/vehicle-details/${id}`]).then();
+  goToVehicleDetails(vehicleId: string, notificationId: string){
+    this.updateNotificationStatus(notificationId);
+    this.updateNotifications();
+
+    this.router.navigate([`/vehicle-details/${vehicleId}`]).then();
+  }
+
+  updateNotificationStatus(id: string) {
+    this.notificationService.updateNotificationStatus(id).subscribe((data) => {
+      this.notifications = data;
+      console.log(data);
+    })
   }
 }
