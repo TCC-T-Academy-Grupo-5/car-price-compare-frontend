@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {FooterComponent} from '@ui/footer/footer.component';
-import {HeaderComponent} from '@ui/header/header.component';
-import {HomeComponent} from '@pages/home/home.component';
-import {UserComponent} from '@ui/user/user.component';
+import {FooterComponent} from '@components/ui/footer/footer.component';
+import {HeaderComponent} from '@components/ui/header/header.component';
+import {HomeComponent} from '@components/pages/home/home.component';
+import {UserComponent} from '@components/ui/user/user.component';
 import {InteractionDirective} from '@directives/EventListenerDirectives';
-import {VehiclesComponent} from '@pages/vehicle/vehicles/vehicles.component';
-import {ModelsComponent} from '@pages/vehicle/models/models.component';
-import {SpinnerComponent} from './shared/spinner/spinner.component';
+import {VehiclesComponent} from '@components/pages/vehicles/vehicles.component';
+import {ModelsComponent} from '@components/pages/models/models.component';
+import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
 
 @Component({
   selector: 'tcc-root',
@@ -31,7 +31,7 @@ import {SpinnerComponent} from './shared/spinner/spinner.component';
           <router-outlet></router-outlet>
         </div>
       </main>
-      <tcc-footer/>
+      <tcc-footer class="bg-secondary" />
     </div>
   `
 })

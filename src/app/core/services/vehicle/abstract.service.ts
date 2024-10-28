@@ -13,9 +13,11 @@ export abstract class AbstractService<T, F> {
     this.entrypoint = `${environment.entrypoint}`;
   }
 
-  public filter(filters: F): Observable<HttpResponse<T>> {
+  filter(filters: F, endpoint?: string): Observable<HttpResponse<T>> {
     const params = this.paramsFromFilter(filters);
-    return this.http.get<T>(`${this.entrypoint}/${this.endpoint()}`, {
+    const url = endpoint ? `${this.entrypoint}/${endpoint}` : `${this.entrypoint}/${this.endpoint()}`;
+
+    return this.http.get<T>(url, {
       params,
       observe: 'response'
     });
