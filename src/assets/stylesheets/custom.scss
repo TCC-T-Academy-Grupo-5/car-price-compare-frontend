@@ -74,7 +74,6 @@ $font-sizes: (
 
   .tcc-shared-bar {
     @apply
-    fixed
     w-full
     left-0
     z-40
@@ -219,6 +218,11 @@ $font-sizes: (
 
   .history-table-row {
     @apply w-40 p-2 text-xs sm:text-base
+  }
+
+  footer {
+    & h5 { @apply text-lg font-bold }
+    & * { @apply text-secondary-light dark:text-secondary-light }
   }
 }
 

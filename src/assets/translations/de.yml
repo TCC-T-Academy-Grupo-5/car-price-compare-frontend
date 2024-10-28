@@ -1,69 +1,86 @@
+about_us: 'Über uns'
 actions:
-  create: "Erstellen %s"
-  delete: "Löschen %s"
-  edit: "Bearbeiten %s"
-close: "Schließen"
-dark: "Dunkel"
+  create: 'Erstellen %s'
+  delete: 'Löschen %s'
+  edit: 'Bearbeiten %s'
+all_rights_reserved: 'Alle Rechte vorbehalten'
+connect_with_us: 'Verbinde dich mit uns'
+close: 'Schließen'
+dark: 'Dunkel'
 home:
-  find_cars_compare_price: "Finde Autos zum Preisvergleich"
-  find_dream_car: "Finde dein Traumauto"
-  browse_by_type: "Nach Typ durchsuchen Fahrzeug"
+  find_cars_compare_price: 'Finde Autos, um Preise zu vergleichen'
+  find_dream_car: 'Finde dein Traumfahrzeug'
+  browse_by_type: 'Nach Typ durchsuchen'
 languages:
-  de: "Deutsch"
-  en: "Englisch"
-  es: "Spanisch"
-  pt: "Portugiesisch"
-light: "Hell"
+  de: 'Deutsch'
+  en: 'Englisch'
+  es: 'Spanisch'
+  pt: 'Portugiesisch'
+light: 'Hell'
 messages:
-  error: "Fehler beim %s %s."
-  success: "%s %s erfolgreich."
+  error: 'Fehler beim %s %s.'
+  success: '%s %s erfolgreich.'
 models:
   brand:
-    one: "Marke"
-    plural: "Marken"
+    one: 'Marke'
+    plural: 'Marken'
   model:
-    one: "Modell"
-    plural: "Modelle"
+    one: 'Modell'
+    plural: 'Modelle'
   vehicle:
     one: 'Fahrzeug'
     plural: 'Fahrzeuge'
-not_found: "Keine %s gefunden"
+not_found: 'Keine %s gefunden'
 placeholder:
-  search: "Suche"
-profile: "Profil"
+  search: 'Suche'
+price_range: 'Preisspanne'
+profile: 'Profil'
 sign:
-  in: "Anmelden"
-  out: "Abmelden"
-switch_theme_to: "Wechsle das Thema zu %s"
-title: "Auto Wert"
-translate: "Übersetzen"
+  in: 'Anmelden'
+  out: 'Abmelden'
+support:
+  title: 'Unterstützung'
+  faqs: 'Häufige Fragen'
+  help_and: 'Hilfe und Unterstützung'
+  terms_of_service: 'Nutzungsbedingungen'
+  privacy_policy: 'Datenschutzrichtlinie'
+switch_theme_to: 'Wechseln Sie das Thema zu %s'
+title: 'Auto Wert'
+translate: 'Übersetzen'
 vehicle:
-  average_price: "Durchschnittspreis"
-  brand: "Marke"
-  category: "Kategorie"
+  average_price: 'Durchschnittspreis'
+  brand: 'Marke'
+  category: 'Kategorie'
+  deal:
+    'Angebot'
   deals:
     header: 'Angebote'
-    related_deals: 'Ähnliche Angebote'
+    related_deals: 'Verwandte Angebote'
     empty_state: 'Keine Angebote gefunden'
     create_alert:
       follow: 'Folgen'
-      unfollow: 'Nicht mehr folgen'
+      unfollow: 'Entfolgen'
       success: 'Sie werden benachrichtigt, wenn wir Angebote unter dem FIPE-Wert für dieses Fahrzeug finden'
-  fipe_code: "FIPE-Code"
+  fipe_code: 'FIPE-Code'
   fipe_history:
-    header: "FIPE-Tabelle - Kürzliche Historie"
-    month: "Monat"
-    price: "Preis"
-    variation: "Abweichung R$"
-    variation_percentage: "Abweichung %"
-    chart_legend: "Preis pro Monat"
-  make: "Hersteller"
-  model: "Modell"
-  type: "Fahrzeugtyp"
+    header: 'FIPE-Tabelle - Jüngste Historie'
+    month: 'Monat'
+    price: 'Preis'
+    variation: 'Variation R$'
+    variation_percentage: 'Variations %'
+    chart_legend: 'Preis pro Monat'
+  fipe_table: 'FIPE-Tabelle'
+  make: 'Hersteller'
+  model: 'Modell'
+  prices:
+    alerts: 'Preisalarm'
+    history: 'Preishistorie'
+  type: 'Fahrzeugtyp'
   types:
-    car: "Auto"
-    motorcycle: "Motorrad"
-    truck: "Lkw"
-  updated_at: "Aktualisiert am"
-  version: "Version"
-  year: "Jahr"
+    car: 'Auto'
+    motorcycle: 'Motorrad'
+    truck: 'Lkw'
+  updated_at: 'Aktualisiert am'
+  search: 'Fahrzeugsuche'
+  version: 'Version'
+  year: 'Jahr'

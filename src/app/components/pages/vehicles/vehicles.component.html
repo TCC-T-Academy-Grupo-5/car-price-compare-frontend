@@ -1,0 +1,33 @@
+<div *ngIf="model" class="flex flex-col items-center justify-start mb-8 gap-2">
+  <img [src]="model.imageUrl" [alt]="model.name" class="w-72 h-72 rounded-full object-contain"/>
+  <h4 class="text-lg font-semibold">{{ model.name }} - {{ 'models.model.plural' | translate }}</h4>
+</div>
+
+<div class="container mx-auto p-4">
+  <ng-container *ngIf="vehicles.length > 0; else noVehicles">
+    <div class="card-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a
+        *ngFor="let vehicle of vehicles"
+        [routerLink]="['/vehicle-details', vehicle.id]"
+        class="card use-skeleton bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
+        tabindex="0"
+      >
+        <!--<div class="image-wrapper">
+          <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" [alt]="vehicle.name" class="w-full h-48 object-cover rounded-t-lg mb-4" />
+        </div>-->
+
+        <h4>{{ vehicle.name }}</h4>
+        <p *ngIf="model?.name"><b>{{ 'models.model.one' | translate }}:</b> {{ model?.name }}</p>
+        <p *ngIf="vehicle.brand"><b>{{ 'models.brand.one' | translate }}:</b> {{ vehicle.brand }}</p>
+        <p><b>{{ 'vehicle.year' | translate }}:</b> {{ vehicle.year }}</p>
+        <p *ngIf="vehicle.vehicleType"><b>{{ 'type' | translate }}:</b> {{ vehicle.vehicleType }}</p>
+        <p *ngIf="vehicle.fipeCode"><b>{{ 'vehicle.fipe_code' | translate }}:</b> {{ vehicle.fipeCode }}</p>
+
+      </a>
+    </div>
+  </ng-container>
+
+  <ng-template #noVehicles>
+    <tcc-skeleton-loader [count]="9" />
+  </ng-template>
+</div>

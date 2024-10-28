@@ -5,6 +5,7 @@ export interface Vehicle extends VehicleFilters {
   fullUrl?: string;
   imageUrl?: string;
   name?: string;
+  fipeCode?: string;
   fipePrice?: number;
   priceRange?: [number, number];
   urlPathName?: string;
