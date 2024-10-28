@@ -29,10 +29,11 @@ Ensure you have Docker and Docker Compose installed on your machine.
 
 #### Clone the Repositories
 
-To get started, clone both the frontend and backend repositories using the following command:
+To get started, clone both the frontend and backend repositories, and the scraping microservice repository using the following command:
 ```bash
 git clone https://github.com/TCC-T-Academy-Grupo-5/car-price-compare-backend.git && \
 git clone https://github.com/TCC-T-Academy-Grupo-5/car-price-compare-frontend.git && \
+git clone https://github.com/TCC-T-Academy-Grupo-5/scraping-microservice.git
 cd car-price-compare-frontend
 ```
 
@@ -56,3 +57,4 @@ The project consists of:
 
 - Frontend: Located in the ./car-price-compare-frontend directory.
 - Backend: Located in the ../car-price-compare-backend directory.
+- Scraping Microservice: Located in the ../scraping-microservice directory.

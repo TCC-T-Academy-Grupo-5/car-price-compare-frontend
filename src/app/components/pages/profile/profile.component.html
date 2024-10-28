@@ -1,0 +1,107 @@
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+  <div class="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-lg shadow-lg">
+    <h2 class="text-4xl font-extrabold text-gray-900 mb-6 border-b pb-4">Perfil do Usuário</h2>
+
+    <div *ngIf="user">
+      <div class="mb-8 space-y-3">
+        <p class="text-xl text-gray-700">
+          <span class="font-semibold text-gray-900">Nome:</span> {{ user.firstName }} {{ user.lastName }}
+        </p>
+        <p class="text-xl text-gray-700">
+          <span class="font-semibold text-gray-900">Email:</span> {{ user.email }}
+        </p>
+        <p class="text-xl text-gray-700">
+          <span class="font-semibold text-gray-900">Telefone:</span> {{ user.cellphone }}
+        </p>
+      </div>
+
+      <button
+        (click)="editUserInfo()"
+        class="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold text-lg px-6 py-3 rounded-md shadow hover:from-blue-600 hover:to-indigo-700 transition duration-300 ease-in-out"
+      >
+        {{ !isEditing ? "Editar Informações" : "Fechar" }}
+      </button>
+    </div>
+  </div>
+
+
+  <form *ngIf="isEditing" [formGroup]="userForm" (ngSubmit)="updateUserProfile()" class="mt-8">
+    <div class="grid grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="firstName">Nome</label>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="lastName">Sobrenome</label>
+        <input
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="cellphone">Telefone</label>
+        <input
+          type="text"
+          id="cellphone"
+          formControlName="cellphone"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        />
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300"
+    >
+      Atualizar Informações
+    </button>
+  </form>
+
+  <div class="mt-8">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Avaliações Feitas</h3>
+    <div *ngIf="ratings.length > 0" class="space-y-4">
+      <div *ngFor="let rating of ratings" class="p-4 bg-gray-100 rounded-lg shadow">
+        <p class="text-gray-800">Nota: <strong>{{ rating.rate }}</strong></p>
+        <p class="text-gray-600">{{ rating.message }}</p>
+      </div>
+    </div>
+    <div *ngIf="ratings.length === 0">
+      <p class="text-gray-600">Nenhuma avaliação disponível.</p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Favoritos</h3>
+    <div *ngIf="favorites.length > 0" class="space-y-4">
+      <div *ngFor="let favorite of favorites" class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+        <h4 class="text-lg font-bold text-gray-800">{{ favorite.name }}</h4>
+        <p class="text-gray-700">{{ favorite.model }}</p>
+        <p class="text-gray-600 italic">{{ favorite.brand }}</p>
+        <p class="text-gray-800 mt-2">Fipe Code: <span class="font-medium text-gray-700">{{ favorite.fipeCode }}</span></p>
+        <p class="text-gray-600">Ano: <span class="font-medium text-gray-700">{{ favorite.year }}</span></p>
+      </div>
+    </div>
+    <div *ngIf="favorites.length === 0">
+      <p class="text-gray-600">Nenhum favorito disponível.</p>
+    </div>
+  </div>
+</div>

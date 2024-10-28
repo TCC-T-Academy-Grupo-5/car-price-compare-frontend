@@ -1,0 +1,28 @@
+<div *ngIf="loading; else content" class="card-wrapper skeleton">
+  <div
+    *ngFor="let _ of [].constructor(count); index as i"
+    class="card content-card animate-bg"
+  >
+    <div class="h-48 w-full rounded mb-4 skeleton-image"></div>
+    <h3 class="h-5 skeleton-image rounded mb-2">&nbsp;</h3>
+    <p class="space-y-2">
+      <span class="block h-3 skeleton-text rounded"></span>
+      <span class="block h-3 skeleton-text rounded"></span>
+      <span class="block h-3 skeleton-text rounded"></span>
+    </p>
+    <div class="flex items-center mt-4">
+      <div class="h-10 w-10 skeleton-circle rounded-full mr-4"></div>
+      <div class="space-y-1">
+        <span class="block h-3 w-24 skeleton-text rounded"></span>
+        <span class="block h-3 w-16 skeleton-text rounded"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content>
+  <div class="not-found bg-blue-500 bg-opacity-70 px-4 py-2 rounded flex items-center justify-start gap-1">
+    <i class="material-symbols-outlined">info</i>
+    <span class="font-[400] lowercase">{{ 'not_found' | translate | translations: object }}</span>
+  </div>
+</ng-template>

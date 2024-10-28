@@ -23,7 +23,22 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/precificar
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: admin
+      STOREPRICESCRAPING_URL: http://scraping:8081/deals
       JWT_SECRET: BboUQ8xAZoO6iLizC9FK1XgNhVhA+UeB4AlQ6GNrrLA==
+
+  scraping:
+    build:
+      context: ../scraping-microservice
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/precificar
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
 
   postgres:
     image: postgres:14

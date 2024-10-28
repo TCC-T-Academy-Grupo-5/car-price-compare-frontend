@@ -1,43 +1,58 @@
+about_us: 'About us'
 actions:
-  create: "Create %s"
-  delete: "Delete %s"
-  edit: "Edit %s"
-close: "Close"
-dark: "Dark"
+  create: 'Create %s'
+  delete: 'Delete %s'
+  edit: 'Edit %s'
+all_rights_reserved: 'All rights reserved'
+connect_with_us: 'Connect with us'
+close: 'Close'
+dark: 'Dark'
 home:
-  find_cars_compare_price: "Find cars to compare prices"
-  find_dream_car: "Find your dream vehicle"
-  browse_by_type: "Browse by type"
+  find_cars_compare_price: 'Find cars to compare prices'
+  find_dream_car: 'Find your dream vehicle'
+  browse_by_type: 'Browse by type'
 languages:
-  de: "German"
-  en: "English"
-  es: "Spanish"
-  pt: "Portuguese"
-light: "Light"
+  de: 'German'
+  en: 'English'
+  es: 'Spanish'
+  pt: 'Portuguese'
+light: 'Light'
 messages:
-  error: "Error while %s %s."
-  success: "%s %s successfully."
+  error: 'Error while %s %s.'
+  success: '%s %s successfully.'
 models:
   brand:
-    one: "Brand"
-    plural: "Brands"
+    one: 'Brand'
+    plural: 'Brands'
   model:
-    one: "Model"
-    plural: "Models"
-not_found: "No %s found"
+    one: 'Model'
+    plural: 'Models'
+  vehicle:
+    one: 'Vehicle'
+    plural: 'Vehicles'
+not_found: 'No %s found'
 placeholder:
-  search: "Search"
-profile: "Profile"
+  search: 'Search'
+price_range: 'Price range'
+profile: 'Profile'
 sign:
-  in: "Sign in"
-  out: "Sign out"
-switch_theme_to: "Switch theme to %s"
-title: "Auto Value"
-translate: "Translate"
+  in: 'Sign in'
+  out: 'Sign out'
+support:
+  title: 'Support'
+  faqs: 'FAQS'
+  help_and: 'Help and support'
+  terms_of_service: 'Terms of service'
+  privacy_policy: 'Privacy policy'
+switch_theme_to: 'Switch theme to %s'
+title: 'Auto Value'
+translate: 'Translate'
 vehicle:
-  average_price: "Average Price"
-  brand: "Brand"
-  category: "Category"
+  average_price: 'Average Price'
+  brand: 'Brand'
+  category: 'Category'
+  deal:
+    'Deal'
   deals:
     header: 'Deals'
     related_deals: 'Related Deals'
@@ -46,20 +61,26 @@ vehicle:
       follow: 'Follow'
       unfollow: 'Unfollow'
       success: 'You will be notified when we find offers below the FIPE value for this vehicle'
-  fipe_code: "FIPE Code"
+  fipe_code: 'Fipe code'
   fipe_history:
-    header: "FIPE Table - Recent History"
-    month: "Month"
-    price: "Price"
-    variation: "Variation R$"
-    variation_percentage: "Variation %"
-  make: "Manufacturer"
-  model: "Model"
-  type: "Vehicle Type"
+    header: 'FIPE Table - Recent History'
+    month: 'Month'
+    price: 'Price'
+    variation: 'Variation R$'
+    variation_percentage: 'Variation %'
+    chart_legend: 'Price per month'
+  fipe_table: 'Fipe table'
+  make: 'Manufacturer'
+  model: 'Model'
+  prices:
+    alerts: 'Price alerts'
+    history: 'Price history'
+  type: 'Vehicle Type'
   types:
-    car: "Car"
-    motorcycle: "Motorcycle"
-    truck: "Truck"
-  updated_at: "Updated at"
-  version: "Version"
-  year: "Year"
+    car: 'Car'
+    motorcycle: 'Motorcycle'
+    truck: 'Truck'
+  updated_at: 'Updated at'
+  search: 'Vehicle search'
+  version: 'Version'
+  year: 'Year'

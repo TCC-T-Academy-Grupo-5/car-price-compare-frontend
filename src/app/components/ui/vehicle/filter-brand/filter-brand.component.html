@@ -1,0 +1,14 @@
+<div *ngIf="brands.length > 0; else noBrandsTemplate">
+  <div class="grid xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-4">
+    <a *ngFor="let brand of brands" class="card" tabindex="0" [routerLink]="['/models', brand.id]">
+      <div class="flex flex-col items-center">
+        <img [src]="brand.imageUrl" [alt]="brand.name + ' logo'" class="brand-logo" />
+        <p>{{ brand.name }}</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<ng-template #noBrandsTemplate class="centralize">
+  <tcc-spinner [object]="'models.brand' | translate" />
+</ng-template>

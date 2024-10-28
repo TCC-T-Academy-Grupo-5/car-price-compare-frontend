@@ -97,7 +97,8 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/assets/stylesheets/custom.scss",
+              "src/assets/stylesheets/styles.sass"
             ],
             "scripts": []
           }
