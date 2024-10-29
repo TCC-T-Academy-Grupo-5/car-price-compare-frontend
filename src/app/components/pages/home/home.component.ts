@@ -13,7 +13,7 @@ import { ModelService } from '@services/vehicle/model.service';
 import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
 import {TranslationsPipe} from '@pipes/translations.pipe';
-import {FilterComponent} from '@ui/filter/filter.component';
+import {FilterComponent} from '@components/ui/filter/filter.component';
 import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
 
 @Component({
