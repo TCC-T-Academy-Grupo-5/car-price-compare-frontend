@@ -1,42 +1,48 @@
-<div>
-  <form (ngSubmit)="onSubmit()">
-    <div class="grid grid-cols-2 gap-4 mb-4">
-      <select (change)="onTypeChange($event)" class="filter-select">
-        <option value="" disabled selected>Selecione o tipo de veículo</option>
-        <option *ngFor="let type of vehicleTypes | keyvalue"
-                [value]="type.value">{{ 'vehicle.types.' + type.key | translate }}
-        </option>
-      </select>
-      <select [disabled]="selectedType === undefined" (change)="onBrandChange($event)" class="filter-select">
-        <option value="" disabled selected>Selecione a marca</option>
-        <ng-container *ngIf="brandOptions.length">
-          <option *ngFor="let option of brandOptions" [value]="option.id">{{ option.name }}</option>
-        </ng-container>
-      </select>
-      <select [disabled]="selectedBrandId === undefined" (change)="onModelChange($event)" class="filter-select">
-        <option value="" disabled selected>Selecione o modelo</option>
-        <ng-container *ngIf="modelOptions.length">
-          <option *ngFor="let option of modelOptions" [value]="option.id">{{ option.name }}</option>
-        </ng-container>
-      </select>
-      <select [disabled]="selectedModelId === undefined" (change)="onYearChange($event)" class="filter-select">
-        <option value="" disabled selected>Selecione o ano</option>
-        <ng-container *ngIf="yearOptions.length">
-          <option *ngFor="let option of yearOptions" [value]="option.id">{{ option.name }}</option>
-        </ng-container>
-      </select>
-      <select [disabled]="selectedYearId === undefined" (change)="onVehicleChange($event)" class="filter-select col-span-2">
-        <option value="" disabled selected>Selecione a versão</option>
-        <ng-container *ngIf="vehicleOptions.length">
-          <option *ngFor="let option of vehicleOptions" [value]="option.id">{{ option.name }}</option>
-        </ng-container>
-      </select>
-    </div>
+<div class="card shadow-md bg-primary-light dark:bg-primary min-w-full">
+    <form (ngSubmit)="onSubmit()">
+        <div class="flex flex-col sm:grid md:grid-cols-2 gap-4 mb-4">
+            <select #typeSelect (change)="onTypeChange($event)" class="filter-select">
+                <option value="" disabled selected>Selecione o tipo de veículo</option>
+                <option *ngFor="let type of vehicleTypes | keyvalue"
+                        [value]="type.value">{{ 'vehicle.types.' + type.key | translate }}
+                </option>
+            </select>
+            <select #brandSelect [disabled]="selectedType === undefined" (change)="onBrandChange($event)" class="filter-select">
+                <option value="" disabled selected>Selecione a marca</option>
+                <ng-container *ngIf="brandOptions.length">
+                    <option *ngFor="let option of brandOptions" [value]="option.id">{{ option.name }}</option>
+                </ng-container>
+            </select>
+            <select #modelSelect [disabled]="selectedBrandId === undefined" (change)="onModelChange($event)" class="filter-select">
+                <option value="" disabled selected>Selecione o modelo</option>
+                <ng-container *ngIf="modelOptions.length">
+                    <option *ngFor="let option of modelOptions" [value]="option.id">{{ option.name }}</option>
+                </ng-container>
+            </select>
+            <select #yearSelect [disabled]="selectedModelId === undefined" (change)="onYearChange($event)" class="filter-select">
+                <option value="" disabled selected>Selecione o ano</option>
+                <ng-container *ngIf="yearOptions.length">
+                    <option *ngFor="let option of yearOptions" [value]="option.id">{{ option.name }}</option>
+                </ng-container>
+            </select>
+            <select #vehicleSelect [disabled]="selectedYearId === undefined" (change)="onVehicleChange($event)"
+                    class="filter-select col-span-2">
+                <option value="" disabled selected>Selecione a versão</option>
+                <ng-container *ngIf="vehicleOptions.length">
+                    <option *ngFor="let option of vehicleOptions" [value]="option.id">{{ option.name }}</option>
+                </ng-container>
+            </select>
+        </div>
 
-    <div class="flex justify-center">
-      <button type="reset" (click)="onReset()">Limpar campos</button>
-      <button type="submit" [disabled]="!selectedVehicleId" class="bg-highlight text-primary-light rounded-3xl py-2 px-4">Consultar</button>
-    </div>
-  </form>
+        <div class="flex justify-center items-center gap-4">
+            <i class="material-symbols-outlined text-tertiary dark:text-secondary-light text-3xl" (click)="onReset()">restart_alt</i>
+            <button type="submit" [disabled]="!selectedVehicleId"
+                    class="w-full sm:w-auto max-w-fit bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold text-lg px-4 py-2 rounded-md shadow hover:from-blue-600 hover:to-indigo-700 transition duration-300 ease-in-out"
+            >
+                <i class="material-symbols-outlined text-primary-light dark:text-primary-light text-2xl">search</i>
+                Consultar
+            </button>
+        </div>
+    </form>
 </div>
 

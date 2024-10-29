@@ -1,20 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorService} from '@services/errors/error.service';
 import {SelectOption} from '@domain/vehicle/select-option';
 import {OptionService} from '@services/vehicle/option.service';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'tcc-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './filter.component.html'
+  imports: [CommonModule, TranslateModule, FormsModule],
+  templateUrl: './filter.component.html',
+  host: {class: 'w-full md:w-3/5 mb-10'}
 })
 export class FilterComponent {
+  @ViewChild('typeSelect') typeSelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('brandSelect') brandSelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('modelSelect') modelSelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('yearSelect') yearSelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('vehicleSelect') vehicleSelect!: ElementRef<HTMLSelectElement>;
+
   vehicleTypes = {
     'car': 0,
     'motorcycle': 1,
@@ -37,6 +44,8 @@ export class FilterComponent {
 
   onTypeChange($event: Event) {
     this.selectedType = Number(($event.target as HTMLSelectElement).value);
+
+    console.log('selecionou tipo de veículo', this.selectedType);
 
     this.optionService.findOptions(this.selectedType, 'brand').subscribe({
       next: (brandOptions: SelectOption[]) => this.brandOptions = brandOptions,
@@ -80,10 +89,17 @@ export class FilterComponent {
   }
 
   onReset() {
+    this.typeSelect.nativeElement.selectedIndex = 0;
+    this.brandSelect.nativeElement.selectedIndex = 0;
+    this.modelSelect.nativeElement.selectedIndex = 0;
+    this.yearSelect.nativeElement.selectedIndex = 0;
+    this.vehicleSelect.nativeElement.selectedIndex = 0;
+
     this.selectedType = undefined;
     this.selectedBrandId = undefined;
     this.selectedModelId = undefined;
     this.selectedYearId = undefined;
+    this.selectedVehicleId = undefined;
     this.brandOptions = [];
     this.modelOptions = [];
     this.yearOptions = [];
