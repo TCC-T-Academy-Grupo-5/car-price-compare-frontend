@@ -34,7 +34,7 @@ import { NotificationResponse } from '@domain/vehicle/notification-response';
       class="material-symbols-outlined hidden md:block"
     >notifications</i>
 
-    <span *ngIf="notifications.length > 0" 
+    <span *ngIf="notifications.length > 0"
             class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
         {{ notifications.length }}
     </span>
@@ -66,7 +66,7 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateNotifications();
-    
+
     this.webSocketService.getMessages().subscribe(notification => {
       console.log('Notificação recebida:', notification);
       this.updateNotifications();
