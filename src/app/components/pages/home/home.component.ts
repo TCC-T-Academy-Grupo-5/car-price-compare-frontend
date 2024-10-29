@@ -62,6 +62,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedType = Number(localStorage.getItem('selectedType')) || this.selectedType;
+    this.searchText = localStorage.getItem('searchText') || this.searchText;
     this.updateImagePaths(this.selectedType);
     this.getPopularBrands();
   }
@@ -71,6 +73,7 @@ export class HomeComponent implements OnInit {
     this.getPopularBrands();
     this.updateImagePaths(type);
     this.showLoadMore = true;
+    localStorage.setItem('selectedType', type.toString());
   }
 
   updateImagePaths(type: number): void {
@@ -88,10 +91,7 @@ export class HomeComponent implements OnInit {
           this.brands = response;
           this.showLoadMore = true;
         }
-      },
-      error: (error) => {
-        console.error("Erro ao carregar marcas:", error.message);
-      }
+      }, error: (error) => console.error("Erro ao carregar marcas:", error.message)
     });
   }
 
@@ -104,22 +104,18 @@ export class HomeComponent implements OnInit {
           this.brands = this.brands.concat(response);
           this.showLoadMore = false;
         }
-      },
-      error: (error) => {
-        console.error("Erro ao carregar marcas:", error.message);
-      }
+      }, error: (error) =>  console.error("Erro ao carregar marcas:", error.message)
     });
   }
 
   onSearchTextChange(): void {
+
+    localStorage.setItem('searchText', this.searchText);
     if (this.searchText.length > 0) {
       this.modelService.getByModel(this.searchText).subscribe({
         next: (response) => {
           this.modelSuggestions = response;
-        },
-        error: (err) => {
-          console.error('Erro ao carregar modelos:', err.message);
-        }
+        }, error: (err) => console.error('Erro ao carregar modelos:', err.message)
       });
 
       this.brandService.getByBrand(this.searchText).subscribe({

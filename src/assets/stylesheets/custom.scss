@@ -130,7 +130,7 @@ $font-sizes: (
     }
   }
 
-  .grayscale {
+  .tcc-grayscale {
     @apply
     filter
     grayscale
@@ -222,7 +222,7 @@ $font-sizes: (
 
   footer {
     & h5 { @apply text-lg font-bold }
-    & * { @apply text-secondary-light dark:text-secondary-light }
+    & * { @apply text-secondary-light dark:text-secondary-light tracking-wider }
   }
 }
 

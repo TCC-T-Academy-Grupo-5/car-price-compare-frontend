@@ -27,7 +27,7 @@ import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
     <div class="flex flex-col min-h-screen">
       <tcc-header/>
       <main class="flex-grow bg-secondary-light dark:bg-secondary">
-        <div class="container-responsive py-16 my-16 overflow-hidden">
+        <div class="container-responsive py-24 my-0 overflow-hidden">
           <router-outlet></router-outlet>
         </div>
       </main>
