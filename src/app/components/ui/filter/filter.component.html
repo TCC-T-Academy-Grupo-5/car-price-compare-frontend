@@ -41,7 +41,11 @@
             <i class="material-symbols-outlined text-tertiary dark:text-secondary-light text-3xl" (click)="onReset()"
                (keydown.enter)="onReset()" tabindex="0">restart_alt</i>
             <button type="submit" [disabled]="!selectedVehicleId"
-                    class="w-full sm:w-auto max-w-fit bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold text-lg px-4 py-2 rounded-md shadow hover:from-blue-600 hover:to-indigo-700 transition duration-300 ease-in-out"
+                    [ngClass]="{
+                        'bg-gradient-to-r from-blue-500 to-indigo-600': selectedVehicleId,
+                        'bg-tertiary dark:bg-tertiary-light': !selectedVehicleId
+                    }"
+                    class="w-full sm:w-auto max-w-fit text-white font-semibold text-lg px-4 py-2 rounded-md shadow hover:from-blue-600 hover:to-indigo-700 transition duration-300 ease-in-out disabled:cursor-not-allowed"
             >
                 <i class="material-symbols-outlined text-primary-light dark:text-primary-light text-2xl">search</i>
                 {{ 'vehicle.filter.query' | translate }}
