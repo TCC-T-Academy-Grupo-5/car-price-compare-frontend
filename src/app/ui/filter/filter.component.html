@@ -1,6 +1,6 @@
 <div class="card shadow-md bg-primary-light dark:bg-primary min-w-full">
     <form (ngSubmit)="onSubmit()">
-        <div class="flex flex-col sm:grid md:grid-cols-2 gap-4 mb-4">
+        <div class="flex flex-col md:grid md:grid-cols-2 gap-4 mb-4">
             <select #typeSelect (change)="onTypeChange($event)" class="filter-select">
                 <option value="" disabled selected>Selecione o tipo de veículo</option>
                 <option *ngFor="let type of vehicleTypes | keyvalue"
