@@ -4,7 +4,7 @@
             <select #typeSelect (change)="onTypeChange($event)" class="filter-select">
                 <option value="" disabled selected>{{ 'vehicle.filter.type_prompt' | translate }}</option>
                 <option *ngFor="let type of vehicleTypes | keyvalue"
-                        [value]="type.value">{{ 'vehicle.types.' + type.key | translate }}
+                        [value]="type.value">{{ 'vehicle.types.' + type.value | translate | titlecase }}
                 </option>
             </select>
             <select #brandSelect [disabled]="selectedType === undefined" (change)="onBrandChange($event)"

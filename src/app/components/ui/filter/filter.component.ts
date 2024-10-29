@@ -45,8 +45,6 @@ export class FilterComponent {
   onTypeChange($event: Event) {
     this.selectedType = Number(($event.target as HTMLSelectElement).value);
 
-    console.log('selecionou tipo de veículo', this.selectedType);
-
     this.optionService.findOptions(this.selectedType, 'brand').subscribe({
       next: (brandOptions: SelectOption[]) => this.brandOptions = brandOptions,
       error: this.handleError.bind(this)
