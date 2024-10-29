@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import {TranslationsPipe} from '@pipes/translations.pipe';
 import {FilterComponent} from '@components/ui/filter/filter.component';
 import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
+import { WebSocketService } from '@services/websocket.service';
 
 @Component({
   selector: 'tcc-home',
