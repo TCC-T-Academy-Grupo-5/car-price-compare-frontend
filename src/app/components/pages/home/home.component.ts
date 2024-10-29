@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
   page = 1;
   pageSize = 100;
   selectedType = 0;
+  searchText = '';
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
@@ -57,6 +58,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedType = Number(localStorage.getItem('selectedType')) || this.selectedType;
+    this.searchText = localStorage.getItem('searchText') || this.searchText;
     this.updateImagePaths(this.selectedType);
     this.getPopularBrands();
   }
