@@ -56,6 +56,8 @@ export class HomeComponent implements OnInit {
   constructor(private brandService: BrandService) {}
 
   ngOnInit(): void {
+    this.selectedType = Number(localStorage.getItem('selectedType')) || this.selectedType;
+    this.searchText = localStorage.getItem('searchText') || this.searchText;
     this.updateImagePaths(this.selectedType);
     this.getPopularBrands();
   }
@@ -65,6 +67,7 @@ export class HomeComponent implements OnInit {
     this.getPopularBrands();
     this.updateImagePaths(type);
     this.showLoadMore = true;
+    localStorage.setItem('selectedType', type.toString());
   }
 
   updateImagePaths(type: number): void {
@@ -86,10 +89,7 @@ export class HomeComponent implements OnInit {
           this.brands = response;
           this.showLoadMore = true;
         }
-      },
-      error: (error) => {
-        console.error('Erro ao carregar marcas:', error.message);
-      },
+      }, error: (error) => console.error("Erro ao carregar marcas:", error.message)
     });
   }
 
