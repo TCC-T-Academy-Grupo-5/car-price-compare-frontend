@@ -5,7 +5,6 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { CommonModule, NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { WebSocketService } from '@services/websocket.service';
-import { AuthService } from '@services/auth.service';
 import { NotificationService } from '@services/user/notification.service';
 import { NotificationResponse } from '@domain/vehicle/notification-response';
 
@@ -25,14 +24,16 @@ import { NotificationResponse } from '@domain/vehicle/notification-response';
   template: `
 <div class="relative">
   <button (click)="toggleMenu()" class="cursor-pointer">
-    <i class="material-icons"
+    <i
       [matMenuTriggerFor]="notifMenu"
       mat-button
       aria-label="Notification Menu"
       aria-haspopup="true"
       tabindex="0"
-      class="material-symbols-outlined hidden md:block"
-    >notifications</i>
+      class="material-icons material-symbols-outlined hidden md:block"
+    >
+      notifications
+    </i>
 
     <span *ngIf="notifications.length > 0"
             class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
@@ -41,7 +42,15 @@ import { NotificationResponse } from '@domain/vehicle/notification-response';
   </button>
   <mat-menu #notifMenu="matMenu" xPosition="before" id="{{ menuId }}">
     <ul>
-      <li *ngFor="let notification of notifications" class="p-2 border-b border-gray-200" (click)="goToVehicleDetails(notification.vehicle.vehicleId, notification.notificationId)">
+      <li
+        *ngFor="let notification of notifications"
+        (click)="goToVehicleDetails(notification.vehicle.vehicleId, notification.notificationId)"
+        (keydown.enter)="goToVehicleDetails(notification.vehicle.vehicleId, notification.notificationId)"
+        (keydown.space)="goToVehicleDetails(notification.vehicle.vehicleId, notification.notificationId)"
+        (keydown.escape)="closeMenu()"
+        tabindex="0"
+        class="p-2 border-b border-gray-200"
+      >
         {{ notification.vehicle.name }} <br>
         {{ notification.vehicle.brand }} <br>
         {{ notification.currentFipePrice }}
@@ -58,7 +67,7 @@ export class NotificationComponent implements OnInit {
   notifMenu = 'notifyMenu';
   readonly menuId = 'notifyMenu';
   menuOpen = false;
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
 
   constructor(private webSocketService: WebSocketService,
               private notificationService: NotificationService,

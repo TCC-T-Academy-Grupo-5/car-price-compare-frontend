@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonModule, DatePipe, NgOptimizedImage} from "@angular/common";
-import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
-import {TranslateModule} from "@ngx-translate/core";
-import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
-import {RouterLink, RouterOutlet} from '@angular/router';
-import {InteractionDirective} from '@directives/EventListenerDirectives';
-import {FilterTypeComponent} from '@components/ui/vehicle/filter-type/filter-type.component';
-import {FilterBrandComponent} from '@components/ui/vehicle/filter-brand/filter-brand.component';
-import {BrandService} from '@services/vehicle/brand.service';
-import {Brand} from '@domain/vehicle/brand';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, DatePipe, NgOptimizedImage } from '@angular/common';
+import { MatCard, MatCardContent, MatCardImage } from '@angular/material/card';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatTab, MatTabContent, MatTabGroup } from '@angular/material/tabs';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { InteractionDirective } from '@directives/EventListenerDirectives';
+import { FilterTypeComponent } from '@components/ui/vehicle/filter-type/filter-type.component';
+import { FilterBrandComponent } from '@components/ui/vehicle/filter-brand/filter-brand.component';
+import { BrandService } from '@services/vehicle/brand.service';
+import { Brand } from '@domain/vehicle/brand';
 import { FormsModule } from '@angular/forms';
-import {TranslationsPipe} from '@pipes/translations.pipe';
-import {FilterComponent} from '@components/ui/filter/filter.component';
-import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
-import {SearchComponent} from '@components/ui/search/search.component';
+import { TranslationsPipe } from '@pipes/translations.pipe';
+import { FilterComponent } from '@components/ui/filter/filter.component';
+import { SpinnerComponent } from '@components/shared/spinner/spinner.component';
+import { SearchComponent } from '@components/ui/search/search.component';
 
 @Component({
   selector: 'tcc-home',
@@ -41,7 +41,7 @@ import {SearchComponent} from '@components/ui/search/search.component';
     SearchComponent,
   ],
   templateUrl: './home.component.html',
-  styles: ``
+  styles: ``,
 })
 export class HomeComponent implements OnInit {
   brands: Brand[] = [];
@@ -51,10 +51,9 @@ export class HomeComponent implements OnInit {
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
+  showLoadMore = true;
 
-  constructor(
-    private brandService: BrandService,
-  ) {}
+  constructor(private brandService: BrandService) {}
 
   ngOnInit(): void {
     this.updateImagePaths(this.selectedType);
@@ -65,6 +64,7 @@ export class HomeComponent implements OnInit {
     this.selectedType = type;
     this.getPopularBrands();
     this.updateImagePaths(type);
+    this.showLoadMore = true;
   }
 
   updateImagePaths(type: number): void {
@@ -74,19 +74,42 @@ export class HomeComponent implements OnInit {
   }
 
   getPopularBrands(): void {
-    const filters = { vehicleType: this.selectedType, pageNumber: this.page, pageSize: this.pageSize };
+    const filters = {
+      vehicleType: this.selectedType,
+      pageNumber: this.page,
+      pageSize: this.pageSize,
+    };
 
-    this.brandService.findByType(filters, true).subscribe({
+    this.brandService.findBrandsByType(filters, 'POPULAR').subscribe({
       next: (response) => {
         if (Array.isArray(response)) {
           this.brands = response;
-        } else {
-          console.log('Resposta inválida ou vazia.');
+          this.showLoadMore = true;
         }
       },
       error: (error) => {
-        console.error("Erro ao carregar marcas:", error.message);
-      }
+        console.error('Erro ao carregar marcas:', error.message);
+      },
+    });
+  }
+
+  getNotPopularBrands(): void {
+    const filters = {
+      vehicleType: this.selectedType,
+      pageNumber: this.page,
+      pageSize: this.pageSize,
+    };
+
+    this.brandService.findBrandsByType(filters, 'NOT_POPULAR').subscribe({
+      next: (response) => {
+        if (Array.isArray(response)) {
+          this.brands = this.brands.concat(response);
+          this.showLoadMore = false;
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao carregar marcas:', error.message);
+      },
     });
   }
 }

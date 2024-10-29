@@ -3,18 +3,28 @@ import { Subject, Observable } from 'rxjs';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
+interface MessagePayload {
+  vehicleId: string;
+  notificationId: string;
+}
+
+interface SockJSWebSocket extends WebSocket {
+  close(code?: number, reason?: string): void;
+  send(data: string | ArrayBufferLike | Blob | ArrayBufferView): void;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService implements OnDestroy {
   private client: Client;
-  private messageSubject = new Subject<any>();
+  private messageSubject = new Subject<MessagePayload>();
   private connected = false;
 
   constructor() {
     this.client = new Client({
       webSocketFactory: () => {
-        return new (SockJS as any)('http://localhost:8080/ws-notification') as WebSocket;
+        return new SockJS('http://localhost:8080/ws-notification') as SockJSWebSocket;
       },
       debug: (str) => {
         console.log(str);
@@ -42,7 +52,7 @@ export class WebSocketService implements OnDestroy {
   private subscribe(): void {
     this.client.subscribe('/topic/notification', (message: IMessage) => {
       try {
-        const data = JSON.parse(message.body);
+        const data: MessagePayload = JSON.parse(message.body);
         this.messageSubject.next(data);
         console.log('Received message:', data);
       } catch (error) {
@@ -59,7 +69,7 @@ export class WebSocketService implements OnDestroy {
     this.client.deactivate();
   }
 
-  sendMessage(destination: string, message: any): void {
+  sendMessage(destination: string, message: MessagePayload): void {
     if (this.client.connected) {
       this.client.publish({
         destination: destination,
@@ -70,7 +80,7 @@ export class WebSocketService implements OnDestroy {
     }
   }
 
-  getMessages(): Observable<any> {
+  getMessages(): Observable<MessagePayload> {
     return this.messageSubject.asObservable();
   }
 
