@@ -25,8 +25,11 @@
               (click)="toggleFavorite()"
               class="text-2xl">
         <i class="material-symbols-outlined text-4xl"
-        [class.text-yellow-500]="isFavorite"
-        [class.text-gray-400]="!isFavorite">
+           [ngClass]="{
+            'text-yellow-500 dark:text-yellow-500': isFavorite,
+            'text-gray-400': !isFavorite
+           }"
+        >
           star
         </i>
         </button>
