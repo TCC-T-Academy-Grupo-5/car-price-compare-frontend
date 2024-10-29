@@ -1,5 +1,5 @@
 <div class="tcc-flex flex-col text-center">
-  <h3>{{ 'home.find_dream_car' | translate }}</h3>
+  <h3>{{ 'home.find_dream_vehicle' | translate | translations: ('vehicle.types.' + selectedType || '0' | translate) }}</h3>
 
   <div class="relative w-full h-64 md:h-[256px]">
     <img

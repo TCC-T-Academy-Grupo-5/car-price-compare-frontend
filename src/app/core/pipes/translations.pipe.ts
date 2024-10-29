@@ -6,7 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TranslationsPipe implements PipeTransform {
   transform(value: string, ...args: string[]): string {
-    if (!value || !args.length) return value;
-    return value.replace(/%s/g, () => args.shift() || '');
+    if (!value) return value;
+    let argIndex = 0;
+    return value.replace(/%s/g, () => args[argIndex++] || '');
   }
 }

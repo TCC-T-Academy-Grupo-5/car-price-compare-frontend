@@ -9,7 +9,7 @@ close: 'Close'
 dark: 'Dark'
 home:
   find_cars_compare_price: 'Find cars to compare prices'
-  find_dream_car: 'Find your dream vehicle'
+  find_dream_vehicle: 'Find your dream %s'
   browse_by_type: 'Browse by type'
 languages:
   de: 'German'
@@ -78,9 +78,9 @@ vehicle:
     history: 'Price history'
   type: 'Vehicle Type'
   types:
-    car: 'Car'
-    motorcycle: 'Motorcycle'
-    truck: 'Truck'
+    0: 'car'
+    1: 'motorcycle'
+    2: 'truck'
   updated_at: 'Updated at'
   search: 'Vehicle search'
   version: 'Version'
