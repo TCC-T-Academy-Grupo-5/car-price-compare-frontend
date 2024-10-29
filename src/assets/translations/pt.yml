@@ -30,6 +30,7 @@ models:
   vehicle:
     one: 'Veículo'
     plural: 'Veículos'
+more: 'Mais'
 not_found: 'Nenhum %s encontrado'
 placeholder:
   search: 'Pesquisar'

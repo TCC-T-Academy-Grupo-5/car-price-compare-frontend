@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Brand} from '@domain/vehicle/brand';
 import {TranslateModule} from '@ngx-translate/core';
 import {CommonModule} from '@angular/common';
@@ -20,4 +20,12 @@ import {SkeletonLoaderComponent} from '@components/shared/skeleton-loader/skelet
 })
 export class FilterBrandComponent {
   @Input({ required: true }) brands: Brand[] = [];
+  @Input() filters!: { vehicleType: number; pageNumber: number; pageSize: number };
+  @Output() loadNotPopular = new EventEmitter<void>();
+  @Input({ required: true }) showLoadMore = true;
+
+  onLoadNotPopular() {
+    this.loadNotPopular.emit();
+    this.showLoadMore = false;
+  }
 }

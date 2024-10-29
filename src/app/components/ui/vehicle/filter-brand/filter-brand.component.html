@@ -9,6 +9,18 @@
   </div>
 </div>
 
+<button
+  type="button"
+  *ngIf="showLoadMore"
+  (click)="onLoadNotPopular()"
+  class="load-more-brands mt-4"
+>
+  <span class="flex flex-col items-center justify-between">
+    {{ 'more' | translate }}
+    <i class="material-symbols-outlined text-primary dark:text-primary-light">keyboard_arrow_down</i>
+  </span>
+</button>
+
 <ng-template #noBrandsTemplate class="centralize">
   <tcc-spinner [object]="'models.brand' | translate" />
 </ng-template>

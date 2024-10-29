@@ -9,12 +9,11 @@ import {FilterTypeComponent} from '@components/ui/vehicle/filter-type/filter-typ
 import {FilterBrandComponent} from '@components/ui/vehicle/filter-brand/filter-brand.component';
 import {BrandService} from '@services/vehicle/brand.service';
 import {Brand} from '@domain/vehicle/brand';
-import { ModelService } from '@services/vehicle/model.service';
-import { Model } from '@domain/vehicle/model';
-import { FormsModule } from '@angular/forms';
+import {ModelService} from '@services/vehicle/model.service';
+import {Model} from '@domain/vehicle/model';
+import {FormsModule} from '@angular/forms';
 import {TranslationsPipe} from '@pipes/translations.pipe';
 import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
-import { WebSocketService } from '@services/websocket.service';
 
 @Component({
   selector: 'tcc-home',
@@ -53,12 +52,14 @@ export class HomeComponent implements OnInit {
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
+  showLoadMore = true;
 
   constructor(
     private brandService: BrandService,
     private modelService: ModelService,
     private router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.updateImagePaths(this.selectedType);
@@ -69,6 +70,7 @@ export class HomeComponent implements OnInit {
     this.selectedType = type;
     this.getPopularBrands();
     this.updateImagePaths(type);
+    this.showLoadMore = true;
   }
 
   updateImagePaths(type: number): void {
@@ -78,14 +80,29 @@ export class HomeComponent implements OnInit {
   }
 
   getPopularBrands(): void {
-    const filters = { vehicleType: this.selectedType, pageNumber: this.page, pageSize: this.pageSize };
+    const filters = {vehicleType: this.selectedType, pageNumber: this.page, pageSize: this.pageSize};
 
-    this.brandService.findByType(filters, true).subscribe({
+    this.brandService.findBrandsByType(filters, 'POPULAR').subscribe({
       next: (response) => {
         if (Array.isArray(response)) {
           this.brands = response;
-        } else {
-          console.log('Resposta inválida ou vazia.');
+          this.showLoadMore = true;
+        }
+      },
+      error: (error) => {
+        console.error("Erro ao carregar marcas:", error.message);
+      }
+    });
+  }
+
+  getNotPopularBrands(): void {
+    const filters = { vehicleType: this.selectedType, pageNumber: this.page, pageSize: this.pageSize };
+
+    this.brandService.findBrandsByType(filters, 'NOT_POPULAR').subscribe({
+      next: (response) => {
+        if (Array.isArray(response)) {
+          this.brands = this.brands.concat(response);
+          this.showLoadMore = false;
         }
       },
       error: (error) => {

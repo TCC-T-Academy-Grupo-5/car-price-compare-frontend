@@ -3,7 +3,6 @@ import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http'
 import {Observable} from 'rxjs';
 import {AbstractService} from '@services/vehicle/abstract.service';
 import {PaginatedBrand} from '@domain/vehicle/paginate-brand';
-import {HeadersService} from '@services/headers.service';
 import { Brand } from '@domain/vehicle/brand';
 
 @Injectable({
@@ -13,7 +12,6 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
 
   constructor(
     protected override http: HttpClient,
-    private headersService: HeadersService
   ) {
     super(http);
   }
@@ -22,10 +20,13 @@ export class BrandService extends AbstractService<PaginatedBrand, { vehicleType:
     return 'brand';
   }
 
-  findByType(filters: { vehicleType: number; pageNumber: number; pageSize: number; }, onlyPopular = false): Observable<PaginatedBrand> {
-    const endpoint = onlyPopular ? `${this.endpoint()}/popular` : this.endpoint();
+  findBrandsByType(
+    filters: { vehicleType: number; pageNumber: number; pageSize: number; },
+    brandType: 'ALL' | 'POPULAR' | 'NOT_POPULAR'
+  ): Observable<PaginatedBrand> {
 
     return new Observable<PaginatedBrand>((observer) => {
+      const endpoint = `${this.endpoint()}?pageNumber=${filters.pageNumber}&pageSize=${filters.pageSize}&brandType=${brandType}`;
       this.filter(filters, endpoint).subscribe({
         next: (response: HttpResponse<PaginatedBrand>) => {
           observer.next(response.body!);
