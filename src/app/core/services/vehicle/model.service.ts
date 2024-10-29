@@ -5,7 +5,6 @@ import {catchError, Observable, throwError} from 'rxjs';
 import {Model} from '@domain/vehicle/model';
 import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
 import {map} from 'rxjs/operators';
-import {SelectOption} from '@domain/vehicle/select-option';
 
 @Injectable({
   providedIn: 'root'

@@ -4,8 +4,6 @@ import {Observable} from 'rxjs';
 import {AbstractService} from '@services/vehicle/abstract.service';
 import {PaginatedBrand} from '@domain/vehicle/paginate-brand';
 import { Brand } from '@domain/vehicle/brand';
-import {SelectOption} from '@domain/vehicle/select-option';
-import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
