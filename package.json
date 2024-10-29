@@ -29,7 +29,12 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "yamljs": "^0.3.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.14.10",
+    "@types/sockjs-client": "^1.5.4",
+    "@types/stompjs": "^2.3.9",
+    "@stomp/stompjs": "^7.0.0",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.9",

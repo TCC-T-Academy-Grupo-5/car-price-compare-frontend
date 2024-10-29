@@ -14,6 +14,7 @@ import { Model } from '@domain/vehicle/model';
 import { FormsModule } from '@angular/forms';
 import {TranslationsPipe} from '@pipes/translations.pipe';
 import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
+import { WebSocketService } from '@services/websocket.service';
 
 @Component({
   selector: 'tcc-home',
