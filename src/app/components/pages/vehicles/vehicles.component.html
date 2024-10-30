@@ -1,8 +1,9 @@
 <div *ngIf="model" class="flex flex-col items-center justify-start mb-8 gap-2">
-  <img [src]="model.imageUrl" [alt]="model.name" class="mix-blend-multiply h-60 w-60 rounded object-contain"/>
   <h4 class="text-lg font-semibold">
+    <img [src]="model.imageUrl" [alt]="model.name" class="mix-blend-multiply h-60 w-60 rounded object-contain"/>
     <span class="text-highlight dark:text-highlight-light lowercase">{{ 'models.model.one' | translate }}:</span>
-    {{ model.name }}</h4>
+    {{ model.name }} {{ model.id }}
+  </h4>
 </div>
 
 <div class="container mx-auto p-4">
@@ -14,22 +15,26 @@
         class="card use-skeleton bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
         tabindex="0"
       >
-        <!--<div class="image-wrapper">
-          <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" [alt]="vehicle.name" class="w-full h-48 object-cover rounded-t-lg mb-4" />
-        </div>-->
-
         <h4>{{ vehicle.name }}</h4>
-        <p *ngIf="model?.name"><b>{{ 'models.model.one' | translate }}:</b> {{ model?.name }}</p>
+        <p *ngIf="vehicle.model"><b>{{ 'models.model.one' | translate }}:</b> {{ vehicle.model }}</p>
         <p *ngIf="vehicle.brand"><b>{{ 'models.brand.one' | translate }}:</b> {{ vehicle.brand }}</p>
         <p><b>{{ 'vehicle.year' | translate }}:</b> {{ vehicle.year }}</p>
         <p *ngIf="vehicle.vehicleType"><b>{{ 'type' | translate }}:</b> {{ vehicle.vehicleType }}</p>
         <p *ngIf="vehicle.fipeCode"><b>{{ 'vehicle.fipe_code' | translate }}:</b> {{ vehicle.fipeCode }}</p>
-
       </a>
     </div>
+
+    <tcc-pagination
+      [totalItems]="paginate.totalItems"
+      [pageSize]="paginate.pageSize"
+      [currentPage]="paginate.pageNumber"
+      (pageChange)="onPageChange($event)"
+      (pageSizeChange)="onPageSizeChange($event)"
+    ></tcc-pagination>
+
   </ng-container>
 
   <ng-template #noVehicles>
-    <tcc-skeleton-loader [count]="9" />
+    <tcc-skeleton-loader [count]="12"/>
   </ng-template>
 </div>

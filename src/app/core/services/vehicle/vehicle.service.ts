@@ -1,17 +1,20 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Vehicle} from '@domain/vehicle/vehicle';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {AbstractService} from '@services/vehicle/abstract.service';
 import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
-import {Model} from '@domain/vehicle/model';
+import {HeadersService} from '@services/headers.service';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService extends AbstractService<Vehicle[], VehicleFilters> {
-
-  constructor(protected override http: HttpClient) {
+  constructor(
+    protected override http: HttpClient,
+    private headersService: HeadersService
+  ) {
     super(http);
   }
 
@@ -19,22 +22,30 @@ export class VehicleService extends AbstractService<Vehicle[], VehicleFilters> {
     return 'vehicle';
   }
 
-  findVehicles(filters: VehicleFilters): Observable<{ vehicles: Vehicle[], model: Model }> {
-    return new Observable<{ vehicles: Vehicle[], model: Model }>((observer) => {
-      this.filter(filters).subscribe({
-        next: (response: HttpResponse<Vehicle[]>) => {
-          const vehicles = response.body ? response.body : [];
+  findVehicles(filters: VehicleFilters): Observable<{ vehicles: Vehicle[] }> {
+    const params = this.createHttpParams(filters);
+    return this.http.get<Vehicle[]>(`${this.entrypoint}/${this.endpoint()}`, { params, observe: 'response' }).pipe(
+      map((response: HttpResponse<Vehicle[]>) => {
+        console.log('Response Headers:', response.headers.keys().map(key => ({ [key]: response.headers.get(key) })));
 
-          const model: Model = {
-            name: filters.model || '',
-            imageUrl: '',
-          };
+        const headers = response.headers;
+        this.headersService.setHeaders(headers);
 
-          observer.next({ vehicles, model });
-          observer.complete();
-        },
-        error: (err) => observer.error(err)
-      });
+        return {
+          vehicles: response.body || []
+        };
+      })
+    );
+  }
+
+  private createHttpParams(filters: VehicleFilters): HttpParams {
+    let params = new HttpParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== undefined) {
+        params = params.set(key, value.toString());
+      }
     });
+
+    return params;
   }
 }

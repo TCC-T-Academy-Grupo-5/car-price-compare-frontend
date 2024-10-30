@@ -9,7 +9,7 @@ close: 'Fechar'
 dark: 'Escuro'
 home:
   find_cars_compare_price: 'Encontre carros para comparar preços'
-  find_dream_vehicle: 'Encontre o(a) %s dos seu sonhos'
+  find_dream_vehicle: 'Encontre %s dos seus sonhos'
   browse_by_type: 'Navegue por tipo'
 languages:
   de: 'Alemão'
@@ -36,6 +36,7 @@ placeholder:
   search: 'Pesquisar'
 price_range: 'Faixa de preço'
 profile: 'Perfil'
+show: 'Mostrar'
 sign:
   in: 'Entrar'
   out: 'Sair'
@@ -78,6 +79,10 @@ vehicle:
     history: 'Histórico de preços'
   type: 'Tipo de Veículo'
   types:
+    article:
+      0: 'o carro'
+      1: 'a moto'
+      2: 'o caminhão'
     0: 'carro'
     1: 'motocicleta'
     2: 'caminhão'

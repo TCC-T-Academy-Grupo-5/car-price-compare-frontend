@@ -36,6 +36,7 @@ placeholder:
   search: 'Search'
 price_range: 'Price range'
 profile: 'Profile'
+show: 'Show'
 sign:
   in: 'Sign in'
   out: 'Sign out'
@@ -78,6 +79,10 @@ vehicle:
     history: 'Price history'
   type: 'Vehicle Type'
   types:
+    article:
+      0: 'car'
+      1: 'motorcycle'
+      2: 'truck'
     0: 'car'
     1: 'motorcycle'
     2: 'truck'

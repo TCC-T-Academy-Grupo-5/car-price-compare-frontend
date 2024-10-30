@@ -8,6 +8,7 @@ import {Brand} from '@domain/vehicle/brand';
 import {BrandService} from '@services/vehicle/brand.service';
 import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
 import {SkeletonLoaderComponent} from '@components/shared/skeleton-loader/skeleton-loader';
+import {PaginationComponent} from '@components/ui/pagination/pagination.component';
 
 @Component({
   selector: 'tcc-domain',
@@ -19,7 +20,8 @@ import {SkeletonLoaderComponent} from '@components/shared/skeleton-loader/skelet
     NgIf,
     RouterLink,
     SkeletonLoaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PaginationComponent
   ],
   templateUrl: './models.component.html',
   styles: ``
@@ -29,8 +31,13 @@ export class ModelsComponent implements OnInit {
   brand: Brand | null = null;
   models: Model[] = [];
   isLoading = false;
-  pageSize = 10;
-  pageNumber = 1;
+  paginate = {
+    totalItems: 0,
+    totalPages: 0,
+    pageNumber: 1,
+    pageSize: 120,
+    hasNext: false
+  };
 
   constructor(
     private router: Router,
@@ -41,16 +48,17 @@ export class ModelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.brandId = params.get('brandId')!;
+      this.brandId = params.get('brandId') as string;
       this.fetchBrandDetails(this.brandId);
       this.isLoading = true;
     });
   }
 
-  fetchModelsByBrand(brandId: string, pageSize: number, pageNumber: number): void {
-    this.modelService.findAllByBrandId(brandId, pageSize, pageNumber).subscribe({
-      next: (models: Model[]) => {
-        this.models = models;
+  fetchModelsByBrand(brandId: string): void {
+    this.modelService.findAllByBrandId(brandId, this.paginate.pageSize, this.paginate.pageNumber).subscribe({
+      next: (response) => {
+        this.models = response.models;
+        this.updatePaginationData(response.totalItems, response.totalPages);
         this.isLoading = false;
       },
       error: (err) => {
@@ -62,9 +70,9 @@ export class ModelsComponent implements OnInit {
 
   fetchBrandDetails(brandId: string): void {
     this.brandService.findById(brandId).subscribe({
-      next: (brand: Brand) => {
+      next: (brand) => {
         this.brand = brand;
-        this.fetchModelsByBrand(this.brandId, this.pageSize, this.pageNumber);
+        this.fetchModelsByBrand(this.brandId);
       },
       error: (err) => {
         console.error('Erro ao carregar detalhes da marca:', err.message);
@@ -73,11 +81,32 @@ export class ModelsComponent implements OnInit {
     });
   }
 
-  selectModel(modelId: string): void {
-    if (modelId) {
+  updatePaginationData(totalItems: number, totalPages: number): void {
+    this.paginate.totalItems = totalItems;
+    this.paginate.totalPages = totalPages;
+    this.paginate.hasNext = this.paginate.pageNumber < totalPages;
+  }
+
+  onPageChange(newPage: number): void {
+    this.paginate.pageNumber = newPage;
+    this.fetchModelsByBrand(this.brandId);
+  }
+
+  onPageSizeChange(newPageSize: number): void {
+    this.paginate.pageSize = newPageSize;
+    this.paginate.pageNumber = 1;
+    this.fetchModelsByBrand(this.brandId);
+  }
+
+  selectModel(model: Model): void {
+    if (model.name && this.brand) {
       this.router.navigate(['/vehicles'], {
-        queryParams: { model: String(modelId) }
-      }).then(r => console.log('redirect', r));
+        queryParams: {
+          model: model.name,
+          imageUrl: model.imageUrl || '',
+          brand: this.brand.name
+        }
+      }).then();
     }
   }
 }

@@ -9,7 +9,7 @@ close: 'Schließen'
 dark: 'Dunkel'
 home:
   find_cars_compare_price: 'Finde Autos, um Preise zu vergleichen'
-  find_dream_vehicle: 'Finde dein(e) %s'
+  find_dream_vehicle: 'Finde %s'
   browse_by_type: 'Nach Typ durchsuchen'
 languages:
   de: 'Deutsch'
@@ -36,6 +36,7 @@ placeholder:
   search: 'Suche'
 price_range: 'Preisspanne'
 profile: 'Profil'
+show: 'Anzeigen'
 sign:
   in: 'Anmelden'
   out: 'Abmelden'
@@ -78,6 +79,10 @@ vehicle:
     history: 'Preishistorie'
   type: 'Fahrzeugtyp'
   types:
+    article:
+      0: 'dein auto'
+      1: 'deine motorrad'
+      2: 'dein lkw'
     0: 'auto'
     1: 'motorrad'
     2: 'lkw'

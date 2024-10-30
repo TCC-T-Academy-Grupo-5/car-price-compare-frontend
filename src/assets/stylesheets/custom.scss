@@ -28,10 +28,10 @@ Table of Contents
 }
 
 $font-sizes: (
-  h1: (base: 1.5rem, scale: 3vw),
-  h2: (base: 1.25rem, scale: 2.5vw),
-  h3: (base: 1rem, scale: 2vw),
-  h4: (base: 0.875rem, scale: 1.5vw)
+  h1: (base: 1.5rem, scale: 2.5vw),
+  h2: (base: 1.25rem, scale: 2vw),
+  h3: (base: 1rem, scale: 1.5vw),
+  h4: (base: 0.875rem, scale: 1vw)
 );
 
 @each $header, $sizes in $font-sizes {
@@ -230,3 +230,36 @@ $font-sizes: (
 /*
 4. TODO +
   -------------------------------------------------------------------------------- */
+::ng-deep .mat-paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+::ng-deep .mat-paginator-page-size-select,
+::ng-deep .mat-paginator-range-label {
+  color: theme('colors.primary'); /* Cor Primária */
+}
+
+::ng-deep .mat-mdc-paginator-navigation-previous,
+::ng-deep .mat-mdc-paginator-navigation-next {
+  background-color: theme('colors.highlight'); /* Cor de Destaque */
+  color: theme('colors.primary-light'); /* Cor do Ícone */
+}
+
+::ng-deep .mat-paginator-page {
+  background-color: theme('colors.secondary'); /* Cor Secundária */
+  color: theme('colors.primary-light'); /* Cor do Texto */
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+::ng-deep .mat-paginator-page.mat-selected {
+  background-color: theme('colors.accent'); /* Cor de Destaque para Página Selecionada */
+  color: theme('colors.primary'); /* Cor do Texto da Página Selecionada */
+}
+
+::ng-deep .mat-paginator-page:hover {
+  background-color: theme('colors.tertiary'); /* Cor Terciária ao Passar o Mouse */
+}

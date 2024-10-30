@@ -1,0 +1,30 @@
+<div class="pagination border border-tertiary-light bg-primary-light dark:bg-primary rounded shadow-tertiary-light">
+  <div class="flex space-between items-center gap-4 px-4">
+    <span>{{ 'show' | translate }}</span>
+    <select (change)="onPageSizeChange($event)">
+      <option [selected]="pageSize === 15" [value]="15">15</option>
+      <option [selected]="pageSize === 30" [value]="30">30</option>
+      <option [selected]="pageSize === 60" [value]="60">60</option>
+      <option [selected]="pageSize === 120" [value]="120">120</option>
+    </select>
+  </div>
+
+  <div *ngIf="totalItems > pageSize" class="flex justify-between gap-1 vg-red-500">
+    <button class="material-symbols-outlined" (click)="previousPage()" [disabled]="currentPage === 1">
+      chevron_left
+    </button>
+    <ng-container *ngFor="let page of pages">
+      <button
+        *ngIf="page !== -1"
+        [ngClass]="{'current-page': currentPage === page, 'page': currentPage !== page}"
+        (click)="setPage(page)"
+      >
+        {{ page }}
+      </button>
+      <span *ngIf="page === -1"></span>
+    </ng-container>
+    <button class="material-symbols-outlined" (click)="nextPage()" [disabled]="!hasNext">
+      chevron_right
+    </button>
+  </div>
+</div>

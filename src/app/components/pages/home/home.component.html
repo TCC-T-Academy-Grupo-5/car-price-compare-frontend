@@ -1,5 +1,5 @@
-<div class="tcc-flex flex-col text-center">
-  <h3>{{ 'home.find_dream_vehicle' | translate | translations: ('vehicle.types.' + selectedType || '0' | translate) }}</h3>
+<div class="tcc-flex flex-col text-center mt-12">
+  <h3>{{ 'home.find_dream_vehicle' | translate | translations: ('vehicle.types.article.' + selectedType || '0' | translate) }}</h3>
 
   <div class="relative w-full h-64 md:h-[256px] mb-10">
     <img [src]="vehicleImgDesktop" [alt]="vehicleTypes[selectedType] + ' image'"
@@ -14,5 +14,25 @@
   <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
   <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)" class="px-1 w-full" />
 
-  <h4 class="my-2"> {{ 'models.brand.plural' | translate }} </h4>
-  <tcc-filter-brand [brands]="brands" [showLoadMore]="showLoadMore" (loadNotPopular)="getNotPopularBrands()" />
+
+      <ul *ngIf="brandsSuggestions.length > 0" class="suggestions-list">
+        <p class="font-bold px-3 py-2 dark:text-primary">Brand</p>
+        <li *ngFor="let brand of brandsSuggestions" class="px-3 py-2 hover:bg-gray-100 cursor-pointer dark:text-primary" (click)="onBrandSelected(brand.name)" (keydown.enter)="onBrandSelected(brand.name)" tabindex="0">
+          {{ brand.name }}
+        </li>
+      </ul>
+
+      <ul *ngIf="modelSuggestions.length > 0" class="suggestions-list">
+        <p class="font-bold px-3 py-2 dark:text-primary">Models</p>
+        <li *ngFor="let model of modelSuggestions" class="px-3 py-2 hover:bg-gray-100 cursor-pointer dark:text-primary" (click)="onModelSelected(model)" (keydown.enter)="onModelSelected(model)" tabindex="0">
+          {{ model.name }}
+        </li>
+      </ul>
+
+    </div>
+    <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
+    <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)" class="px-1 w-full"/>
+
+    <h4 class="my-2"> {{ 'models.brand.plural' | translate }} </h4>
+    <tcc-filter-brand [brands]="brands" [showLoadMore]="showLoadMore" (loadNotPopular)="getNotPopularBrands()" />
+</div>

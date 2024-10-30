@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   constructor(private brandService: BrandService) {}
 
   ngOnInit(): void {
-    this.selectedType = Number(localStorage.getItem('selectedType')) || this.selectedType;
+    this.selectedType = Number(localStorage.getItem('vehicleType')) || this.selectedType;
     this.searchText = localStorage.getItem('searchText') || this.searchText;
     this.updateImagePaths(this.selectedType);
     this.getPopularBrands();
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
     this.getPopularBrands();
     this.updateImagePaths(type);
     this.showLoadMore = true;
-    localStorage.setItem('selectedType', type.toString());
+    localStorage.setItem('vehicleType', type.toString());
   }
 
   updateImagePaths(type: number): void {
@@ -112,5 +112,46 @@ export class HomeComponent implements OnInit {
         console.error('Erro ao carregar marcas:', error.message);
       },
     });
+  }
+
+  onSearchTextChange(): void {
+
+    localStorage.setItem('searchText', this.searchText);
+    if (this.searchText.length > 0) {
+      this.modelService.getByModel(this.searchText).subscribe({
+        next: (response) => {
+          this.modelSuggestions = response;
+        }, error: (err) => console.error('Erro ao carregar modelos:', err.message)
+      });
+
+      this.brandService.getByBrand(this.searchText).subscribe({
+        next: (response) =>  this.brandsSuggestions = response,
+        error: (err) => console.error('Erro ao carregar marcas:', err.message)
+      });
+    } else {
+      this.modelSuggestions = [];
+      this.brandsSuggestions = [];
+    }
+  }
+
+  onBrandSelected(name: string | undefined): void {
+    if (name) {
+      this.router.navigate(['/models'], {state: {brand: name, vehicleType: this.selectedType}}).then();
+     }
+  }
+
+  onModelSelected(model: Model): void {
+    if (model.name) {
+      const selectedBrand = this.brands.find(b => b.id === model.brandId);
+      if (selectedBrand) {
+        this.router.navigate(['/vehicles'], {
+          queryParams: {
+            model: model.name,
+            imageUrl: model.imageUrl || '',
+            brand: selectedBrand.name
+          }
+        }).then();
+      }
+    }
   }
 }
