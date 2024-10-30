@@ -85,3 +85,10 @@ vehicle:
   search: 'Búsqueda de vehículos'
   version: 'Versión'
   year: 'Año'
+  filter:
+    type_prompt: 'Selecciona el tipo de vehículo'
+    brand_prompt: 'Selecciona la marca'
+    model_prompt: 'Selecciona el modelo'
+    year_prompt: 'Selecciona el año'
+    version_prompt: 'Selecciona la versión'
+    query: 'Consultar'
