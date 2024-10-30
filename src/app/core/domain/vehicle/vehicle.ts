@@ -10,4 +10,5 @@ export interface Vehicle extends VehicleFilters {
   priceRange?: [number, number];
   urlPathName?: string;
   model?: string;
+  brand?: string;
 }

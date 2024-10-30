@@ -1,12 +1,12 @@
 <div *ngIf="brand" class="flex flex-col items-center justify-start mb-8 gap-2">
-  <img [src]="brand.imageUrl" [alt]="brand.name" class="w-20 h-20 rounded-full object-contain"/>
+  <img [src]="brand.imageUrl" [alt]="brand.name" class="mix-blend-multiply dark:opacity-100 w-20 h-20 rounded object-contain"/>
   <h4 class="text-lg font-semibold">
     <span class="text-highlight dark:text-highlight-light lowercase">{{ 'models.brand.one' | translate }}:</span>
     {{ brand.name }}</h4>
 </div>
 
 <ng-container *ngIf="isLoading; else content">
-  <tcc-skeleton-loader [count]="models.length || 9" [showAnimation]="models.length > 0" />
+  <tcc-skeleton-loader [count]="models.length || 15" [showAnimation]="models.length > 0" />
 </ng-container>
 
 <ng-template #content>
@@ -16,18 +16,27 @@
         *ngFor="let model of models"
         class="card use-skeleton"
         tabindex="0"
-        (click)="selectModel(model.name || '')"
-        (keydown.enter)="selectModel(model.name || '')"
+        (click)="selectModel(model)"
+        (keydown.enter)="selectModel(model)"
       >
         <div class="image-wrapper" *ngIf="model.imageUrl">
-          <img [src]="model.imageUrl" [alt]="model.name" />
+          <img [src]="model.imageUrl" [alt]="model.name" class="mix-blend-multiply" />
         </div>
         <h4>{{ model.name }}</h4>
       </div>
     </div>
   </ng-container>
 
+  <tcc-pagination
+    [totalItems]="paginate.totalItems"
+    [pageSize]="paginate.pageSize"
+    [currentPage]="paginate.pageNumber"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+  ></tcc-pagination>
+
   <ng-template #loading>
-    <tcc-skeleton-loader [count]="models.length || 1" />
+    <tcc-skeleton-loader [count]="models.length || 12" />
   </ng-template>
+
 </ng-template>

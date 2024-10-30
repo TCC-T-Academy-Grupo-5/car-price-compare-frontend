@@ -1,5 +1,5 @@
-<div class="tcc-flex flex-col text-center">
-  <h3>{{ 'home.find_dream_vehicle' | translate | translations: ('vehicle.types.' + selectedType || '0' | translate) }}</h3>
+<div class="tcc-flex flex-col text-center mt-12">
+  <h3>{{ 'home.find_dream_vehicle' | translate | translations: ('vehicle.types.article.' + selectedType || '0' | translate) }}</h3>
 
   <div class="relative w-full h-64 md:h-[256px]">
     <img
@@ -37,7 +37,7 @@
 
       <ul *ngIf="modelSuggestions.length > 0" class="suggestions-list">
         <p class="font-bold px-3 py-2 dark:text-primary">Models</p>
-        <li *ngFor="let model of modelSuggestions" class="px-3 py-2 hover:bg-gray-100 cursor-pointer dark:text-primary" (click)="onModelSelected(model.name)" (keydown.enter)="onModelSelected(model.name)" tabindex="0">
+        <li *ngFor="let model of modelSuggestions" class="px-3 py-2 hover:bg-gray-100 cursor-pointer dark:text-primary" (click)="onModelSelected(model)" (keydown.enter)="onModelSelected(model)" tabindex="0">
           {{ model.name }}
         </li>
       </ul>

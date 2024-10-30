@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedType = Number(localStorage.getItem('selectedType')) || this.selectedType;
+    this.selectedType = Number(localStorage.getItem('vehicleType')) || this.selectedType;
     this.searchText = localStorage.getItem('searchText') || this.searchText;
     this.updateImagePaths(this.selectedType);
     this.getPopularBrands();
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
     this.getPopularBrands();
     this.updateImagePaths(type);
     this.showLoadMore = true;
-    localStorage.setItem('selectedType', type.toString());
+    localStorage.setItem('vehicleType', type.toString());
   }
 
   updateImagePaths(type: number): void {
@@ -134,9 +134,18 @@ export class HomeComponent implements OnInit {
      }
   }
 
-  onModelSelected(name: string | undefined): void {
-    if (name) {
-      this.router.navigate(['/vehicles'], { state: { model: name } }).then();
+  onModelSelected(model: Model): void {
+    if (model.name) {
+      const selectedBrand = this.brands.find(b => b.id === model.brandId);
+      if (selectedBrand) {
+        this.router.navigate(['/vehicles'], {
+          queryParams: {
+            model: model.name,
+            imageUrl: model.imageUrl || '',
+            brand: selectedBrand.name
+          }
+        }).then();
+      }
     }
   }
 }

@@ -1,13 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {CurrencyPipe, NgForOf, NgIf} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
-import {Vehicle} from '@domain/vehicle/vehicle';
 import {VehicleService} from '@services/vehicle/vehicle.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {VehicleFilters} from '@domain/vehicle/vehicle-filters';
 import {SkeletonLoaderComponent} from '@components/shared/skeleton-loader/skeleton-loader';
+import {PaginationComponent} from '@components/ui/pagination/pagination.component';
+import {Vehicle} from '@domain/vehicle/vehicle';
 import {Model} from '@domain/vehicle/model';
-import {ModelService} from '@services/vehicle/model.service';
+import {HeadersService} from '@services/headers.service';
+
+interface QueryParams {
+  model?: string;
+  imageUrl?: string;
+  brand?: string;
+}
 
 @Component({
   selector: 'tcc-vehicles',
@@ -18,7 +25,8 @@ import {ModelService} from '@services/vehicle/model.service';
     NgIf,
     TranslateModule,
     RouterLink,
-    SkeletonLoaderComponent
+    SkeletonLoaderComponent,
+    PaginationComponent,
   ],
   templateUrl: './vehicles.component.html',
   styles: ``
@@ -26,62 +34,84 @@ import {ModelService} from '@services/vehicle/model.service';
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   model: Model | null = null;
-  selectedModelName?: string;
-  selectedBrand?: string;
-  selectedType?: number;
-  page = 1;
-  pageSize = 10;
-  isLoading!: boolean;
+  isLoading = false;
+  paginate = {
+    totalItems: 0,
+    totalPages: 0,
+    pageNumber: 1,
+    pageSize: 12,
+    hasNext: false
+  };
+  vehicleType = 0;
+  brand = '';
 
   constructor(
     private vehicleService: VehicleService,
-    private modelService: ModelService,
     private route: ActivatedRoute,
+    private headersService: HeadersService
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.selectedModelName = params['model'] || '';
-      this.selectedBrand = params['brand'] || '';
-      this.selectedType = params['type'] ? Number(params['type']) : undefined;
-      this.isLoading= true;
-      this.getVehicles();
+      const { model, imageUrl, brand } = this.fetchDataFromParams(params);
+      this.vehicleType = Number(localStorage.getItem('vehicleType')) || 0;
+      this.brand = brand;
+      const selectedModel: Model = { name: model, imageUrl };
+
+      if (model && this.vehicleType >= 0 && brand) {
+        this.getVehicles(selectedModel, this.vehicleType, brand);
+      }
     });
   }
 
-  getVehicles() {
+  fetchDataFromParams(params: QueryParams): { model: string, imageUrl: string, brand: string } {
+    const modelName = params['model'] || '';
+    const modelImageUrl = params['imageUrl'] || '';
+    const brandName = params['brand'] || '';
+    return { model: modelName, imageUrl: modelImageUrl, brand: brandName };
+  }
+
+  getVehicles(model: Model, vehicleType: number, brand: string) {
+    this.isLoading = true;
     const filters: VehicleFilters = {
-      model: this.selectedModelName,
-      brand: this.selectedBrand,
-      vehicleType: this.selectedType,
-      page: this.page,
-      pageSize: this.pageSize
+      model: model.name,
+      vehicleType,
+      pageNumber: this.paginate.pageNumber,
+      pageSize: this.paginate.pageSize,
+      brand
     };
 
-    this.isLoading = true;
     this.vehicleService.findVehicles(filters).subscribe({
       next: (response) => {
-        console.log(response);
         this.vehicles = response.vehicles;
-
-        // FIXME: Gambiarra, até criarmos o endpoint para model/:id na API
-        if (this.selectedModelName) {
-          this.modelService.getByModel(this.selectedModelName).subscribe({
-            next: (modelResponse) => {
-              if (modelResponse.length > 0) {
-                this.model = modelResponse[0];
-                this.isLoading = false;
-              } else {
-                this.model = null;
-                this.isLoading = false;
-              }
-            }, error: () =>  this.isLoading = false
-          });
-        } else {
-          this.isLoading = false;
-        }
+        this.model = model;
+        this.isLoading = false;
+        this.updatePaginationData();
       },
       error: () => this.isLoading = false
     });
+  }
+
+  updatePaginationData() {
+    this.paginate.totalItems = this.headersService.totalElements;
+    this.paginate.totalPages = this.headersService.totalPages;
+    this.paginate.pageNumber = this.headersService.currentPage;
+    this.paginate.pageSize = this.headersService.pageSize;
+    this.paginate.hasNext = this.headersService.currentPage < this.headersService.totalPages;
+  }
+
+  onPageChange(newPage: number): void {
+    this.paginate.pageNumber = newPage;
+    if (this.model) {
+      this.getVehicles(this.model, this.vehicleType, this.brand);
+    }
+  }
+
+  onPageSizeChange(newPageSize: number): void {
+    this.paginate.pageSize = newPageSize;
+    this.paginate.pageNumber = 1;
+    if (this.model) {
+      this.getVehicles(this.model, this.vehicleType, this.brand);
+    }
   }
 }

@@ -36,6 +36,7 @@ placeholder:
   search: 'Buscar'
 price_range: 'Rango de precios'
 profile: 'Perfil'
+show: 'Mostrar'
 sign:
   in: 'Iniciar sesión'
   out: 'Cerrar sesión'
@@ -78,6 +79,10 @@ vehicle:
     history: 'Historial de precios'
   type: 'Tipo de Vehículo'
   types:
+    article:
+      0: 'coche'
+      1: 'motocicleta'
+      2: 'camión'
     0: 'coche'
     1: 'motocicleta'
     2: 'camión'
