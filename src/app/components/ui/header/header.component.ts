@@ -14,6 +14,7 @@ import {NavbarComponent} from "@components/ui/navbar/navbar.component";
 import {InteractionDirective} from '@directives/EventListenerDirectives';
 import { NotificationComponent } from "../notification/notification.component";
 import { AuthService } from '@services/auth.service';
+import {SearchComponent} from '@components/ui/search/search.component';
 
 @Component({
   selector: 'tcc-header',
@@ -36,8 +37,9 @@ import { AuthService } from '@services/auth.service';
     ThemeComponent,
     UserComponent,
     NotificationComponent,
-    CommonModule
-],
+    CommonModule,
+    SearchComponent
+  ],
   templateUrl: './header.component.html'
 })
 

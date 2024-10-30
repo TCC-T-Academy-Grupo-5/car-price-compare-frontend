@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonModule, DatePipe, NgOptimizedImage} from "@angular/common";
-import {MatCard, MatCardContent, MatCardImage} from "@angular/material/card";
-import {TranslateModule} from "@ngx-translate/core";
-import {MatTab, MatTabContent, MatTabGroup} from "@angular/material/tabs";
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import {InteractionDirective} from '@directives/EventListenerDirectives';
-import {FilterTypeComponent} from '@components/ui/vehicle/filter-type/filter-type.component';
-import {FilterBrandComponent} from '@components/ui/vehicle/filter-brand/filter-brand.component';
-import {BrandService} from '@services/vehicle/brand.service';
-import {Brand} from '@domain/vehicle/brand';
-import {ModelService} from '@services/vehicle/model.service';
-import {Model} from '@domain/vehicle/model';
-import {FormsModule} from '@angular/forms';
-import {TranslationsPipe} from '@pipes/translations.pipe';
-import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, DatePipe, NgOptimizedImage } from '@angular/common';
+import { MatCard, MatCardContent, MatCardImage } from '@angular/material/card';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatTab, MatTabContent, MatTabGroup } from '@angular/material/tabs';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { InteractionDirective } from '@directives/EventListenerDirectives';
+import { FilterTypeComponent } from '@components/ui/vehicle/filter-type/filter-type.component';
+import { FilterBrandComponent } from '@components/ui/vehicle/filter-brand/filter-brand.component';
+import { BrandService } from '@services/vehicle/brand.service';
+import { Brand } from '@domain/vehicle/brand';
+import { FormsModule } from '@angular/forms';
+import { TranslationsPipe } from '@pipes/translations.pipe';
+import { FilterComponent } from '@components/ui/filter/filter.component';
+import { SpinnerComponent } from '@components/shared/spinner/spinner.component';
+import { SearchComponent } from '@components/ui/search/search.component';
 
 @Component({
   selector: 'tcc-home',
@@ -37,9 +37,11 @@ import {SpinnerComponent} from '@components/shared/spinner/spinner.component';
     FormsModule,
     SpinnerComponent,
     TranslationsPipe,
+    FilterComponent,
+    SearchComponent,
   ],
   templateUrl: './home.component.html',
-  styles: ``
+  styles: ``,
 })
 export class HomeComponent implements OnInit {
   brands: Brand[] = [];
@@ -47,19 +49,12 @@ export class HomeComponent implements OnInit {
   pageSize = 100;
   selectedType = 0;
   searchText = '';
-  brandsSuggestions: Brand[] = [];
-  modelSuggestions: Model[] = [];
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
   showLoadMore = true;
 
-  constructor(
-    private brandService: BrandService,
-    private modelService: ModelService,
-    private router: Router,
-  ) {
-  }
+  constructor(private brandService: BrandService) {}
 
   ngOnInit(): void {
     this.selectedType = Number(localStorage.getItem('vehicleType')) || this.selectedType;
@@ -83,7 +78,11 @@ export class HomeComponent implements OnInit {
   }
 
   getPopularBrands(): void {
-    const filters = {vehicleType: this.selectedType, pageNumber: this.page, pageSize: this.pageSize};
+    const filters = {
+      vehicleType: this.selectedType,
+      pageNumber: this.page,
+      pageSize: this.pageSize,
+    };
 
     this.brandService.findBrandsByType(filters, 'POPULAR').subscribe({
       next: (response) => {
@@ -96,7 +95,11 @@ export class HomeComponent implements OnInit {
   }
 
   getNotPopularBrands(): void {
-    const filters = { vehicleType: this.selectedType, pageNumber: this.page, pageSize: this.pageSize };
+    const filters = {
+      vehicleType: this.selectedType,
+      pageNumber: this.page,
+      pageSize: this.pageSize,
+    };
 
     this.brandService.findBrandsByType(filters, 'NOT_POPULAR').subscribe({
       next: (response) => {
@@ -104,7 +107,10 @@ export class HomeComponent implements OnInit {
           this.brands = this.brands.concat(response);
           this.showLoadMore = false;
         }
-      }, error: (error) =>  console.error("Erro ao carregar marcas:", error.message)
+      },
+      error: (error) => {
+        console.error('Erro ao carregar marcas:', error.message);
+      },
     });
   }
 

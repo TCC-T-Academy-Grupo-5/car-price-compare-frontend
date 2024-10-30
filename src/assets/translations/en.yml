@@ -90,3 +90,10 @@ vehicle:
   search: 'Vehicle search'
   version: 'Version'
   year: 'Year'
+  filter:
+    type_prompt: 'Select the vehicle type'
+    brand_prompt: 'Select the brand'
+    model_prompt: 'Select the model'
+    year_prompt: 'Select the year'
+    version_prompt: 'Select the version'
+    query: 'Query'
