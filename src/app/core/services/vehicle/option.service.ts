@@ -24,7 +24,9 @@ export class OptionService {
   public findOptions(parentId: string | number, optionType: 'brand' | 'model' | 'year' | 'vehicle'): Observable<SelectOption[]> {
     const path = this.optionsPaths[optionType](parentId);
     return this.http.get<SelectOption[]>(`${this.entrypoint}/${path}`).pipe(
-      map((options: SelectOption[]) => options.sort((a, b) => a.name.localeCompare(b.name)))
+      map((options: SelectOption[]) =>
+        options.sort((a, b) => optionType === 'year' ? b.name.localeCompare(a.name) : a.name.localeCompare(b.name))
+      )
     );
   }
 }

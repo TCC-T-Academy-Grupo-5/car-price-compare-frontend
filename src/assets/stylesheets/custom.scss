@@ -153,10 +153,10 @@ $font-sizes: (
       shadow-md
       duration-300
       cursor-pointer
-      bg-primary-light
       dark:bg-primary
       hover:scale-105
       hover:shadow-lg
+      bg-primary-light
     }
 
     @apply
