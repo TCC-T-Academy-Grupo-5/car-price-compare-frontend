@@ -14,14 +14,20 @@ import {BehaviorSubject, Subscription} from 'rxjs';
   standalone: true,
   imports: [CommonModule, TranslateModule, FormsModule],
   templateUrl: './filter.component.html',
-  host: { class: 'w-full md:w-3/5 mb-10' }
+  host: {class: 'w-full md:w-3/5 mb-10'}
 })
-export class FilterComponent implements OnInit, OnDestroy {
+export class FilterComponent {
+  @ViewChild('typeSelect') typeSelect!: ElementRef<HTMLSelectElement>;
   @ViewChild('brandSelect') brandSelect!: ElementRef<HTMLSelectElement>;
   @ViewChild('modelSelect') modelSelect!: ElementRef<HTMLSelectElement>;
   @ViewChild('yearSelect') yearSelect!: ElementRef<HTMLSelectElement>;
   @ViewChild('vehicleSelect') vehicleSelect!: ElementRef<HTMLSelectElement>;
 
+  vehicleTypes = {
+    'car': 0,
+    'motorcycle': 1,
+    'truck': 2
+  }
   brandOptions: SelectOption[] = [];
   modelOptions: SelectOption[] = [];
   yearOptions: SelectOption[] = [];
@@ -33,59 +39,17 @@ export class FilterComponent implements OnInit, OnDestroy {
   selectedYearId: string | undefined;
   selectedVehicleId: string | undefined;
 
-  private vehicleTypeSubscription: Subscription | undefined;
+  constructor(private optionService: OptionService,
+              private router: Router,
+              private errorService: ErrorService) {}
 
-  constructor(
-    private optionService: OptionService,
-    private router: Router,
-    private errorService: ErrorService
-  ) {}
+  onTypeChange($event: Event) {
+    this.selectedType = Number(($event.target as HTMLSelectElement).value);
 
-  ngOnInit(): void {
-    this.selectedType = this.getVehicleTypeFromLocalStorage();
-    this.loadBrandOptions(this.selectedType);
-
-    this.vehicleTypeSubscription = this.getVehicleTypeObservable().subscribe((type: number) => {
-      console.log('Vehicle type changed to:', type);
-      this.selectedType = type;
-      this.onReset();
-      this.loadBrandOptions(type);
+    this.optionService.findOptions(this.selectedType, 'brand').subscribe({
+      next: (brandOptions: SelectOption[]) => this.brandOptions = brandOptions,
+      error: this.handleError.bind(this)
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.vehicleTypeSubscription) {
-      this.vehicleTypeSubscription.unsubscribe();
-    }
-  }
-
-  getVehicleTypeFromLocalStorage(): number {
-    const vehicleType = localStorage.getItem('vehicleType');
-    const selectedType = vehicleType != null ? +vehicleType : 0;
-    console.log('Selected vehicle type from localStorage:', selectedType);
-    return selectedType;
-  }
-
-  getVehicleTypeObservable(): BehaviorSubject<number> {
-    const vehicleTypeSubject = new BehaviorSubject<number>(this.getVehicleTypeFromLocalStorage());
-    window.addEventListener('storage', () => {
-      const vehicleType = this.getVehicleTypeFromLocalStorage();
-      vehicleTypeSubject.next(vehicleType);
-    });
-    return vehicleTypeSubject;
-  }
-
-  loadBrandOptions(vehicleType: number) {
-    if (vehicleType !== undefined) {
-      console.log('Loading brand options for vehicle type:', vehicleType);
-      this.optionService.findOptions(vehicleType, 'brand').subscribe({
-        next: (brandOptions: SelectOption[]) => {
-          this.brandOptions = brandOptions;
-          console.log('Loaded brand options:', brandOptions);
-        },
-        error: this.handleError.bind(this)
-      });
-    }
   }
 
   onBrandChange($event: Event) {
@@ -120,15 +84,17 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.router.navigate(['/vehicle-details', this.selectedVehicleId]).then();
+    this.router.navigate(['/vehicle-details', this.selectedVehicleId]);
   }
 
   onReset() {
+    this.typeSelect.nativeElement.selectedIndex = 0;
     this.brandSelect.nativeElement.selectedIndex = 0;
     this.modelSelect.nativeElement.selectedIndex = 0;
     this.yearSelect.nativeElement.selectedIndex = 0;
     this.vehicleSelect.nativeElement.selectedIndex = 0;
 
+    this.selectedType = undefined;
     this.selectedBrandId = undefined;
     this.selectedModelId = undefined;
     this.selectedYearId = undefined;
@@ -137,8 +103,6 @@ export class FilterComponent implements OnInit, OnDestroy {
     this.modelOptions = [];
     this.yearOptions = [];
     this.vehicleOptions = [];
-
-    localStorage.removeItem('vehicleType');
   }
 
   private handleError(error: HttpErrorResponse): void {
@@ -146,3 +110,4 @@ export class FilterComponent implements OnInit, OnDestroy {
     console.error(error.message);
   }
 }
+

@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
   page = 1;
   pageSize = 100;
   selectedType = 0;
-  searchText = '';
   vehicleTypes: string[] = ['car', 'motorcycle', 'truck'];
   vehicleImgDesktop!: string;
   vehicleImgMobile!: string;
@@ -59,7 +58,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedType = Number(localStorage.getItem('vehicleType')) || this.selectedType;
-    this.searchText = localStorage.getItem('searchText') || this.searchText;
     this.updateImagePaths(this.selectedType);
     this.getPopularBrands();
   }
@@ -70,8 +68,6 @@ export class HomeComponent implements OnInit {
     this.updateImagePaths(type);
     this.showLoadMore = true;
     localStorage.setItem('vehicleType', type.toString());
-
-    this.clearFilterOptions();
   }
 
   updateImagePaths(type: number): void {
@@ -116,45 +112,5 @@ export class HomeComponent implements OnInit {
         console.error('Erro ao carregar marcas:', error.message);
       },
     });
-  }
-
-  onSearchTextChange(): void {
-    localStorage.setItem('searchText', this.searchText);
-    if (this.searchText.length > 0) {
-      this.brandService.getByBrand(this.searchText).subscribe({
-        next: (response) => (this.brands = response),
-        error: (err) => console.error('Erro ao carregar marcas:', err.message),
-      });
-    } else {
-      this.getPopularBrands();
-    }
-  }
-
-  onBrandSelected(name: string | undefined): void {
-    if (name) {
-      this.router.navigate(['/models'], { state: { brand: name, vehicleType: this.selectedType } }).then();
-    }
-  }
-
-  onModelSelected(model: Model): void {
-    if (model.name) {
-      const selectedBrand = this.brands.find((b) => b.id === model.brandId);
-      if (selectedBrand) {
-        this.router.navigate(['/vehicles'], {
-          queryParams: {
-            model: model.name,
-            imageUrl: model.imageUrl || '',
-            brand: selectedBrand.name,
-          },
-        }).then();
-      }
-    }
-  }
-
-  clearFilterOptions(): void {
-    this.selectedType = 0;
-    this.searchText = '';
-    localStorage.removeItem('searchText');
-    this.getPopularBrands();
   }
 }

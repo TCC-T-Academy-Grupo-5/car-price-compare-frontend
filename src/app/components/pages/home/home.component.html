@@ -9,12 +9,12 @@
          class="absolute inset-0 block md:hidden object-contain w-full h-full" height="256" width="332"/>
   </div>
 
-  <h4 class="my-2"> {{ 'vehicle.type' | translate }} </h4>
-  <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)" class="px-1 w-full mt-8"/>
-
   <div class="w-full px-1">
     <tcc-filter></tcc-filter>
   </div>
+
+  <h4 class="my-2 pt-8"> {{ 'vehicle.type' | translate }} </h4>
+  <tcc-filter-type [selectedType]="selectedType" (typeSelected)="onTypeSelected($event)" class="px-1 w-full mt-8"/>
 
   <h4 class="mt-8 mb-2"> {{ 'models.brand.plural' | translate }} </h4>
   <tcc-filter-brand [brands]="brands" [showLoadMore]="showLoadMore" (loadNotPopular)="getNotPopularBrands()"/>
