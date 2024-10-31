@@ -1,6 +1,12 @@
 <div class="card shadow-md bg-primary-light dark:bg-primary min-w-full">
   <form (ngSubmit)="onSubmit()">
-    <div class="flex flex-col md:grid md:grid-cols-3 gap-4 mb-4">
+    <div class="flex flex-col md:grid md:grid-cols-2 gap-4 mb-4">
+      <select #typeSelect (change)="onTypeChange($event)" class="filter-select">
+        <option value="" disabled selected>{{ 'vehicle.filter.type_prompt' | translate }}</option>
+        <option *ngFor="let type of vehicleTypes | keyvalue"
+                [value]="type.value">{{ 'vehicle.types.' + type.value | translate | titlecase }}
+        </option>
+      </select>
       <select #brandSelect [disabled]="selectedType === undefined" (change)="onBrandChange($event)"
               class="filter-select">
         <option value="" disabled selected>{{ 'vehicle.filter.brand_prompt' | translate }}</option>
@@ -23,7 +29,7 @@
         </ng-container>
       </select>
       <select #vehicleSelect [disabled]="selectedYearId === undefined" (change)="onVehicleChange($event)"
-              class="filter-select col-span-3">
+              class="filter-select col-span-2">
         <option value="" disabled selected>{{ 'vehicle.filter.version_prompt' | translate }}</option>
         <ng-container *ngIf="vehicleOptions.length">
           <option *ngFor="let option of vehicleOptions" [value]="option.id">{{ option.name }}</option>
