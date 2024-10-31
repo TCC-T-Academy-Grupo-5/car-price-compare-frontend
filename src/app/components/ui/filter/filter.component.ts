@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, OnInit, OnDestroy} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -7,7 +7,6 @@ import { SelectOption } from '@domain/vehicle/select-option';
 import { OptionService } from '@services/vehicle/option.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import {BehaviorSubject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'tcc-filter',

@@ -14,7 +14,6 @@ import { TranslationsPipe } from '@pipes/translations.pipe';
 import { FilterComponent } from '@components/ui/filter/filter.component';
 import { SpinnerComponent } from '@components/shared/spinner/spinner.component';
 import { SearchComponent } from '@components/ui/search/search.component';
-import {Model} from '@domain/vehicle/model';
 
 @Component({
   selector: 'tcc-home',
